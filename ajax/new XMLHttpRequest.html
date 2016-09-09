@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>AJAX</title>
+	<script>
+		var request;
+		if( window.XMLHttpRequest ){
+			request = new XMLHttpRequest;	//IE7+和主流的浏览器
+		}else {
+			request = new ActiveXObject("Microsoft.XMLHTTP");	//IE6,IE5
+		}
+		// 例1
+		request.open("GET","get.php",true);
+		request.send();
+		//	例2
+		request.open("POST","post.php",true);
+		request.send();
+		//	例3
+		request.open("POST","post.php",true);
+		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		request.send("name=老王&sex=男");
+	</script>
+</head>
+<body>
+</body>
+</html>
