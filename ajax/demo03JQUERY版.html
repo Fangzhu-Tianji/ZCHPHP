@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单</title>
+    <style>
+    *{
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    </style>
+</head>
+<body>
+	<h1>员工查询</h1>
+    <label>请输入员工的编号：</label>
+    <input type="text" id="keyword"><br />
+    <button id="search">查询</button>
+    <p id="searchResult">2424</p>
+
+    <h1>新建员工</h1>
+    <label>请输入员工姓名：</label>
+    <input type="text" id="staffName"><br />
+    <label>请输入员工编号：</label>
+    <input type="text" id="staffNumber"><br />
+    <label>请输入员工性别：</label>
+    <select id="staffSex">
+        <option value="女">女</option>
+        <option value="男">男</option>
+    </select><br />
+    <label>请输入员工职位：</label>
+    <input type="text" id="staffJob"><br />
+    <button id="save">保存</button>
+    <p id="createResult">2424</p>
+    <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            // 查询
+            $('#search').click(function(){
+                $.ajax({
+                    type: "GET",
+                    url: "http://127.0.0.1//ZCHPHP/ajax/serverjson2.php?number=" + $('#keyword').val(),
+                    dataType: "json",
+                    success: function(data){
+                        if(data.success){
+                            $('#searchResult').html(data.msg);
+                        } else {
+                            $('#searchResult').html("发生错误：" + data.msg);
+                        }
+                    },
+                    error: function(jqXHR){
+                        alert("发生错误：" + jqXHR.status);
+                    }
+                });
+            });
+            // 新建
+            $('#save').click(function(){
+                $.ajax({
+                    type: "POSt",
+                    url: "serverjson2.php",
+                    data: {
+                        name: $('#staffName').val(),
+                        number: $('#staffNumber').val(),
+                        sex: $('#staffSex').val(),
+                        job: $('#staffJob').val(),
+                    },
+                    dataType: "json",
+                    success: function(data){
+                        if(data.success){
+                            $('#createResult').html(data.msg);
+                        } else {
+                            $('#createResult').html("发生错误：" + data.msg);
+                        }
+                    },
+                    error: function(jqXHR){
+                        alert("发生错误：" + jqXHR.status);
+                    }
+                });
+            });
+        });
+    </script>
+    
+    <!-- <script>
+    function $(id) {
+        return document.getElementById(id)
+    }
+    $('search').onclick = function(){
+        //  GET查询数据
+        var request = new XMLHttpRequest();
+        request.open("GET","serverJSON.php?number=" + $('keyword').value);
+        request.send();
+        request.onreadystatechange = function(){
+            if( request.readyState === 4 ){
+                if( request.status === 200 ){
+                    $('searchResult').innerHTML = request.responseText;
+                } else{
+                    alert("发生错误：" + request.status );
+                }
+            }
+        }
+    }
+
+    $('save').onclick = function(){
+        //  POST添加数据
+        var request = new XMLHttpRequest();
+        request.open("POST","serverJSON.php");
+        var data = "name=" + $('staffName').value
+                    + "&number=" + $('staffNumber').value
+                    + "&sex=" + $('staffSex').value
+                    + "&job=" + $('staffJob').value
+        request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        request.send(data);
+        request.onreadystatechange = function(){
+            if( request.readyState === 4 ){
+                if( request.status === 200 ){
+                    $('createResult').innerHTML = request.responseText;
+                } else{
+                    alert("发生错误：" + request.status );
+                }
+            }
+        }
+    }
+    </script> -->
+
+</body>
+</html>
