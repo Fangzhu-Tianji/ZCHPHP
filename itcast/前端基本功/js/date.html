@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>date</title>
+    <style>
+    #time {
+        font-size: 40px;
+        color: red;
+    }
+    </style>
+    <script>
+    window.onload = function(){
+        // var date = new Date();
+        // console.log( date.getMonth() );
+        // console.log( date.getTime() );
+        // var oTime = new Date();
+        // 例：（倒计时日期）
+        var Itime = document.getElementById('time');
+        fntime();
+        function fntime(){
+        var Inow = new Date();
+        var Iaft = new Date(2016,8,18,12,0,0);
+        var t = Math.floor((Iaft-Inow)/1000);
+        // console.log(t);
+        Itime.innerHTML ='距离18号中午还有：' + Math.floor(t/86400)+'天'+ Math.floor(t%86400/3600)+'时'+ Math.floor(t%86400%3600/60)+'分'+t%60+'秒';
+        }
+        setInterval( function(){
+            fntime();
+        }, 1000);
+
+        var date = new Date();
+        console.log(Date.now());
+    }
+    </script>
+</head>
+<body>
+    <div id="time"></div>
+</body>
+</html>

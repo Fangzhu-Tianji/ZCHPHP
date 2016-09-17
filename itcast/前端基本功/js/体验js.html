@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>体验js</title>
+    <style>
+    #box{
+        width: 200px;
+        height: 200px;
+        background-color: pink;
+    }
+    </style>
+    <script>
+    window.onload = function(){
+        var oBox = document.getElementById('box');
+        var oH = document.getElementById('h');
+        function confirm2(){
+            var r=confirm("Press a button")
+            if( r ){
+                oH.innerHTML = "对了";
+            } else {
+                oH.innerHTML = "错了";
+            }
+        };
+        oBox.onclick = function(){
+            confirm2();
+        };
+        // document.write('哈哈哈');
+    }
+    </script>
+</head>
+<body>
+    <h1 id="h">hahah</h1>
+    <div id="box"></div>
+</body>
+</html>
