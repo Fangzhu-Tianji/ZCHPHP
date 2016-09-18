@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script charset="utf-8" src="http://wpa.b.qq.com/cgi/wpa.php"></script>
+	<title>日历</title>
+	<style>
+		body {
+			font-size: 30px;
+		}
+ 		#box {
+			width: 200px;
+			height: 200px;
+			background-color: pink;
+			margin: 50px auto;
+		}
+		p {
+			line-height: 50px;
+			text-align: center;
+			font-size: 20px;
+		}
+		#date {
+			width: 80px;
+			height: 80px;
+			background-color: green;
+			margin: 0 auto;
+			line-height: 80px;
+			text-align: center;
+			color: yellow;
+		}
+		#BizQQWPA {
+			display: block;
+			width: 300px;
+			height: 300px;
+			background-color: green;
+		}
+		#BizQQWPA1 {
+			display: block;
+			width: 300px;
+			height: 300px;
+			background-color: green;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var oBox = document.getElementById('box');
+			var oP = oBox.children[0];
+			var oDate = oBox.children[1];
+			var arr = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"]
+			var date = new Date();
+			oP.innerHTML = date.getFullYear() + "年" + (date.getMonth()+1) + "月" + date.getDate() + "日" + arr[date.getDay()];
+			oDate.innerHTML = date.getDate();
+			BizQQWPA.addCustom({aty: '0', a: '0', nameAccount: 4009668883, selector: 'BizQQWPA'});
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<p>234</p>
+		<div id="date">23</div>
+	</div>
+	<!-- <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=4009668883&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:793262201:41" alt="点击这里给我发消息" title="点击这里给我发消息"/></a> -->
+	<!-- WPA Button Begin -->
+	<!-- <script type="text/javascript"
+	src="http://static.b.qq.com/account/bizqq/js/wpa.js?wty=1&type=1&kfuin=xxxyo
+	urQQxxx&ws=http%3A%2F%2Fwww.qq8.com&btn1=%E4%BC%81%E4%B8%9AQQ
+	%E4%BA%A4%E8%B0%88&aty=0&a=&key=xxx&wid=yourwid"></script> -->
+	<!-- WPA Button END -->
+	<!-- <div id="yourwid">请点击我</div> -->
+
+	<a href="###" id="BizQQWPA"></a>
+	<a href="###" id="BizQQWPA1"></a>
+	<!-- <script charset="utf-8" src="http://wpa.b.qq.com/cgi/wpa.php"></script> -->
+	<!-- <script>
+		BizQQWPA.addCustom({aty: '0', a: '0', nameAccount: 4009668883, selector: 'BizQQWPA'});
+	</script> -->
+</body>
+</html>
