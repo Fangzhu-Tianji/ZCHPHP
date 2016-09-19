@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>width</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+        body {
+            background-color: purple;
+        }
+        .box {
+            width: 600px;
+            height: 50px;
+            border-radius: 5px;
+            background-color: #fff;
+            margin: 50px auto;
+        }
+        li {
+            float: left;
+            font: 14px/50px "Microsoft YaHei";
+            padding: 0 20px;
+            background-color: green;
+            color: #fff;
+        }
+        li:hover {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <ul id="father">
+        <li>首页</li>
+        <li>案例</li>
+        <li>关于我们</li>
+        <li>孙悟空</li>
+    </ul>
+</div>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+    var oFather = document.getElementById("father");
+    var oLi = oFather.getElementsByTagName("li");
+    console.log( oLi[1].offsetWidth );
+    console.log( oLi[2].offsetWidth );
+    console.log( oLi[3].offsetWidth );
+    var wli = $('li').eq(2);
+    console.log( wli.outerWidth(true) );
+</script>
+</body>
+</html>
