@@ -70,8 +70,8 @@
         <li></li>
     </ul>
 </div>
-<div class="nav">
-    <span class="cloud"></span>
+<div class="nav" id="nav">
+    <span class="cloud" id="cloud"></span>
     <ul>
         <li>首页资讯</li>
         <li>首页资讯</li>
@@ -85,6 +85,7 @@
 </div>
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script>
+    /*
     $('.nav li').hover(function(){
         var off = $(this).position().left;
         console.log(off);
@@ -96,6 +97,32 @@
             left: 0
         },300)
     })
+    */
+    var nav = document.getElementById("nav");
+    var cloud = document.getElementById("cloud");
+    var lis = nav.children[1].children;
+    var current = 0;    //用于存放当前的left值
+    lis[1].onclick = function(){
+        console.log('ok');
+    }
+    for( var i=0; i<lis.length; i++ ){
+        lis[i].onmouseover = function(){
+            target = this.offsetLeft;
+        };
+        lis[i].onmouseout = function(){
+            target = current;
+        }
+        lis[i].onclick = function(){
+            current = this.offsetLeft;
+        }
+    }
+
+    // 缓动公式
+    var leader = 0, target = 0;
+    setInterval(function(){
+        leader = leader + (target - leader ) / 10;
+        cloud.style.left = leader + "px";
+    },10);
 </script>
 </body>
 </html>

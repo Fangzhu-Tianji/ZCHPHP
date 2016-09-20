@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>event</title>
+</head>
+<body>
+<script type=text/javascript>
+    document.onclick = function(event){
+//        alert(22)
+//        console.log(event.clientX)
+        var event = event || window.event;
+        console.log( event.clientX );
+        console.log( event.clientY );
+    }
+
+
+</script>
+</body>
+</html>
