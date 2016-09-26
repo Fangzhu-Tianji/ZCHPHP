@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>金千禧</title>
+    <style>
+        *{margin: 0; padding: 0;}
+        body {
+            overflow: hidden;
+        }
+        .main {
+            width: 600px;
+            height: 600px;
+            background-color: pink;
+            margin: 0 auto;
+            position: relative;
+        }
+        .logo {
+            width: 200px;
+            height: 100px;
+            background-color: blue;
+        }
+        .move {
+            width: 380px;
+            height: 100px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -190px;
+            margin-top: -50px;
+            -webkit-animation: move1 3s forwards;
+            animation: move1 3s forwards;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        @-webkit-keyframes move1 {
+            from {
+                -webkit-transform: translateX(1000px) rotate(0deg);
+                transform: translateX(1000px) rotate(0deg);
+            }
+            to {
+                -webkit-transform: translateX(0) rotate(1800deg);
+                transform: translateX(0) rotate(1800deg);
+                color: purple;
+                opacity: 1;
+            }
+        }
+        @keyframes move1 {
+            from {
+                -webkit-transform: translateX(1000px);
+                transform: translateX(1000px);
+            }
+            to {
+                -webkit-transform: translateX(0);
+                transform: translateX(0);
+                color: purple;
+                opacity: 1;
+            }
+        }
+
+        .move p {
+            font: 40px/1.2 "microsoft yahei";
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="logo"></div>
+    <div class="move">
+        <p>祝您</p>
+        <p>生日快乐、身体健康</p>
+    </div>
+</div>
+<!--<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>-->
+<!--<script type="text/javascript">-->
+    <!--$(function(){-->
+        <!--$(".move").animate({-->
+            <!--left: '50%',-->
+            <!--opacity: 1-->
+        <!--}, 3000 );-->
+    <!--})-->
+<!--</script>-->
+</body>
+</html>
