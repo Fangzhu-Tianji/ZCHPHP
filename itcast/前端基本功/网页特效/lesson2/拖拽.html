@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拖拽</title>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.box {
+		width: 400px;
+		height: 300px;
+		background-color: #ccc;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+	}
+	.box .head {
+		height: 50px;
+		width: 100%;
+		background-color: pink;
+		cursor: move;
+	}
+	.head span {
+		font: bold 30px/50px "微软雅黑";
+		color: blue;
+		float: right;
+		margin-right: 30px;
+		cursor: pointer;
+	}
+	</style>
+</head>
+<body>
+	<div class="box" id="box">
+		<div class="head" id="head">
+			<span>×</span>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	function $(id) {
+		return document.getElementById(id);
+	};
+	console.log( $('box').offsetLeft );
+	atartDrap($('box'),$('head'));
+	function atartDrap(father,son) {
+		son.onmousedown = function(event){
+			var event = event || window.event;
+			var x = event.clientX - father.offsetLeft - 200;
+			var y = event.clientY - father.offsetTop - 150;
+			document.onmousemove = function(event){
+				var event = event || window.event;
+				father.style.left = event.clientX - x + 'px';
+				father.style.top = event.clientY - y + 'px';
+			}
+		};
+		document.onmouseup = function(){
+			document.onmousemove = null;  
+		}
+	}
+</script>
+</html>
