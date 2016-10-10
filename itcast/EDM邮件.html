@@ -31,13 +31,14 @@
             -webkit-animation: move1 3s forwards;
             animation: move1 3s forwards;
             overflow: hidden;
-            opacity: 0;
+            opacity: 1;
         }
 
         @-webkit-keyframes move1 {
             from {
                 -webkit-transform: translateX(1000px) rotate(0deg);
                 transform: translateX(1000px) rotate(0deg);
+                opacity: 0;
             }
             to {
                 -webkit-transform: translateX(0) rotate(1800deg);

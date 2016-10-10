@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>select</title>
+	<style>
+		table {
+			border-collapse:collapse;
+			border-spacing:0;
+			width: 100%;
+		}
+		th,td {
+			border: 1px solid blue;
+		}
+		.cotainer {
+			width: 1000px;
+			height: 600px;
+			background-color: pink;
+			margin: 20px auto;
+		}
+	</style>
+</head>
+<body>
+<div class="cotainer">
+	<select name="" id="">
+		<option value="" selected disabled>--请选择--</option>
+		<option value="">未审核</option>
+		<option value="">审核已通过</option>
+		<option value="">审核未通过</option>
+	</select>
+	<table>
+		<thead>
+			<tr>
+				<th>姓名</th>
+				<th>性别</th>
+				<th>年龄</th>
+				<th>备注</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>张三</td>
+				<td>男</td>
+				<td>28</td>
+				<td>他长得好帅！</td>
+			</tr>
+			<tr>
+				<td>李思</td>
+				<td>女</td>
+				<td>28</td>
+				<td>他长得好帅的！</td>
+			</tr>
+			<tr>
+				<td>王五</td>
+				<td>男</td>
+				<td>28</td>
+				<td>他长得好帅 发多少！</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$('select').change(function(){
+		if( $(this).children('option:selected').index()==1 ){
+			$('table').css('color','red');
+		}
+		else{
+			$('table').css('color','#ccc');
+		}
+	})
+</script>
+</body>
+</html>
