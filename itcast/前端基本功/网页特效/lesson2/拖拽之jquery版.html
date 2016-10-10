@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>拖拽之jquery</title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.box {
+	width: 400px;
+	height: 300px;
+	background-color: #ccc;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+.box .head {
+	height: 50px;
+	width: 100%;
+	background-color: pink;
+	cursor: move;
+}
+.head span {
+	font: bold 30px/50px "微软雅黑";
+	color: blue;
+	float: right;
+	margin-right: 30px;
+	cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div class="box" id="box">
+	<div class="head" id="head">
+		<span>×</span>
+	</div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+<script type="text/javascript">
+	var boxX = $('.box').offset().left;
+	var boxY = $('.box').offset().top;
+	var boxW = $('.box').width();
+	var boxH = $('.box').height();
+	var flag = false;
+	// console.log(boxW);
+	// console.log(boxH);
+	$('.head').mousedown(function(event){
+		flag = true;
+		$(window).mousemove(function(event){
+			if( flag == true ){
+				var hw = event.pageX - boxX - 200;
+				var hh = event.pageY - boxY - 25;
+				$('.box').css({
+					left: hw,
+					top: hh
+				})
+			}
+		});
+	});
+	$(window).mouseup(function(event){
+		flag = false;
+	})
+</script>	
+</body>
+</html>
