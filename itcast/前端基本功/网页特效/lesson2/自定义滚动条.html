@@ -52,6 +52,25 @@
 	// 计算滚动条的高度
 	var barHeight = box.offsetHeight / container.offsetHeight * box.offsetHeight;
 	bar.style.height = barHeight + "px";
+
+	// 点击滑轮事件
+	startScroll( bar )
+	function startScroll(obj) {
+		obj.onmousedown = function(event){
+			var event = event || window.event;
+			var t = event.clientY - this.offsetTop;
+			var that = this;
+			document.onmousemove = function(event){
+				var event = event || window.event;
+				that.style.top = event.clientY - t + 'px';
+				
+				window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();   // 防止拖动滑块的时候， 选中文字
+			}
+		};
+		document.onmouseup = function(event){
+			document.onmousemove = null;
+		}
+	};
 </script>
 </body>
 </html>
