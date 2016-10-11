@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>我的页面</title>
+</head>
+<body>
+<button id="btn">变色</button>
+<script type="text/javascript">
+	console.log(document.title);
+	console.log(document.body);
+	console.log(document.head);
+	console.log(document.documentElement);
+	var oBtn = document.getElementById('btn');
+	oBtn.onclick = function(){
+		document.body.style.background = 'pink';
+	};
+</script>
+</body>
+</html>

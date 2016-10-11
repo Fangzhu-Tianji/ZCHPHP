@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body style="height:3000px;">
+<script>
+	window.onscroll = function(){
+		// document.title = document.body.scrollTop;	//谷歌和没有DTD（DOCTYPE）的写法
+		// document.title = document.documentElement.scrollTop;	//火狐和其他浏览器
+		// document.title = window.pageYOffset;	//IE9+ 与最新浏览器
+
+		// 兼容性写法
+		var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+		document.title = scrollTop;
+	}
+</script>
+</body>
+</html>

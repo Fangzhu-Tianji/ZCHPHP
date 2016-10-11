@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>自定义滚动条</title>
+<style>
+.box {
+	width: 300px;
+	height: 500px;
+	border: 1px solid red;
+	margin: 50px auto;
+	position: relative;
+}
+.container {
+	padding-right: 20px;
+	height: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.roll {
+	width: 20px;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: #ccc;
+}
+.bar {
+	width: 100%;
+	height: 100px;
+	background-color: purple;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-radius: 10px;
+	cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div class="box" id="box">
+	<div class="container">
+		这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文是文字这是文字这是文字这是文字这是文字这是文字这是文字这文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文这是文字这是文字这是文字这是文字这是文字这是文是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文是文字这是文字这是文字这是文字这是文字这是文字这是文字这文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文这是文字这是文字这是文字这是文字这是文字这是文是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文是文字这是文字这是文字这是文字这是文字这是文字这是文字这文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文这是文字这是文字这是文字这是文字这是文字这是文是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文是文字这是文字这是文字这是文字这是文字这是文字这是文字这文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文这是文字这是文字这是文字这是文字这是文字这是文是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文是文字这是文字这是文字这是文字这是文字这是文字这是文字这文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文
+	</div>
+	<div class="roll">
+		<div class="bar"></div>
+	</div>
+</div>
+<script type="text/javascript">
+	var box = document.getElementById('box');
+	var container = box.children[0];
+	var roll = box.children[1];
+	var bar = roll.children[0];
+	// 计算滚动条的高度
+	var barHeight = box.offsetHeight / container.offsetHeight * box.offsetHeight;
+	bar.style.height = barHeight + "px";
+	// 判断是否有轮动条
+	if (container.offsetHeight <= box.offsetHeight) {
+		roll.style.display = 'none';
+		container.style.padding = 0;
+	}
+	else {
+		// 点击滑轮事件
+		startScroll( bar,container )
+	}
+	function startScroll(obj,target) {
+		obj.onmousedown = function(event){
+			var event = event || window.event;
+			var t = event.clientY - this.offsetTop;
+			console.log(t);
+			var that = this;
+			document.onmousemove = function(event){
+				var event = event || window.event;
+				var barTop = event.clientY - t;
+				// container滚动的距离
+				var conTop = (target.offsetHeight - box.offsetHeight) / (box.offsetHeight - bar.offsetHeight) * barTop;
+				if (barTop<0) {
+					barTop = 0;
+				}
+				else if (barTop>box.offsetHeight-that.offsetHeight) {
+					barTop = box.offsetHeight-that.offsetHeight;
+				}
+				else {
+					container.style.top = -conTop + "px";
+				}
+				that.style.top = barTop + 'px';
+				
+				window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+				//  防止拖动滑块的时候， 选中文字
+			}
+		};
+		document.onmouseup = function(event){
+			document.onmousemove = null;
+		}
+	};
+</script>
+</body>
+</html>
