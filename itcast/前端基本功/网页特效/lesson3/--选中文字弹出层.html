@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>弹出</title>
+<style>
+	#test,#default {
+		width: 400px;
+		margin: 100px;
+	}
+	#demo {
+		width: 100px;
+		height: 100px;
+		background-color: pink;
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: none;
+	}
+</style>
+</head>
+<body>
+<div id="demo"></div>
+<div id="test">这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字这是选中的文字</div>
+<div id="default">这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字这是默认的文字</div>
+<script type="text/javascript">
+	function $(id) {
+		return document.getElementById(id);
+	}
+	$("test").onmouseup = function(event){
+		var event = event || window.event;
+		var x = event.clientX;
+		var y = event.clientY;
+		var txt;	// 用于储存文字
+		if(window.getSelection) {
+			txt = window.getSelection().toString();	// 标准浏览器的写法，toString转化成字符串
+		}
+		else {
+			txt = document.selection.createRange().text;	// IE的写法
+		}
+		if(txt) {	// 如果选中文字为空，则不执行showBox函数
+			showBox(x,y,txt);
+		}
+
+		document.onmousedown = function(event){	// 点击空白处隐藏
+			var event = event || window.event;
+			var targetid = event.target ? event.target.id : event.srcElement.id;
+			if(targetid != "demo") {
+				$("demo").style.display = "none";
+			}
+		}
+	}
+	
+	function showBox(mousex,mousey,contentText){
+		setTimeout(function(event){
+			$("demo").style.display = "block";
+			$("demo").style.left = mousex + "px";
+			$("demo").style.top = mousey + "px";
+			$("demo").innerHTML = contentText;
+		},300)
+	}
+</script>
+</body>
+</html>

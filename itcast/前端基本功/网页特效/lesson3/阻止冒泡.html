@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>冒泡</title>
+</head>
+<body>
+<button id="btn">按钮</button>
+<script>
+	var btn = document.getElementById('btn');
+	document.onclick = function(){
+		alert("点击了空白处");
+	}
+	btn.onclick = function(event){
+		alert("点击了按钮");
+		var event = event || window.event;
+		// event.stopPropagation();
+		if(event && event.stopPropagation) {
+			event.stopPropagation();	// w3c标准
+		}
+		else {
+			event.cancelBubble = true;	// ie6 7 8
+		}
+	}
+</script>
+</body>
+</html>

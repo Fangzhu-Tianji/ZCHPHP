@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>宽度</title>
+</head>
+<body>
+<script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+<script>
+	$(function(){
+		console.log( $(window).width() )
+		$(window).resize(function(){
+			if( $(window).width() > 960 ) {
+				$('body').css({
+					background: 'pink'
+				})
+			}
+			else if( $(window).width()>640 && $(window).width()<=960 ) {
+				$('body').css({
+					background: 'purple'
+				})
+			}
+			else {
+				$('body').css({
+					background: 'yellow'
+				})
+			}
+		})
+	})
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>顶部</title>
+<style>
+	.box {
+		width:100px;
+		height:100px;
+		background-color:purple;
+		position:fixed;
+		bottom:30px;
+		right:0;
+		display:none;
+	}
+</style>
+</head>
+<body>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<p>回到顶部</p>
+<div class="box"></div>
+<script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$(window).scroll(function(){
+			$(window).scrollTop() > 0 ? $('.box').show() : $('.box').hide();
+		});
+		$('.box').click(function(){
+			$('html,body').animate({
+				scrollTop: '0'
+			},1000)
+		})
+	})
+</script>
+</body>
+</html>
