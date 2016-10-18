@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>运动框架</title>
+	<style>
+	div {
+		width: 100px;
+		height: 100px;
+		background-color: pink;
+		position: absolute;
+	}
+	</style>
+</head>
+<body>
+<button id="btn1">200</button>
+<button id="btn2">400</button>
+<div id="box"></div>
+<script>
+	function $(id) { return document.getElementById(id) };
+	$("btn1").onclick = function(){
+		animate( $("box"),200 )
+	}
+	$("btn2").onclick = function(){
+		animate( $("box"),400 )
+	}
+	var timer = null;
+	function animate(obj,target){
+		obj.timer = setInterval(function(){
+			if(obj.offsetLeft > target) {
+				clearInterval( obj.timer );
+			}
+			obj.style.left = obj.offsetLeft + 10 + "px";
+		},30)
+	}
+</script>
+</body>
+</html>
