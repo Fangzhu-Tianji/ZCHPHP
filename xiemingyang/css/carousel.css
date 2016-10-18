@@ -1,0 +1,30 @@
+
+
+
+
+
+
+
+.focusBox { position: relative; width:1920px; height: 777px; overflow: hidden; }
+.focusBox .pic { width: 100%; }
+.focusBox .pic a {display: block; height: 777px;}
+.focusBox .hd { width:100%;  position:absolute; z-index:999999; bottom:60px; left:0; height:40px; line-height:40px; text-align:center;}
+.focusBox .hd li{cursor:pointer; display:inline-block; *display:inline; zoom:1; width:10px; height:10px; border: 2px solid #fff; border-radius: 50%; margin:4px; overflow:hidden; z-index:9999999; }
+.focusBox .hd .on{ width: 14px; height: 14px; background-color: #FFFFFF; border: none;}
+
+
+.focusBox .search { width:270px; height:80px; position:absolute; top:100px; left:50%; margin-left:-135px; z-index:999999;}
+.focusBox .search .inp,.focusBox .search .btn { float:left;}
+.focusBox .search .inp input{ box-sizing:border-box; width:200px; height:34px; padding:6px 12px; line-height:20px; background-image:none; background-color:#fff; border:1px solid #ccc; border-radius:4px; box-shadow:inset 0 1px 1px rgba(0,0,0,.075);transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; font-family:"Microsoft Yahei"; margin-right: 10px;}
+.focusBox .search .inp input:focus {border-color:#66afe9; box-shadow:inset 0 0 8px rgba(102,175,233,.6); outline:0 none;}
+.focusBox .search .btn input { box-sizing:border-box; padding:6px 12px; line-height:20px; background-image:none; background-color:#fff; border:1px solid #ccc;text-align: center;
+    vertical-align: middle; white-space: nowrap; text-align:center;border-radius:4px; box-shadow:inset 0 1px 1px rgba(0,0,0,.075);transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; font-family:"Microsoft Yahei"; cursor:pointer;outline:0 none;}
+.focusBox .search .btn input:hover { background-color:#e6e6e6; border-color:#adadad;}
+
+
+.focusBox1 { position: relative; width:100%; height: 477px; overflow: hidden; }
+.focusBox1 .pic { width: 100%; }
+.focusBox1 .pic a {display: block; height: 477px;}
+.focusBox1 .hd { width:100%;  position:absolute; z-index:999999; bottom:0; left:0; height:40px; line-height:40px; text-align:center;}
+.focusBox1 .hd li{cursor:pointer; display:inline-block; *display:inline; zoom:1; width:10px; height:10px; border: 2px solid #fff; border-radius: 50%; margin:4px; overflow:hidden; z-index:9999999; }
+.focusBox1 .hd .on{ width: 14px; height: 14px; background-color: #FFFFFF; border: none;}

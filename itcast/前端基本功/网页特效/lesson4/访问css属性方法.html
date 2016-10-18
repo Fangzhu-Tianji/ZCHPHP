@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css属性</title>
+    <style>
+        .box {
+            width: 300px;
+            height: 300px;
+            background-color: pink;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box" style="left:300px"></div>
+<script type=text/javascript>
+    window.onload = function(){
+        var oBox = document.getElementById("box");
+        console.log(oBox.style.left);
+        console.log(oBox.style["left"]);    // 另一种访问css属性的方法，此方法可以传值
+        function fn(attr){
+            console.log(oBox.style[attr])
+        }
+        fn("left");
+        fn("top");
+    }
+</script>
+</body>
+</html>

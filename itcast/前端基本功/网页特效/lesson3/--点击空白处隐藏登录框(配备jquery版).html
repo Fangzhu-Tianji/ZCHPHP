@@ -45,10 +45,10 @@
 		//	取消冒泡
 		var event = event || window.event;
 		if(event && event.stopPropagation) {
-			event.stopPropagation();
+			event.stopPropagation();	// w3c标准
 		}
 		else {
-			event.cancelBubble = true;
+			event.cancelBubble = true;	// ie6 7 8
 		}
 	}
 	document.onclick = function(event){
@@ -63,5 +63,33 @@
 		}
 	}
 </script>
+<!--
+<script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+<script type="text/javascript">
+	$("#login").click(function(event){
+		event.stopPropagation();	// jquery取消冒泡
+		$("#mask").css({
+			display: "block"
+		});
+		$("#show").css({
+			display: "block"
+		});
+		$("body").css({
+			overflow: "hidden"
+		})
+	});
+	$("#show").click(function(event){
+		event.stopPropagation();
+		$("#mask,#show").css({
+			display: "block"
+		})
+	});
+	$(window).click(function(){
+		$("#mask,#show").css({
+			display: "none"
+		})
+	})
+</script>
+-->
 </body>
 </html>
