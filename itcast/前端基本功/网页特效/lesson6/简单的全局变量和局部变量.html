@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>变量</title>
+</head>
+<body>
+<script>
+    fn();
+    function fn() { // 声明局部变量
+        var num = 100;
+        console.log(num)
+    }
+    var key = "这是一个钥匙"; // 声明的是全局变量
+    function keys() {
+        console.log(key)
+    }
+    keys()
+</script>
+</body>
+</html>

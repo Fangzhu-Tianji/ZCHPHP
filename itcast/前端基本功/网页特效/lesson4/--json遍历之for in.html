@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>json遍历</title>
+    <script>
+        var json = {
+            "width": 200,
+            "height": 300,
+            "left": 400,
+            "right": 500
+        }
+        for(var k in json) {
+            // console.log( k )     // k遍历的是JOSN的属性
+            console.log( json[k] )      // json[k]遍历的是json属性的值
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>
