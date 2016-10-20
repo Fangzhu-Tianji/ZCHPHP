@@ -1,0 +1,1308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>index</title>
+<link href='style/style.css' rel='stylesheet' type='text/css' />
+<script src="jquery-1.7.2.min.js"></script>
+<script src="js/jquery.easie.js"></script>
+<script>
+	$(function(){
+
+	/*减、送、增，动画效果*/
+		var h=$(window).height();
+		var h01=$('.song').offset().top;
+		$(document).scroll(function(){
+				var h02=$(document).scrollTop();
+				if(h02>h01-h){
+					$('.song').animate({'left':115,'opacity': 1},800,'easieEaseInOut');
+					$('.jian').animate({'bottom':62,'opacity': 1},800,'easieEaseInSine');
+					$('.zeng').animate({'left':641,'opacity': 1},800,'easieEaseInOutSine');				
+				}		
+			
+
+			});
+
+	});
+
+	$(function(){
+
+
+
+		$('.l_bto span').mouseover(function(){
+			$(this).addClass('act').siblings().removeClass('act');
+			var index=$(this).index();
+			$('.lilist li').eq(index).fadeIn(1000).siblings().fadeOut(1000);
+		});
+		$('.lilist li').each(function(i,item){
+			$(item).css({'background':'url(images/'+(i+1)+'.jpg) 0 0 no-repeat'})
+		});
+	});
+
+		/*为何学动画效果*/
+	$(function(){
+		var h=$(window).height();
+		var h03=$('.l_bto').offset().top;
+		$(document).scroll(function(){
+			var h04=$(document).scrollTop();
+			if(h04>h03-h){
+				$('.learn .l_top img').slideDown(1000);
+			}
+		});
+	});
+	/*黄鹤楼动画*/
+	$(function(){
+		var h=$(window).height();
+		var h05=$('.lou .txt').offset().top;
+		$(document).scroll(function(){
+			var h06=$(document).scrollTop();
+			if(h06>h05-h){
+				$('.lou .pic').animate({'top':0},800,'easieEaseInOut');
+				$('.lou .txt li:nth-child(1)').fadeIn(1000);
+				$('.lou .txt li:nth-child(2)').fadeIn(2000);
+				$('.lou .txt li:nth-child(3)').fadeIn(3000);
+				$('.lou .txt li:nth-child(4)').fadeIn(4000);
+			}
+		});
+	});
+	/*学什么动画效果*/
+	$(function(){
+		var h=$(window).height();
+		var h03=$('.hot .h_c').offset().top;
+		$(document).scroll(function(){
+			var h04=$(document).scrollTop();
+			if(h04>h03-h){
+				$('.hot .h_top img').slideDown(1000);
+			}
+		});
+	});
+	
+	/*选择武汉动画效果*/
+	$(function(){
+		var h=$(window).height();
+		var h03=$('.wenti .li3').offset().top;
+		$(document).scroll(function(){
+			var h04=$(document).scrollTop();
+			if(h04>h03-h){
+				$('.wuhan .box').css('transform','rotateY(720deg)');
+				
+			}
+		});
+	});
+	/*火爆里面圆圈滚动动画*/
+	$(function(){
+		var h=$(window).height();
+		var h03=$('.h_bto').offset().top;
+		$(document).scroll(function(){
+			var h04=$(document).scrollTop();
+			if(h04>h03-h){
+				$('.hot .h_c li:nth-child(1)').css('animation','rollInLeft 2s')
+				$('.hot .h_c li:nth-child(2)').css('animation','rollInLeft 2s')
+				$('.hot .h_c li:nth-child(3)').css('animation','rollInLeft 2s')
+				$('.hot .h_c li:nth-child(4)').css('animation','rollInLeft 2s')
+				$('.hot .h_c li:nth-child(5)').css('animation','rollInRight 2s')
+				$('.hot .h_c li:nth-child(6)').css('animation','rollInRight 2s')
+				$('.hot .h_c li:nth-child(7)').css('animation','rollInRight 2s')
+				$('.hot .h_c li:nth-child(8)').css('animation','rollInRight 2s')
+
+				
+			}
+		});
+	});
+
+
+	/*能学会吗*/
+	$(function(){
+		$('.cani dl').mouseover(function(){
+			$(this).children('img').css('transform','rotateY(720deg)');
+			$(this).children('dd').css('transform','scale(1.1)');
+			$(this).children('dt').css('transform','scale(1.1)');
+		}).mouseout(function(){
+			$(this).children('img').css('transform','rotateY(0deg)');
+			$(this).children('dd').css('transform','scale(1)');
+			$(this).children('dt').css('transform','scale(1)');
+		});
+		
+	});
+
+	/*回顶部*/
+	$(function(){
+			var h1=$(window).height();
+				//alert(h1);
+		
+			$(document).scroll(function(){
+				var h3=$(document).scrollTop();
+				if(h3>h1){
+					$('.top img').fadeIn(400);					
+			}else{$('.top img').fadeOut(400);}
+
+			});
+			$('.top img').click(function(){
+
+				$('html,body').animate({'scrollTop':0},400);
+			});
+
+	});
+
+	/*轮播图*/
+	$(function(){
+		/* 先利用JQ将小点居中显示*/
+		var w = $('.icon_list span').outerWidth( true );
+		var iconNum = $( '.icon_list span' ).length;
+
+		$('.icon_list').css('width',w*iconNum);
+
+		/* 将所有参与运动的Li位置存起来 */
+		var json0 = {'width':165,'height':100,'top':150,'left':-50}
+		var json1 = {'width':470,'height':225,'top':125,'left':0}
+		var json2 = {'width':800,'height':500,'top':0,'left':250}
+		var json3 = {'width':470,'height':225,'top':125,'left':720}
+		var json4 = {'width':165,'height':100,'top':150,'left':1000}
+
+		/*var json0 = {'width':400,'height':250,'top':125,'left':-50}
+		var json1 = {'width':400,'height':250,'top':125,'left':0}
+		var json2 = {'width':800,'height':500,'top':0,'left':525}
+		var json3 = {'width':400,'height':250,'top':125,'left':0}
+		var json4 = {'width':400,'height':250,'top':125,'left':1000}*/
+
+		/*  实现左按钮点击 */
+		$('.l').click(oBtnClick_l);
+		function oBtnClick_l(){
+			if( !$('.list li').is(":animated") || lock ){
+				// 交换位置
+				$('.num0').css(json4);
+				$('.num1').animate(json0,time);
+				$('.num2').animate(json1,time);
+				$('.num3').animate(json2,time);
+				$('.num4').animate(json3,time);
+
+				// 交换身份
+				var no4 = $('.num4');
+				//$('.num0').attr('class','num4');
+				$('.num0').attr('class','waiting');
+				$('.num1').attr('class','num0');
+				$('.num2').attr('class','num1');
+				$('.num3').attr('class','num2');
+				no4.attr('class','num3');
+
+				if( no4.next().length != 0 ){
+					no4.next().attr('class','num4');
+				}else{
+					$('.list li:first').attr('class','num4');
+				}
+
+				$('.num4').css(json4);
+
+				// 同步小圆点业务
+				num--;
+				if( num == -1 ){
+					num = $('.icon_list span').length-1;
+				}
+				$('.icon_list span').eq(num).addClass('act').siblings().removeClass('act');
+			}
+		}
+
+		/* 实理右按钮点击 */
+		$('.learnhui-bd .r').click(oBtnClick_r);
+		function oBtnClick_r(){
+			if( !$('.learnhui-bd .list li').is(':animated') || lock ){
+				// 交换位置
+				$('.learnhui-bd .num4').css(json0);
+				$('.learnhui-bd .num3').animate(json4,time);
+				$('.learnhui-bd .num2').animate(json3,time);
+				$('.learnhui-bd .num1').animate(json2,time);
+				$('.learnhui-bd .num0').animate(json1,time);
+
+				// 交换身份
+				var no0 = $('.num0');
+				//$('.num4').attr('class','num0');
+				$('.learnhui-bd .num4').attr('class','waiting');
+				$('.learnhui-bd .num3').attr('class','num4');
+				$('.learnhui-bd .num2').attr('class','num3');
+				$('.learnhui-bd .num1').attr('class','num2');
+				no0.attr('class','num1');
+
+				if( no0.prev().length != 0 ){
+					no0.prev().attr('class','num0')
+				}else{
+					$('.learnhui-bd .list li:last').attr('class','num0');
+				}
+
+				$('.learnhui-bd .num0').css(json0);
+
+				// 同步小圆点业务
+				num++;
+				if( num == $('.learnhui-bd .icon_list span').length ){
+					num = 0;
+				}
+				$('.learnhui-bd .icon_list span').eq(num).addClass('act').siblings().removeClass('act');
+			}
+		}
+
+		/* 小圆点业务 */
+		var num = 0;
+
+		/* 为上帝开个后门 */
+		var lock = false;
+
+		/* 设置一个全局变量将正常运动时间存起来 */
+		var time = time;
+
+
+		$('.learnhui-bd .icon_list span').click(function(){
+			// 点击的时候模拟点击事件来跳转到当前图片
+			var index = $(this).index();
+
+			// 点下的时候对当前运动时间进行备份
+			var beifen = time;
+			time = 100;
+
+			// 当我们点击小标的时候将后门打开
+			lock = true
+
+			if( num > index ){
+				// 定义一个容器用来存放应模拟点击几次按钮
+				var aBtnNum = num - index;
+
+				// 利用循环来将点击事件执行aBtnNum次
+				for( var i=1;i<=aBtnNum;i++ ){
+					oBtnClick_l();
+				}
+				console.log( '月哥~我要点击左按钮'+aBtnNum+'次' );
+			}else{
+				var aBtnNum = index - num;
+
+				// 利用循环来将点击事件执行aBtnNum次
+				for( var i=1;i<=aBtnNum;i++ ){
+					oBtnClick_r();
+				}
+				console.log( '月哥~我要点击右按钮'+aBtnNum+'次' );
+			}
+
+			lock = false;
+			time = beifen;
+
+			num = index;
+
+			// 当前状态切换
+			$('.learnhui-bd .list li').eq(num).addClass('act').siblings().removeClass('act');
+
+			console.log( num+'---'+index);
+		});
+
+		/* 自动播放 */
+		var timer = null;
+		timer = setInterval(oBtnClick_r,2000);
+		$('.learnhui-bd .box').mouseover(function(){
+			clearInterval( timer );
+		}).mouseout(function(){
+			timer = setInterval(oBtnClick_r,2000);
+		});
+	});
+
+
+/*内容区浮现的内容*/
+	$(function(){
+
+		$('.content dd').mouseover(function(){
+			$(this).children('.mask').stop().animate({'top':0},400);
+
+		}).mouseout(function(){
+			$(this).children('.mask').stop().animate({'top':168},400);
+		});
+	});
+/*表格滚动*/
+$(function(){
+	var timer=null;
+	var num=0;
+	
+	// 自动播放
+		timer = setInterval(autoplay,3000);
+
+		// 清除定时器
+		$('.form .list ul').mouseover(function(){
+			clearInterval(timer);
+		}).mouseout(function(){
+			timer = setInterval(autoplay,3000);
+		});
+
+		function autoplay(){
+			num++;
+
+			if( num == 12 ){
+				num = 0;
+			}
+
+			$('.form .list ul').animate({'top':-num*42},500);
+		}
+
+});
+
+
+</script>
+</head>
+<!-- 顶部：logo、tell -->
+<div class='header'>
+	<div class='header_c area'>
+		<div class='tell'>
+			<span><img src="images/dianhua.png" alt="" />&nbsp;咨询电话&nbsp;<strong>027-81970008</strong></span>
+			<img class='qq' src="images/qq.gif" alt="" />
+		</div>
+		<div class='logo'>
+			<h1><a href="#"  target="_blank" title="武汉传智播客官网">传智播客武汉校区</a></h1>
+		</div>
+	</div>
+</div>
+
+<!-- banner区 -->
+<div class='banner'>
+	<div class='b_01'></div>
+	<div class='b_02'></div>
+	<div class='b_03'></div>
+	<div class='b_04'></div>
+	<div class='b_05'></div>
+	<div class='linkbox'>
+		<a class='ask' href="#">咨询优惠</a>
+		<a href="#">我要报名</a>
+	</div>	
+</div>
+<!-- 送减赠活动宣传 -->
+<div class='ad'>
+	<div class='ad_c area'>
+		<div class='c_top'>
+			<p>为庆祝网页平面UI设计学科落户武汉，从即日起至2015年8月8日，凡交清就业班学费的学员将享受以下超值钜惠</p>
+			<div class='line'></div>
+		</div>
+		<div class='c_bto'>
+			<dl class='song'>
+				<dt></dt>
+				<dd><h3>报就业班即送<br />价值<strong>1800元</strong>的基础班</h3></dd>
+			</dl>
+			<dl class='jian'>
+				<dt></dt>
+				<dd><h3>学费在优惠价的基础上<br />再优惠<strong>1000元</strong></h3></dd>
+			</dl>
+			<dl class='zeng'>
+				<dt></dt>
+				<dd><h3>传智与黑马程序员女友<br />免费学价值<strong>1800元</strong>的基础班</h3></dd>
+				</dl>
+			<a href="#">我要享受优惠</a>
+
+		</div>
+	</div>	
+</div>
+<!-- 为何学 -->
+<div class='learn area'>
+	<div class='l_top'>
+		<img src="images/whylearn-hd.png" alt="" />
+	</div>
+	<div class='l_bto'>
+		<div class='spanlist'>
+			<span class='act'>
+				<h3>前景广</h3>
+				<p>时事必将造英雄</p>
+			</span>
+			<span>
+				<h3>好就业</h3>
+				<p>紧缺高手上千万</p>
+			</span>
+			<span>
+				<h3>薪资高</h3>
+				<p>平均已达六千大洋</p>
+			</span>
+			<span class='last'>
+				<h3>全能型</h3>
+				<p>十八般武艺样样精通</p>
+			</span>
+		</div>
+		<div class='lilist'>
+			<ul>
+				<li class='cur'></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- 黄鹤楼 -->	
+<div class='lou'>
+	<div class='lou_c area'>
+		<div class='pic'>
+			<ul>
+				<li class='txt01'></li>
+				<li class='txt02'></li>
+				<li class='txt03'></li>
+				<li class='txt04'></li>
+			</ul>
+		</div>
+		<div class='txt'>
+			<ul>
+				<li class='first'>
+					<p class='pic01'></p>
+					技能：广告平面设计、包装设计、DM广告设计、海报设计、样本设计、书刊设计、VI设计、印刷排版、动画概念设计、影楼后期制作......
+				</li>
+				<li>
+					<p class='pic02'></p>
+					技能：网页设计、各种效果打造、HTML5网站设计、FLash网站设计、html+css前端代码编程、网站优化与维护等......
+				</li>
+				<li>
+					<p class='pic03'></p>
+					技能：视觉营销创意设计、交互设计、软件图形设计、用户研究把控、手机界面设计、APP设计、可穿戴设计等......
+				</li>
+				<li>
+					<p class='pic04'></p>
+					技能：既懂各种设计，又会编程，响应式手机网站制作、Javascript、JQuery交互特效、html5+css3、Flash特效等等。
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<!-- 年薪 -->
+<div class='salary'>
+	<div class='salary_c area'>
+		<div class='sa_top'>	
+		</div>
+		<div class='sa_bto'>
+			<a href="#"></a>
+		</div>
+	</div>	
+</div>
+
+<!-- 火爆 -->
+<div class='hot area'>
+	<div class='h_top'>
+		<img src="images/whatlearn-hd.png" alt="" />
+	</div>
+	<div class='h_c'>
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+	<div class='h_bto'>
+		<ul>
+			<li>
+				<h3><img src="images/whatlearn-list1.gif" alt="" /></h3>
+				<p>明暗与透视，色彩学基础，色彩心理学，平面构成，形式美法则，交互设计、界面设计规范，创意设计能力</p>
+			</li>
+			<li>
+				<h3><img src="images/whatlearn-list2.gif" alt="" /></h3>
+				<p>数字化信息处理，WEB项目实训，项目综合管理，思维导图，DIV+CSS，JS，JQ，动画设计</p>
+			</li>
+			<li>
+				<h3><img src="images/whatlearn-list3.gif" alt="" /></h3>
+				<p>超过100个实战项目案例，且每周更新，600饱满课时，项目经验全行业覆盖</p>
+			</li>
+		</ul>
+	</div>
+	
+</div>
+<!-- 红色大条 -->
+<div class='red'>
+	<div class='red_c area'>
+		<div class='hotpic'>
+			<img src="images/hotregister-hd.png" alt="" />
+		</div>
+		<div class='ask'>
+			<a href="">咨询优惠</a>
+			<a href="">我要报名</a>
+		</div>
+	</div>
+</div>
+<!-- 课程title -->
+<div class='title area'></div>
+<div class='shadow'></div>
+<!-- 课程内容 -->
+<div class='content area'>
+	<dl>
+		<dt><img src="images/course-list-tt1.gif" alt="" /></dt>
+		<dd><img src="images/course-list-1-1.jpg" alt="" />
+			<div class="mask" >
+				<h4>Photoshop 图像处理</h4>
+				<p>讲解PS在图像编辑、图像合成、校色调色及特效制作四大部分的技巧 以及在网页平面设计领域的应用</p>
+			</div>
+		</dd>
+		<dd><img src="images/course-list-1-2.jpg" alt="" />
+			<div class="mask" >
+				<h4>Illustrator 图形设计</h4>
+				<p>掌握AI软件在图标设计与图形设计中的运用方法 熟练设计与制作企业标志与图标</p>
+			</div>
+		</dd>
+		<dd><img src="images/course-list-1-3.jpg" alt="" />
+			<div class="mask" >
+				<h4>平面广告与企业VI设计</h4>
+				<p>讲解平面广告创意与策划流程 海报广告与企业宣传单页设计</p>
+			</div>
+		</dd>
+	</dl>
+	<dl>
+		<dt><img src="images/course-list-tt2.gif" alt="" />	
+		</dt>
+		<dd><img src="images/course-list-2-1.jpg" alt="" />
+			<div class="mask" >
+				<h4>电商广告形式美法则</h4>
+				<p>点线面构成法则的掌握理解常见电商广告创意设计术语，明确努力方向，会分辨网页设计作品、动画作品的优劣，为后面班级系统讲解打下基础。</p>
+			</div>
+			
+		</dd>
+		<dd><img src="images/course-list-2-2.jpg" alt="" />
+			<div class="mask">
+				<h4>表现技法深度强化</h4>
+				<p>通过商业BANNER广告案例加深对软件的理解，学会更多实际应用技巧，提升软件操作的效率。通过商业BANNER广告案例加深对软件的理解，学会更多实际应用技巧，提升软件操作的效率</p>
+			</div>
+			
+		</dd>
+		<dd><img src="images/course-list-2-3.jpg" alt="" />
+			<div class="mask">
+
+				<h4>全行业电商广告实战</h4>
+				<p>电商广告设计实战训练，从设计构图、创意思路、表现手法、效果打造、细节把握等多个方面全面掌握电商广告设计技巧</p>
+			</div>
+			
+		</dd>
+	</dl>
+	<dl>
+		<dt><img src="images/course-list-tt3.gif" alt="" />
+		</dt>
+		<dd><img src="images/course-list-3-1.jpg" alt="" />
+			<div class="mask">
+				<h4>光影效果与透视</h4>
+				<p>光影在空间层次表现及单体物象塑造上都是不可缺少的。比如：体现空间，掌握光对空间表现的影响；光照射物体时的明暗变化以及层次关系等是提高空间表现能力的重要知识。掌握透视关系就能在绘画过程中正确把握视觉空间。</p>
+			</div>
+			
+		</dd>
+		<dd><img src="images/course-list-3-2.jpg" alt="" />
+			<div class="mask" style="top: 168px;">
+				<h4>色彩理论与色彩心理学</h4>
+				<p>色彩三要素的属性特征，色彩情感，单色与多色搭配的技巧，色彩心理学在网页设计中的实际应用。</p>
+			</div>
+		</dd>
+		<dd><img src="images/course-list-3-3.jpg" alt="" />
+			<div class="mask" style="top: 168px;">
+				<h4>WEB元素的打造技法</h4>
+				<p>各类网页元素的绘制方式方法与案例中的实际应用。包括网页图标、banner、艺术字等。各类风格的表现手法日韩卡通小清新风格、中国水墨气息风格、欧美简约大气风格、个性化炫酷风格。</p>
+			</div>
+		</dd>
+		<dd><img src="images/course-list-3-4.jpg" alt="" />
+			<div class="mask" style="top: 168px;">
+				<h4>WEB尺寸与设计规范</h4>
+				<p>网站设计基本流程与设计规范的概念性讲解，重点了解Web界面设计规范。通过相关企业网站案例训练，掌握web端网页UI界面设计的流程和规范。</p>
+			</div>
+		</dd>
+		<dd><img src="images/course-list-3-5.jpg" alt="" />
+			<div class="mask" style="top: 168px;">
+				<h4>Web界面设计实战</h4>
+				<p>掌握各种网站的网页特点认知，根据不同企业类网站的特点，进行web端界面设计技巧和相关规范。 企业类网站设计 电商店铺装修设计 HTML5+css3炫酷类网站设计</p>
+			</div>
+		</dd>
+		<dd><img src="images/course-list-3-6.jpg" alt="" />
+			<div class="mask" style="top: 168px;">
+				<h4>网页用户体验设计</h4>
+				<p>讲解互联网产品在使用之前、使用期间和使用之后的全部感受，包括情感、信仰、喜好、认知印象、生理和心理反应、行为和成就等各个方面。 </p>
+			</div>
+		</dd>
+	</dl>
+	<dl>
+		<dt><img src="images/course-list-tt4.gif" alt="" />
+		</dt>
+		<dd><img src="images/course-list-4-1.jpg" alt="" />
+			<div class="mask" style="top: 168px;">
+				<h4>手绘基础造型</h4>
+				<p>素描步骤和构图在图标与界面中的影响 速写步骤与表现技法，手绘基础造型</p>
+			</div>
+		</dd>
+		<dd><img src="images/course-list-4-2.jpg" alt="" />
+			<div class="mask" style="top: 168px;">
+				<h4>移动平台图标设计</h4>
+				<p>ICON设计基本流程与设计规范的概念性讲解，掌握当今世界最系统的UI界面图标设计技能，重点了解各种风格的设计方法通过各种风格设计方法训练，快速掌握不同图标设计特征和效果实现。</p>
+			</div>
+		</dd>
+		<dd><img src="images/course-list-4-3.jpg" alt="" />
+			<div class="mask" style="top: 168px;">
+				<h4>UI设计尺寸与规范</h4>
+				<p>屏幕内元素的平衡布局，功能区域的合理划分规范。掌握让用户通过最少的判断和最少的操作达到交互目的方法与技巧。以及app图标格式、app图标大小和常见手机显示屏分辨率的规范。</p>
+			</div>
+		</dd>
+		<dd><img src="images/course-list-4-4.jpg" alt="" />
+			<div class="mask" style="top: 168px;">
+				<h4>Android平台APP设计</h4>
+				<p>掌握基于Android平台的APP设计过程和方法，以及Android平台APP设计的风格把控。炫丽的图片展示、巧妙的设计细节、清晰和有意义的布局排版设计，以及一些直观的手势操作等。</p>
+			</div>
+		</dd>
+		<dd><img src="images/course-list-4-5.jpg" alt="" />
+			<div class="mask" style="top: 168px;">
+				<h4>苹果IOS平台APP设计</h4>
+				<p>从拟物化和扁平化两种风格方向上进行实战训练，设计出能够提高用户基于苹果IOS平台APP的产品认知和交互便捷性的APP界面。</p>
+			</div>
+		</dd>
+		<dd><img src="images/course-list-4-6.jpg" alt="" />
+			<div class="mask" style="top: 168px;">
+				<h4>多媒体终端界面设计</h4>
+				<p>掌握多媒体智能电视的使用特点、智能电视平台app的设计与应用、电视平台导航界面的设计、界面流媒体功能和列表信息组织方式、导航焦点的响应方式设计、多媒体智能电视的界面设计分辨率和颜色的使用。</p>
+			</div>
+		</dd>
+	</dl>
+	<dl>
+		<dt><img src="images/course-list-tt5.gif" alt="" />
+		</dt>
+		<dd><img src="images/course-list-5-1.jpg" alt="" />
+			<div class="mask" style="top: 168px;">
+				<h4>HTML网页架构</h4>
+				<p>对网页结构进行认知，了解切片与网页结构间的逻辑关系，学习符合W3C标准的HTML网页结构技术，掌握书写具有语义化的标签结构。</p>
+			</div>
+		</dd>
+		<dd><img src="images/course-list-5-2.jpg" alt="" />
+			<div class="mask">
+				<h4>CSS网页样式标准</h4>
+				<p>学习使用时下最流行的DIV+CSS进行网页制作，用css精灵技术处理网页图像，对网页进行seo搜索引擎优化,掌握滑动门技术，解决各大浏览器兼容性问题。</p>
+			</div>
+		</dd>
+		<dd><img src="images/course-list-5-3.jpg" alt="" />
+			<div class="mask">
+				<h4>Dreamweaver网站项目实战</h4>
+				<p>使用Dreamweaver开发实战项目,制作线上大型网站案例,强化网站书写技术，熟练掌握整套网站制作流程。</p>
+			</div>
+		</dd>
+	</dl>
+	<dl>
+		<dt><img src="images/course-list-tt6.gif" alt="" />
+		</dt>
+		<dd><img src="images/course-list-6-1.jpg" alt="" />
+			<div class="mask" style="top: 168px;">
+				<h4>Javascript网页特效制作</h4>
+				<p>初探JavaScript魅力，掌握JS语法 编程基础流程控制、函数、数组 熟悉JS内置对象、事件驱动编程原理</p>
+			</div>
+		</dd>
+		<dd><img src="images/course-list-6-2.jpg" alt="" />
+			<div class="mask" style="top: 168px;">
+				<h4>jQuery网页特效制作</h4>
+				<p>讲解jQuery编程魅力，使用jQuery进行敏捷开发快速制作常用网页特效，掌握jQuery核心技术。</p>
+			</div>
+		</dd>
+		<dd><img src="images/course-list-6-3.jpg" alt="" />
+			<div class="mask" style="top: 168px;">
+				<h4>响应式手机网站制作</h4>
+				<p>学习互联网最前沿的html5与css3技术，并结合媒体查询制作响应式网站同时适应三种不同终端，制作绚丽的html5个性特效网站。</p>
+			</div>
+		</dd>
+	</dl>
+	<dl>
+		<dt><img src="images/course-list-tt7.gif" alt="" />
+		</dt>
+		<dd><img src="images/whflash1.png" alt="" />
+			<div class="mask" style="top: 168px;">
+				<h4>Flash动画基础</h4>
+				<p>让你迅速掌握Flash软件，了解动画原理。</p>
+			</div>
+		</dd>
+		<dd><img src="images/whflash2.png" alt="" />
+			<div class="mask" style="top: 168px;">
+				<h4>Flash广告设计</h4>
+				<p>讲解Flash广告的制作流程，掌握flash商业广告的制作技巧。</p>
+			</div>
+		</dd>
+		<dd><img src="images/whflash3.png" alt="" />
+			<div class="mask">
+				<h4>FlashUI动效</h4>
+				<p>学习将静态的UI做成动态，并且生成GIF动画进行展示。</p>
+			</div>
+		</dd>
+	</dl>
+	<dl>
+		<dt><img src="images/course-list-tt8.gif" alt="" />
+		</dt>
+		<dd><img src="images/course-list-8-1.jpg" alt="" />
+			<div class="mask" style="top: 168px;">
+				<h4>个人职业规划</h4>
+				<p>全面分析行业发展趋势，针对学员具体情况，科学引导，明确定位，每个人都能找到属于自己的职业轨道！ </p>
+			</div>
+		</dd>
+		<dd><img src="images/course-list-8-2.jpg" alt="" />
+			<div class="mask" style="top: 168px;">
+				<h4>企业面试技巧</h4>
+				<p>人事面试？技术面试！掌握企业最炙手可热的面试信息，综合分析，各个击破，提供最专业的指导，让面试变得更简单！</p>
+			</div>
+		</dd>
+		<dd><img src="images/course-list-8-3.jpg" alt="" />
+			<div class="mask" style="top: 168px;">
+				<h4>毕业后跟踪服务</h4>
+				<p>长期跟踪，不定期回访，给学员提供最贴心的课后服务，定期举行技术沙龙，轻轻松松学到新知识！</p>
+			</div>
+		</dd>
+	</dl>
+</div>
+
+<!-- 每期开班 -->
+<div class='open'>
+	<h3><img src="images/h_bg.png" alt="" /></h3>
+	<div class='form'>
+		<div class='o_l'>
+			<span>*</span>真实姓名：<input type="text" placeholder='我们期待更了解您' required/>
+			<span>*</span>联系手机：<input type="text" placeholder='我们和您一样讨厌骚扰电话' required/>
+			<!-- <span>*</span>上课地址：<input type="text" value='请选择上课地址' required list="conlist" />
+						    <datalist id="conlist"> -->
+			<span>*</span>上课地址：<select>
+							    	<option value="请选择上课地址">请选择上课地址</option>
+							    	<option value="北京校区">北京校区</option>
+							    	<option value="上海校区">上海校区</option>
+							    	<option value="广州校区">广州校区</option>
+							    	<option value="武汉校区">武汉校区</option>
+						    	</select>
+						   <!--  </datalist> -->
+
+			<span>*</span>QQ号码：<input type="text" placeholder='我们将第一时间与您联系' required/>
+		</div>
+		<div class='o_r'>
+			<input type="button" value='现在预报名' />
+			<p>温馨提示：请保持手机畅通，咨询老师将为您提供专属的一对一报名服务。</p>
+		</div>
+	</div>
+</div>
+
+<!-- 能学吗 -->
+<div class='cani'>
+	<div class='canipic'>
+		<img src="images/learnhui-top.png" alt="" />
+	</div>
+	<div class='wait area'>
+		<img src="images/learnhui002.png" alt="" />
+		<div class='list'>
+			<ul>
+				<li>
+					<dl>
+						<img src="images/chance001.png" alt="" />
+						<dt>职场小新人</dt>
+						<dd>掌握一门技能，能力蹭蹭上涨，工作机会增多，带来事业转型</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<img src="images/chance002.png" alt="" />
+						<dt>在校大学生</dt>
+						<dd>掌握一门技能，前途不再迷茫，有底气更有自信，生活有意义，就业不费力。</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<img src="images/chance003.png" alt="" />
+						<dt>宝妈与妹纸</dt>
+						<dd>掌握一门技能，自给自足有底气。生活更有安全感，工作爱情更独立。</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<img src="images/chance004.png" alt="" />
+						<dt>设计与代码爱好者</dt>
+						<dd>美轮美奂的设计与炫酷的代码效果，给你征服的欲望与满足。</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<img src="images/chance005.png" alt="" />
+						<dt>管理者</dt>
+						<dd>了解技术，表达更准确，沟通无障碍，我口说我心，管理更轻松。</dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- 作品展示 -->
+<div class='works area'>
+	<!-- 轮播 -->
+	<div class="learnhui-bd area">
+			<h3><img src="images/learnhui-bd-tt.gif" class="wow fadeInUp imgLoad" alt="" style="visibility: visible; animation-name: fadeInUp; -webkit-animation-name: fadeInUp;"></h3>		
+			<div class="box">
+		    	<div class="list">
+		    		<ul>
+		    			<li class="num0">
+		    				<div class="mark"></div>
+		    				<img src="images/slidepic1.jpg" alt="">
+		    			</li>
+		    			<li class="num1">
+		    				<div class="mark"></div>
+		    				<img src="images/slidepic2.jpg" alt="">
+		    			</li>
+		    			<li class="num2">
+		    				<div class="mark"></div>
+		    				<img src="images/slidepic3.jpg" alt="">
+		    			</li>
+		    			<li class="num3">
+		    				<div class="mark"></div>
+		    				<img src="images/slidepic4.jpg" alt="">
+		    			</li>
+		    			<li class="num4">
+		    				<div class="mark"></div>
+		    				<img src="images/slidepic5.jpg" alt="">
+		    			</li>
+		    			 <li class="waiting">
+		    				<div class="mark"></div>
+		    				<img src="images/slidepic6.jpg" alt="">
+		    			</li>
+		    			<li class="waiting">
+		    				<div class="mark"></div>
+		    				<img src="images/slidepic7.jpg" alt="">
+		    			</li>
+		    			<li class="waiting">
+		    				<div class="mark"></div>
+		    				<img src="images/slidepic8.jpg" alt="">
+		    			</li>
+		    			<li class="waiting">
+		    				<div class="mark"></div>
+		    				<img src="images/slidepic9.jpg" alt="">
+		    			</li> 
+		    		</ul>
+	    		</div>
+		    	<div class="btn">
+		    		<span class="l"></span>
+		    		<span class="r"></span>
+		    	</div>
+		    	<div class="icon_list">
+		    		<span class="act"></span>
+		    		<span></span>
+		    		<span></span>
+		    		<span></span>
+		    		<span></span>
+		    		<span></span>
+		    		<span></span>
+		    		<span></span>
+		    		<span></span>
+		    	</div>
+    		</div>
+
+				<!-- <ul>
+					<li style="z-index: 0; width: 564px; height: 330px; opacity: 0; left: 34px; top: 0px;"><img class="imgLoad" src="images/slidepic6.jpg" alt=""></li>
+					<li style="z-index: 0; width: 564px; height: 330px; left: 34px; top: 0px; opacity: 0;"><img class="imgLoad" src="images/slidepic7.jpg" alt=""></li>
+					<li style="z-index: 1; width: 564px; height: 330px; left: 34px; top: 0px; opacity: 0;"><img class="imgLoad" src="images/slidepic8.jpg" alt=""></li>
+					<li style="z-index: 2; width: 564px; height: 330px; left: 34px; top: 0px; opacity: 0;"><img class="imgLoad" src="images/slidepic9.jpg" alt=""></li>
+					<li style="z-index: 3; width: 564px; height: 330px; left: 34px; top: 79px; opacity: 0.8;"><img class="imgLoad"  src="images/slidepic1.jpg" alt=""></li>
+					<li style="z-index: 4; width: 800px; height: 500px; left: 200px; top: 0px; opacity: 1;"><img class="imgLoad"  src="images/slidepic2.jpg" alt=""></li>
+					<li style="z-index: 3; width: 564px; height: 330px; left: 605px; top: 79px; opacity: 0.8;"><img class="imgLoad" src="images/slidepic3.jpg" alt=""></li>
+					<li style="z-index: 2; width: 564px; height: 330px; left: 605px; top: 0px; opacity: 0;"><img class="imgLoad" src="images/slidepic4.jpg" alt=""></li>
+					<li style="z-index: 1; width: 564px; height: 330px; left: 34px; top: 0px; opacity: 0;"><img class="imgLoad"  src="images/slidepic5.jpg" alt=""></li>
+				</ul> -->
+				<!-- <div class="toggle" style="display: none;">
+					<a href="javascript:;" class="prev"></a>
+					<a href="javascript:;" class="next"></a>
+					这里的href="javascript:;"，其中javascript:是伪协议，它可以让我们通过一个链接来调用javascript函数.而采用这个方式 javascript:;可以实现A标签的点击事件运行时，如果页面内容很多，有滚动条时，页面不会乱跳，用户体验更好。
+				</div> -->
+			</div>
+	</div>
+</div>
+<!-- 能学会吗 -->
+<div class='get'>
+	<div class='g_pic'>
+		<img src="images/learnhui-bottom-img.jpg" alt="" />
+	</div>
+	<div class='center area'>
+		<div class='g_c_top'>
+			<h3><img src="images/learnhui-why-tt1.gif" alt="" /></h3>
+			<div class='video'>
+				
+				<embed style='border:1px #ccc solid' src="http://static.video.qq.com/TPout.swf?vid=n014110cmul&amp;auto=0" width="980" height="578" align="middle" type="application/x-shockwave-flash" quality="high" allowscriptaccess="always">
+			</div>
+		</div>
+	<!-- 表格 -->
+		<div class='form'>
+			<h3><img src="images/learnhui-why-tt2.gif" alt="" /></h3>
+			<div class='table'>
+				<h4>
+					<span class="td1">姓名</span>
+					<span class="td2">籍贯</span>
+					<span class="td3">毕业院校</span>
+					<span class="td4">入职时间</span>
+					<span class="td5">入职公司</span>
+					<span class="td6">薪资</span>
+					<span class="td7">福利</span>
+				</h4>
+				<div class='list'>
+					<ul>
+						<li>
+							<span class="td1">陈万*同学</span>
+							<span class="td2">湖北荆州</span>
+							<span class="td3">湖北水利水电职业技术学院</span>
+							<span class="td4">2014/12/05</span>
+							<span class="td5">艺*公司</span>
+							<span class="td6">8500</span>
+							<span class="td7">五险一金+餐补</span>
+						</li><li>
+							<span class="td1">朱*同学</span>
+							<span class="td2">湖北宜昌</span>
+							<span class="td3">湖北科技学院</span>
+							<span class="td4">2015/4/14</span>
+							<span class="td5">北京**康</span>
+							<span class="td6">8000</span>
+							<span class="td7">五险一金</span>
+						</li><li>
+							<span class="td1">刘*同学</span>
+							<span class="td2">湖北武汉</span>
+							<span class="td3">华中科技大学</span>
+							<span class="td4">2015/2/11</span>
+							<span class="td5">腾*互娱</span>
+							<span class="td6">13000</span>
+							<span class="td7">六险一金</span>
+						</li><li>
+							<span class="td1">王小*同学</span>
+							<span class="td2">湖北襄阳</span>
+							<span class="td3">华中师范大学</span>
+							<span class="td4">2014/10/21</span>
+							<span class="td5">奇*360</span>
+							<span class="td6">12000</span>
+							<span class="td7">六险一金</span>
+						</li><li>
+							<span class="td1">张万*同学</span>
+							<span class="td2">湖北宜昌</span>
+							<span class="td3">武汉软件工程职业学院</span>
+							<span class="td4">2015/3/25</span>
+							<span class="td5">阿***国际站</span>
+							<span class="td6">11000</span>
+							<span class="td7">六险一金+补助</span>
+						</li><li>
+							<span class="td1">黄*同学</span>
+							<span class="td2">湖北黄冈</span>
+							<span class="td3">华中农业大学</span>
+							<span class="td4">2014/12/11</span>
+							<span class="td5">高*财富</span>
+							<span class="td6">11000</span>
+							<span class="td7">六险一金+补助</span>
+						</li><li>
+							<span class="td1">龚*同学</span>
+							<span class="td2">湖北恩施</span>
+							<span class="td3">武汉理工大学华夏学院</span>
+							<span class="td4">2014/3/14</span>
+							<span class="td5">京*商城</span>
+							<span class="td6">10000</span>
+							<span class="td7">五险一金</span>
+						</li><li>
+							<span class="td1">操锦*同学</span>
+							<span class="td2">湖北武汉</span>
+							<span class="td3">湖北省竹山县职业技术集团</span>
+							<span class="td4">2015/3/30</span>
+							<span class="td5">*代</span>
+							<span class="td6">9500</span>
+							<span class="td7">五险一金</span>
+						</li><li>
+							<span class="td1">肖雪*同学</span>
+							<span class="td2">湖北武汉</span>
+							<span class="td3">湖北科技学院</span>
+							<span class="td4">2014/9/22</span>
+							<span class="td5">金*科技有限公司</span>
+							<span class="td6">9500</span>
+							<span class="td7">五险一金</span>
+						</li><li>
+							<span class="td1">梁振*同学</span>
+							<span class="td2">湖北宜昌</span>
+							<span class="td3">武汉商学院</span>
+							<span class="td4">2014/12/11</span>
+							<span class="td5">安**越投资</span>
+							<span class="td6">9000</span>
+							<span class="td7">五险一金</span>
+						</li><li>
+							<span class="td1">付小*同学</span>
+							<span class="td2">湖北襄阳</span>
+							<span class="td3">武汉软件工程职业学院</span>
+							<span class="td4">2014/12/15</span>
+							<span class="td5">北京吾***医疗科技有限公司</span>
+							<span class="td6">9000</span>
+							<span class="td7">五险一金</span>
+						</li><li>
+							<span class="td1">李*同学</span>
+							<span class="td2">湖北宜昌</span>
+							<span class="td3">武汉软件学院</span>
+							<span class="td4">2015/5/13</span>
+							<span class="td5">中国***会通用航空分会</span>
+							<span class="td6">8500</span>
+							<span class="td7">五险一金</span>
+						</li><li>
+							<span class="td1">唐胜*同学</span>
+							<span class="td2">湖北荆州</span>
+							<span class="td3">武汉商学院</span>
+							<span class="td4">2015/4/7</span>
+							<span class="td5">博*科技</span>
+							<span class="td6">8000</span>
+							<span class="td7">五险一金+餐补</span>
+						</li>
+						<li>
+							<span class="td1">付小*同学</span>
+							<span class="td2">湖北襄阳</span>
+							<span class="td3">武汉软件工程职业学院</span>
+							<span class="td4">2014/12/15</span>
+							<span class="td5">北京吾***医疗科技有限公司</span>
+							<span class="td6">9000</span>
+							<span class="td7">五险一金</span>
+						</li><li>
+							<span class="td1">李*同学</span>
+							<span class="td2">湖北宜昌</span>
+							<span class="td3">武汉软件学院</span>
+							<span class="td4">2015/5/13</span>
+							<span class="td5">中国***会通用航空分会</span>
+							<span class="td6">8500</span>
+							<span class="td7">五险一金</span>
+						</li><li>
+							<span class="td1">唐胜*同学</span>
+							<span class="td2">湖北荆州</span>
+							<span class="td3">武汉商学院</span>
+							<span class="td4">2015/4/7</span>
+							<span class="td5">博*科技</span>
+							<span class="td6">8000</span>
+							<span class="td7">五险一金+餐补</span>
+						</li><li>
+							<span class="td1">付小*同学</span>
+							<span class="td2">湖北襄阳</span>
+							<span class="td3">武汉软件工程职业学院</span>
+							<span class="td4">2014/12/15</span>
+							<span class="td5">北京吾***医疗科技有限公司</span>
+							<span class="td6">9000</span>
+							<span class="td7">五险一金</span>
+						</li><li>
+							<span class="td1">李*同学</span>
+							<span class="td2">湖北宜昌</span>
+							<span class="td3">武汉软件学院</span>
+							<span class="td4">2015/5/13</span>
+							<span class="td5">中国***会通用航空分会</span>
+							<span class="td6">8500</span>
+							<span class="td7">五险一金</span>
+						</li><li>
+							<span class="td1">唐胜*同学</span>
+							<span class="td2">湖北荆州</span>
+							<span class="td3">武汉商学院</span>
+							<span class="td4">2015/4/7</span>
+							<span class="td5">博*科技</span>
+							<span class="td6">8000</span>
+							<span class="td7">五险一金+餐补</span>
+						</li><li>
+							<span class="td1">付小*同学</span>
+							<span class="td2">湖北襄阳</span>
+							<span class="td3">武汉软件工程职业学院</span>
+							<span class="td4">2014/12/15</span>
+							<span class="td5">北京吾***医疗科技有限公司</span>
+							<span class="td6">9000</span>
+							<span class="td7">五险一金</span>
+						</li><li>
+							<span class="td1">李*同学</span>
+							<span class="td2">湖北宜昌</span>
+							<span class="td3">武汉软件学院</span>
+							<span class="td4">2015/5/13</span>
+							<span class="td5">中国***会通用航空分会</span>
+							<span class="td6">8500</span>
+							<span class="td7">五险一金</span>
+						</li><li>
+							<span class="td1">唐胜*同学</span>
+							<span class="td2">湖北荆州</span>
+							<span class="td3">武汉商学院</span>
+							<span class="td4">2015/4/7</span>
+							<span class="td5">博*科技</span>
+							<span class="td6">8000</span>
+							<span class="td7">五险一金+餐补</span>
+						</li><li>
+							<span class="td1">付小*同学</span>
+							<span class="td2">湖北襄阳</span>
+							<span class="td3">武汉软件工程职业学院</span>
+							<span class="td4">2014/12/15</span>
+							<span class="td5">北京吾***医疗科技有限公司</span>
+							<span class="td6">9000</span>
+							<span class="td7">五险一金</span>
+						</li><li>
+							<span class="td1">李*同学</span>
+							<span class="td2">湖北宜昌</span>
+							<span class="td3">武汉软件学院</span>
+							<span class="td4">2015/5/13</span>
+							<span class="td5">中国***会通用航空分会</span>
+							<span class="td6">8500</span>
+							<span class="td7">五险一金</span>
+						</li><li>
+							<span class="td1">唐胜*同学</span>
+							<span class="td2">湖北荆州</span>
+							<span class="td3">武汉商学院</span>
+							<span class="td4">2015/4/7</span>
+							<span class="td5">博*科技</span>
+							<span class="td6">8000</span>
+							<span class="td7">五险一金+餐补</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>			
+	</div>	
+</div>
+
+<!-- 选择武汉 -->
+<div class='wuhan' >
+	<div class="wh_c area">
+		<h3><img src="images/wuhan-tt.png"  alt="" /></h3>
+		<div class="box box1">
+			<div>
+				<h4>课程</h4>
+				<p>和北京一样的课程</p>
+				<span>课程统一使用最新教学大纲。
+紧跟一线城市设计潮流。</span>
+			</div>
+		</div>
+		<div class="box box2">
+			<div>
+				<h4>师资</h4>
+				<p>和北京一样的老师</p>
+				<span>传智播客只有直营，不搞加盟！总部直接派讲师到武汉授课，采用相同的培训模式与课程</span>
+			</div>	
+		</div>
+		<div class="box box3">
+			<div>
+				<h4>教学</h4>
+				<p>和北京一样的教学</p>
+				<span>全部课程由北京直接派遣讲师到武汉进行面授，保障师资质量。</span>
+			</div>
+		</div>
+		<div class="box box4">
+			<div>
+				<h4>口碑</h4>
+				<p>性价比高、口碑最好</p>
+				<span>性价比最高，口碑最好的培训学校，学费是其他IT培训机构的50%，学到的知识却是3倍。</span>
+			</div>
+		</div>
+		<div class="box box5">
+			<div>
+				<h4>就业</h4>
+				<p>和北京一样的就业</p>
+				<span>毕业学员将由总部组织到北上广就业，确保高薪就业！北上广校区提供住宿、就业指导、推荐就业等服务。</span>
+			</div>
+		</div>
+		<div class="box box6">
+			<div>
+				<h4>成本</h4>
+				<p>武汉学习、生活成本更低</p>
+				<span>在武汉学习期间，吃、穿、住、行等日常开销会远远低于北上广的开销。</span>
+			</div>
+		</div>
+		<div class="box box7"><div></div></div>
+		<div class="box box8"><div></div></div>
+	</div>
+</div>
+<!-- 问题 -->
+<div class="wenti area">
+		<div class="g-wp">
+			<div class="wenti-hd">
+				<h3><img  src="images/wenti-hd-tt.gif"  class="wow fadeInUp animated imgLoad" alt="" /></h3>
+				<ul class="f-cb">
+					<li class="wow fadeInLeft li3">
+						<h4>1、不是设计或计算机专业的可以学</h4>
+						<p>答：可以的，传智播客网页平面UI设计课程面向零基础学员 、在校大学生、想转行从事设计及前端的在职者，以及有志 于设计与IT前端行业的人士。只要肯付出努力，都可以学。</p>
+					</li>
+					<li class="wow fadeInRight">
+						<h4>2、零基础会不会对学习有影响？能不能学得会？</h4>
+						<p>答：传智播客网页平面UI设计的课程非常系统、全面，从软件操作、理论知识、实战练习、就业指导 等方面设置都很科学完善，只要跟着老师的节奏来，经受住三个半月魔鬼式培训，大家都可以学会的 ，零基础学员也不会有任何影响。</p>
+					</li>
+					<li class="wow fadeInLeft ">
+						<h4>3、课程安排如何？</h4>
+						<p>答：三个半月脱产学习，每周上五天课，除非常特殊的情况，学员必须上晚自习，晚自习有辅导老师 解答问题。每天上课的视频都会给到每位学员，以便课下复习。</p>
+
+					</li>
+					<li class="wow fadeInRight">
+						<h4>4、学出来能干什么？</h4>
+						<p>答：我们培养全能型巅峰设计人才，既会设计，又会前端代码，无压力胜任设计及网页制作、web前 端等工作，学员毕业可从事广告设计、平面设计师、印刷排版、淘宝美工、天猫设计师、网页设计师 、UI设计师、UI交互设计师、前端制作工程师、Flash动画设计师等。</p>
+					</li>
+					<li class="wow fadeInLeft">
+						<h4>5、毕业薪资和就业情况怎么样？</h4>
+						<p>答：学习完网页平面UI设计课程，根据个人选择方向的不同，薪资有差异，目前网页平面学员的平均 薪酬在6000左右，最高可达15000。就业情况，依照北京、上海、广州各校区的情况来看，毕业两个月内，就业率为95%以上，有的班级就业率能够达到100%。</p>
+					</li>
+					<li class="wow fadeInRight">
+						<h4>6、传智播客有那么多的免费学习视频，有必要参加实体培训吗？</h4>
+						<p>答：学习就像烧开水，断断续续烧，1万小时也烧不开！如果连续烧，1个小时就够了！有时候选择比努力更重要！而且，免费的视频不系统也不全面， 如果想更好的就业，还是系统学习比较好。参加实体培训，更有许多志同道合的小伙伴一起学习，将来都是人生中的宝贵人脉。</p>
+
+					</li>
+					<li class="wow fadeInLeft">
+						<h4>7、包就业吗？不包就业工作有保障吗？</h4>
+						<p>答： 决定你能否找到一份好的工作主要是取决于你的技术，并非什么书面协议或口头承诺。选培训主要是看教学质量， 教学质量高，学生有真本领，毕业也好找到工作。保就业大多数只是吸引眼球的商业手段而已，真正好、有口碑的培训，没必要采用这种商业手段招收学生。</p>
+					</li>
+					<li class="wow fadeInRight">
+						<h4>8、毕业后发证吗？</h4>
+						<p>答：IT行业公司是非常务实的，企业不会过多去看你的各类证书。“100%保证就业”、“发教育部权威***认证”都代替不了你的认真学习。如果确实需要一个学习经历的认证的话，传智播客目前有CEAC国家信息化计算机认证和CSIP国家信息技术认证。只需出工本费就可以得到认证。</p>
+					</li>
+				</ul>
+			</div>
+			<div class="wenti-bd" id="wenti-bd">
+				<h3><img  src="images/wenti-bd-tt.gif" class="wow fadeInUp animated imgLoad" alt="" /></h3>
+				<div class="wenti-bd-box">
+					<ul class="f-cb">
+						<li><img src="images/wenti-bd1.gif"  alt=""></li>
+						<li><img src="images/wenti-bd2.gif" alt=""></li>
+						<li><img src="images/wenti-bd3.gif"  alt=""></li>
+						<li><img src="images/wenti-bd4.gif"  alt=""></li>
+						<li><img src="images/wenti-bd5.gif" alt=""></li>
+						<li><img src="images/wenti-bd6.gif"  alt=""></li>
+						<li><img src="images/wenti-bd7.gif"  alt=""></li>
+					</ul>
+				</div>
+			</div>
+	</div>
+</div>
+<!-- 联系 -->
+<div class="lianxi area"></div>
+	<!-- 每期开班 -->
+	<div class='open'>
+		<h3><img src="images/h_bg.png" alt="" /></h3>
+		<div class='form'>
+			<div class='o_l'>
+				<span>*</span>真实姓名：<input type="text" placeholder='我们期待更了解您' required/>
+				<span>*</span>联系手机：<input type="text" placeholder='我们和您一样讨厌骚扰电话' required/>
+				<!-- <span>*</span>上课地址：<input type="text" value='请选择上课地址' required list="conlist" />
+							    <datalist id="conlist"> -->
+				<span>*</span>上课地址：<select>
+								    	<option value="请选择上课地址">请选择上课地址</option>
+								    	<option value="北京校区">北京校区</option>
+								    	<option value="上海校区">上海校区</option>
+								    	<option value="广州校区">广州校区</option>
+								    	<option value="武汉校区">武汉校区</option>
+							    	</select>
+							   <!--  </datalist> -->
+
+				<span>*</span>QQ号码：<input type="text" placeholder='我们将第一时间与您联系' required/>
+			</div>
+			<div class='o_r'>
+				<input type="button" value='现在预报名' />
+				<p>温馨提示：请保持手机畅通，咨询老师将为您提供专属的一对一报名服务。</p>
+			</div>
+		</div>
+</div>
+	<div class="mengxiang area">
+		<div class="g-wp">
+			<div class="mengxiang-hd"><img src="images/mengxiang-hd.jpg" class="wow fadeInUp animated imgLoad" alt="" /></div>
+			<div class="mengxiang-bd">
+				<a href="#" target="_blank"  class="wow fadeInLeft">立刻学习</a>
+				<a href="#" target="_blank" class="zx wow fadeInRight">我要咨询</a>
+			</div>
+		</div>
+	</div>
+	<div class="footer g-wp f-cb area">
+		<div class="f-fl foot  wow fadeInLeft">
+				<p class="one"><a href="#" target="_blank">传智简介</a>-<a href="#" target="_blank">官方微博</a>-<a href="#" target="_blank">传智特刊</a>-<a href="#" target="_blank">校园生活</a>-<a href="#" target="_blank">人才服务 </a>-<a href="#" target="_blank">汇款账号</a>-<a href="#" target="_blank">招贤纳士</a>-<a href="#" target="_blank">联系我们</a></p>
+				<p>传智播客-专业java培训、.net培训、php培训、iOS培训、C++培训、网页设计、平面设计、网络营销、游戏开发培训机构</p>
+				<p>版权所有 2006 - 2015 北京传智播客教育科技有限公司</p>
+	            <p>咨询电话：010-82935150/60/70</p>
+	            <p>京ICP备08001421号 京公网安备110108007702</p>
+	            <p class="one">地址：武汉金融港 B15栋2层</p>
+				
+		</div>
+		<div class="foot-ad f-fr wow fadeInRight"></div>
+	</div>
+	<div class='top'>
+		<img src='images/Top.png'/>
+	</div>
+
+<body>
+</body>
+</html>
+
+
+<!-- <p><script type="text/javascript">var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Ff64344efd5a3e5d5ced11d58a8948b15' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script>var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5760122'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s17.cnzz.com/stat.php%3Fid%3D5760122%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-51288244-1', 'itcast.cn');ga('send', 'pageview');</script><script language="JavaScript" src="http://www6.dianji007.com/bls/srv/s?uid=10751090728&sty=4"></script></p> -->

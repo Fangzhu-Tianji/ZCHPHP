@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script src="jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="jquery.lazyload.min.js"></script>
+<style>
+    /*如果要执行slideDown动画，最好把父元素设为固定高度*/
+    li {
+        margin:150px 0;
+        height:500px;
+    }
+    img {
+        height:500px;
+        background:url("loading.gif") no-repeat center;
+    }
+</style>
+</head>
+
+<body>
+<div>
+    <ol>
+        <li><img real_src="bg.png" src="bg.png" /></li>
+        <li><img real_src="bg.png" src="bg.png" /></li>
+        <li><img real_src="bg.png" src="bg.png" /></li>
+        <li><img real_src="bg.png" src="bg.png" /></li>
+        <li><img real_src="bg.png" src="bg.png" /></li>
+        <li><img real_src="bg.png" src="bg.png" /></li>
+        <li><img real_src="bg.png" src="bg.png" /></li>
+        <li><img real_src="bg.png" src="bg.png" /></li>
+        <li><img real_src="bg.png" src="bg.png" /></li>
+        <li><img real_src="bg.png" src="bg.png" /></li>
+       
+       
+    </ol>
+</div>
+ 
+<script type="text/javascript" charset="utf-8">
+    $(function(){
+        /**
+        *   option 的默认属性说明，进入 Y_lazyload.js 中查看注释
+        *
+        *   event           //加载img的触发事件
+        *   img             //随后加载 img 的dom
+        *   real_src        //要加载真实 src 使用到的自定义属性(attr)
+        *   animate         //动画效果
+        *   animate_delay   //动画等待时间，等待图片下载完成
+        *   animate_time    //动画执行时间
+        *   time_out        //设置延迟加载，有时IE下如果太快会有个别图片无反应的情况，设置此延时就可以解决
+        **/
+        $(window).lazyload({
+            time_out : 1000
+        });
+    });
+</script>
+</body>
+</html>
