@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>屏幕缩放</title>
+</head>
+<body>
+<div id="demo"></div>
+<script>
+    var demo = document.getElementById("demo");
+    window.onresize = throttle(function(){
+        demo.innerHTML = window.innerWidth;
+    },30)
+
+    function throttle(fn,delay) {
+        var timer = null;
+        return function() {
+            clearTimeout(timer);
+            timer = setTimeout(fn,delay);
+        }
+    }
+</script>
+</body>
+</html>

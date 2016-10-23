@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>闭包面试</title>
+</head>
+<body>
+<script>
+    /*
+    function outfn() {
+        var num = 111;
+        function infn() {
+            num++;
+            console.log(num)
+        }
+        return infn;
+    }
+    */ //两者的方法一样，一个用匿名函数，一个没有用匿名
+    function outfn() {
+        var num = 111;
+        return function() {
+            num++;
+            console.log(num)
+        }
+    }
+    var obj = outfn();
+    obj();  // 112
+    obj();  // 113
+
+    var obj2 = outfn(); // 外部执行域的非持久型变量神奇地保留他们在闭包最初定义(或创建)时的值
+    obj2(); // 112
+    obj2(); // 113
+</script>
+</body>
+</html>

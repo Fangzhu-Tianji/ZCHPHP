@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>闭包</title>
+</head>
+<body>
+<script>
+    function outfn() {
+        var num = 100;
+        function infn() {
+            console.log(num)
+        }
+        return infn;
+    }
+//    console.log(outfn())
+    var demo = outfn();
+    demo()
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>闭包之事件</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<button id="btn1">向右</button>
+<button id="btn2">向左</button>
+<div id="box"></div>
+<script>
+    function $(id) { return document.getElementById(id) };
+    /*$("btn1").onclick = function() {
+        move(5)
+    }
+    $("btn2").onclick = function() {
+        move(-5)
+    }
+    function move(speed) {
+        $("box").style.left = $("box").offsetLeft + speed + "px";
+    }*/
+    $("btn1").onclick = move(20);
+    $("btn2").onclick = move(-20);
+    function move(speed) {
+        return function() {
+            $("box").style.left = $("box").offsetLeft + speed + "px";
+        }
+    }
+</script>
+</body>
+</html>

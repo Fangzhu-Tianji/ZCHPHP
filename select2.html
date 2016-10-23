@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>下拉</title>
+	<style>
+	.box {
+		height: 100px;
+		width: 100px;
+		background-color: pink;
+	}
+	</style>
+</head>
+<body>
+	<select name="##" id="##">
+		<option value="0" selected disabled>请输入</option>
+		<option value="111">添加</option>
+		<option value="222">删除</option>
+		<option value="666">其他</option>
+	</select>
+	<div class="box"></div>
+	<table>
+		<tr>
+			<th>111</th>
+		</tr>
+		<tr>
+			<td>222</td>
+		</tr>
+	</table>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script>
+		$(function(){
+			// $("option").click(function(){
+			// 	console.log($("select").val())
+			// })
+
+			/*$('select').change(function(){
+				var that = $(this).val();
+				if(that == 111) {
+					$("table").append("<tr id='999'><td>333</td></tr>")
+				}
+				else if(that == 222) {
+					// $("table").children("#999").remove();
+					$("#999").remove();
+				}
+			})*/
+			// console.log($('select option:selected').val())
+			/*function bian() {
+				var val = $("select option:selected").val();
+				var ind = $("select option:selected").index();
+				console.log(val);
+				console.log(ind);
+				$("option").eq(ind).css({
+					color: "red"
+				}).siblings("option").css({
+					color: "green"
+				})
+			}*/
+			// var clone = $("tr").eq(0).clone();
+			var clone = "<tr><td>333</td></tr>";
+			console.log(clone)
+			$("select").change(function(){
+				var val = $("option:selected").val();
+				if(val == 111) {
+					adds()
+				}
+				else if(val == 222) {
+					removes()
+				}
+			})
+			function adds() {
+				$("table").append(clone)
+			}
+			function removes() {
+				$("table tr").eq(-1).remove()
+			}
+
+		})
+	</script>
+</body>
+</html>

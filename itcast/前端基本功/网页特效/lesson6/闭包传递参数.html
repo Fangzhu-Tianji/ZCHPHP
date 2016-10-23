@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>闭包传递参数</title>
+</head>
+<body>
+<script>
+    function outfn(x) {
+        return function(y) {
+            console.log(x+y)
+        }
+    }
+    var obj = outfn(4);
+    obj();  // NaN
+    obj(5); // 9    // x为4 y为5
+</script>
+</body>
+</html>
