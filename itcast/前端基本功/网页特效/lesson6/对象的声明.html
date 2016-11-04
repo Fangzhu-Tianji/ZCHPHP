@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>object</title>
+</head>
+<body>
+<script>
+    /*var obj = new Object;
+    console.log( typeof obj )*/
+    var obj = {};   // 声明对象
+    obj.name = "刘德华";   // 属性
+    obj.age = 18;
+    obj.ageName = function() {  // 方法
+        console.log("我今年18岁")
+    }
+    console.log(obj.name);  // 调用属性
+    console.log(obj.ageName);
+    obj.ageName();  // 调用方法
+</script>
+</body>
+</html>
