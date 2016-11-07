@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>prototype</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function Person(name,age) {
+        this.name = name;
+        this.age = age;
+    }
+    Person.prototype.showName = function() { // 公用同个父级
+        alert("我的名字是" + this.name)
+    }
+    Person.prototype.showAge = function() {
+        alert("我的年龄是" + this.age)
+    }
+    var demo = new Person("张三",18);
+    var demo1 = new Person("李四",18);
+    demo.showName();
+    alert(demo.showName == demo1.showName)  // true
+</script>

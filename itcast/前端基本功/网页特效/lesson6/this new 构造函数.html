@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>this</title>
+</head>
+<body>
+<button id=btn>button</button>
+</body>
+</html>
+<script>
+    var oBtn = document.getElementById("btn")
+    /*function fn() {
+        alert(this)
+    }
+    oBtn.onclick = fn;*/
+    function person() {
+        this.x = 20;
+    }
+    var demo = new person();
+    console.log(demo.x)
+</script>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>new</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function Person(name,age) { // 构造函数就是普通函数，为了和普通函数区分，第一个字母大写
+        this.name = name;
+        this.age = age;
+        this.showName = function() {
+            alert("我的名字是" + name)
+        }
+    }
+    var demo = new Person("张三",18);
+    var demo1 = new Person("李四",28);
+    console.log(demo.name);     // 提倡用点调用
+    console.log(demo["name"]);
+    demo.showName()
+    alert(demo.showName == demo1.showName)  // false
+</script>
