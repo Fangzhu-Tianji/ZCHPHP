@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>each</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <style>
+        li {
+            width: 200px;
+            height: 50px;
+            background-color: #fafafa;
+        }
+    </style>
+</head>
+<body>
+<button>按钮</button>
+<ul>
+    <li>1</li>
+    <li id="num">2</li>
+    <li>3</li>
+</ul>
+</body>
+</html>
+<script>
+    /*$("button").click(function(){
+        $("li").each(function(index,domEle){
+            $(domEle).css("background","pink")
+            console.log($(this).attr("id"))
+        })
+    })*/
+    var arr = [11,21,31];
+    $.each(arr,function(index,domEle){
+        console.log(arr[index])
+    })
+    var obj = {one:1,two:2,three:3,four:4};
+    $.each(obj,function(key,val){
+        console.log(obj[key])
+    })
+
+    /*var obj = { one:1, two:2, three:3, four:4};
+    $.each(obj, function(key, val) {
+        alert(obj[key]);
+    });*/
+    //这个each就有更厉害了，能循环每一个属性
+    //输出结果为：1 2 3 4
+</script>
