@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>function</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script type="text/javascript">
+	window.onload = function() {
+		// 三种写法是一样的
+		var a = function() {
+			var arr = [100,101,102,103];
+			for (var i = 0; i < arr.length; i++) {
+				console.log(arr[i]);
+			}
+		}
+		a();
+
+		(function() {
+			var arr = [200,201,202,203];
+			for(var i=0; i<arr.length; i++) {
+				console.log(arr[i]);
+			}
+		})(); // 多了一对括号，调用匿名函数
+
+		!function() {
+			var arr = [300,301,302,303];
+			for(var i=0; i<arr.length; i++) {
+				console.log(arr[i]);
+			}
+		}(); // 前面加了一个布尔运算符（只多加了一个感叹号），就是表达式了，将执行后面的代码，也就合法实现调用
+	}
+</script>
