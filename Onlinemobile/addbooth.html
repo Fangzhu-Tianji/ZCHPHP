@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <title></title>
+    <script src="script/51size.js"></script>
+    <link href="css/start.css" rel="stylesheet" />
+    <link href="css/general.css" rel="stylesheet" />
+    <script src="script/jquery-1.11.1.min.js"></script>
+
+
+</head>
+<body>
+    <header class="fix">
+        <h1>展品添加修改</h1>
+        <a class="hr_back hr_a" href="mybooth.html">
+            <div class="icon"></div>
+        </a>
+    </header>
+    <div class="content index">
+        <ul class="booth_imgUl">
+            <li class="booth_imgBox">
+                <input type="file" />
+            </li>
+            <li class="booth_imgBox">
+                <input type="file" />
+            </li>
+            <li class="booth_imgBox">
+                <input type="file" />
+            </li>
+        </ul>
+
+
+
+        <ul class="inputSection">
+            <li class="inputLine">
+                <div class="inputTit">展柜名称:</div>
+                <div class="inputBox">
+                    <input class="input" placeholder="请输入展柜名称" />
+                    <span class="inputTag"></span>
+                </div>
+            </li>
+        </ul>
+        <ul class="booth_input">
+            <li class="inputLine">
+                <div class="inputTit">清易货价:</div>
+                <div class="inputBox">
+                    <input class="input" placeholder="请输入清货易货价" />
+                    <span class="inputTag"></span>
+                </div>
+            </li>
+            <li class="booth_tagBox clearfix" id="booth_tag">
+                <span class="booth_tag on">原价</span><span class="booth_tag">有折扣</span><span class="booth_tag">大优惠</span><span class="booth_tag">超级大优惠</span>
+            </li>
+        </ul>
+        <div class="booth_detail">
+            <div class="booth_tit">展品描述:</div>
+            <textarea placeholder="请填写展品描述" class="booth_txt"></textarea>
+        </div>
+        <a class="button btn_color" href="mybooth.html">确认保存</a>
+        <footer>©copyright</footer>
+    </div>
+
+    <script>
+        $(function () {
+            $("#booth_tag span").click(function () {
+                $("#booth_tag span").removeClass("on");
+                $(this).addClass("on");
+
+            })
+
+        })
+    </script>
+
+
+</body>
+</html>

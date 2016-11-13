@@ -1,0 +1,480 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes"><!-- 启用 WebApp 全屏模式 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"><!--隐藏状态栏/设置状态栏颜色-->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <title></title>
+    <script src="script/51size.js"></script>
+    <link href="css/start.css" rel="stylesheet" />
+    <link href="css/general.css" rel="stylesheet" />
+    <script src="script/jquery-1.11.1.min.js"></script>
+    <script src="script/pageSwitch.js"></script>
+
+
+</head>
+<body>
+    <style>
+        .inner { -webkit-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1; background-color: #fff; overflow-y: scroll; -webkit-overflow-scrolling: touch; }
+        .opacity { -webkit-animation: opacity 0.5s linear; animation: opacity 0.5s linear; }
+
+        @-webkit-keyframes opacity {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes opacity {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* dropload */
+        .dropload-up, .dropload-down { position: relative; height: 0; overflow: hidden; -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0); }
+        .dropload-refresh, .dropload-update, .dropload-load { font-size: 0.6rem; position: absolute; left: 50%; bottom: 0; width: 100%; height: 50px; line-height: 50px; text-align: center; -webkit-transform: translate(-50%,0); transform: translate(-50%,0); }
+            .dropload-load .loading { display: inline-block; height: 15px; width: 15px; border-radius: 100%; margin: 6px; border: 2px solid #666; border-bottom-color: transparent; vertical-align: middle; -webkit-animation: rotate 0.75s 0 linear infinite; animation: rotate 0.75s 0 linear infinite; }
+
+        @-webkit-keyframes rotate {
+            0% { -webkit-transform: rotate(0deg); }
+            50% { -webkit-transform: rotate(180deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <div id="wrap" class="wrapper">
+        <div id="pages">
+            <div class="page">
+                <div class="content index">
+                    <section class="userInfo_box">
+                        <div class="userInfo_box_l">
+                            <div class="userInfo_avatar">
+                                <img src="images/img.png" />
+                            </div>
+
+                        </div>
+                        <ul class="userInfo_box_r">
+                            <li class="userInfo_li">昵称：欧维达</li>
+                            <li class="userInfo_li">用户名：星星点灯</li>
+                            <li class="userInfo_li">手机：15988888888</li>
+                            <li class="userInfo_li">等级：1级用户</li>
+                        </ul>
+                    </section>
+                    <ul class="userList_box">
+                        <li>
+                            <a class="userList_li" href="mybooth.html">
+                                <div class="icon ul_icon_myBooth"></div>
+                                <h2 class="userList_li_tit">我的展位</h2>
+                                <span class="userList_li_msg"></span>
+                                <div class="icon ul_icon_goto"></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="userList_li">
+                                <div class="icon ul_icon_starShop"></div>
+                                <h2 class="userList_li_tit">星级店铺</h2>
+                                <span class="userList_li_msg"></span>
+                                <div class="icon ul_icon_goto"></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="userList_li">
+                                <div class="icon ul_icon_shopState"></div>
+                                <h2 class="userList_li_tit">店铺状态</h2>
+                                <span class="userList_li_msg"></span>
+                                <div class="icon ul_icon_goto"></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="userList_li" href="revise.html">
+                                <div class="icon ul_icon_infoModify"></div>
+                                <h2 class="userList_li_tit">信息修改</h2>
+                                <span class="userList_li_msg"></span>
+                                <div class="icon ul_icon_goto"></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="userList_li">
+                                <div class="icon ul_icon_news"></div>
+                                <h2 class="userList_li_tit">查看消息</h2>
+                                <span class="userList_li_msg"></span>
+                                <div class="icon ul_icon_goto"></div>
+                            </a>
+                        </li>
+                    </ul>
+                    <a class="button btn_color" href="login.html">注销登陆</a>
+                    <footer>©copyright</footer>
+                </div>
+            </div>
+            <div class="page">
+                <div class="content outer">
+                    <div class="selection">
+                        <div class="selectBox">
+                            <div class="select default">
+                                <a class="option on" data-show="all">价格区间(全部)</a>
+                                <a class="option" data-section="0-99">0-99</a>
+                                <a class="option" data-section="100-200">100-199</a>
+                                <a class="option" data-section="300+">200+</a>
+                                <a class="option" data-section="all">全部</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inner">
+                        <ul class="booth_ul lists" data-role="listview">
+                            <li>
+                                <a class="booth_li" href="detail.html">
+                                    <div class="booth_l">
+                                        <img src="asd" />
+                                    </div>
+                                    <div class="booth_r">
+                                        <div class="booth_tit">产品名称产品名称产品名称产品名称产品名称产品名称</div>
+                                        <div class="booth_tagBox clearfix">
+                                            <span class="booth_tag on">有折扣</span>
+                                        </div>
+                                        <div class="booth_r_b">
+                                            <span class="booth_price"><span>￥</span><em>550</em><span>.25</span></span>
+                                            <span class="booth_toDetail">...</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="booth_li" href="detail.html">
+                                    <div class="booth_l">
+                                        <img src="images/img.png" />
+                                    </div>
+                                    <div class="booth_r">
+                                        <div class="booth_tit">产品名称产品名称产品名称产品名称产品名称产品名称</div>
+                                        <div class="booth_tagBox clearfix">
+                                            <span class="booth_tag on">有折扣</span>
+                                        </div>
+                                        <div class="booth_r_b">
+                                            <span class="booth_price"><span>￥</span><em>550</em><span>.25</span></span>
+                                            <span class="booth_toDetail">...</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="booth_li" href="detail.html">
+                                    <div class="booth_l">
+                                        <img src="images/123.jpg" />
+                                    </div>
+                                    <div class="booth_r">
+                                        <div class="booth_tit">产品名称产品名称产品名称产品名称产品名称产品名称</div>
+                                        <div class="booth_tagBox clearfix">
+                                            <span class="booth_tag on">有折扣</span>
+                                        </div>
+                                        <div class="booth_r_b">
+                                            <span class="booth_price"><span>￥</span><em>550</em><span>.25</span></span>
+                                            <span class="booth_toDetail">...</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="booth_li" href="detail.html">
+                                    <div class="booth_l">
+                                        <img src="images/img.png" />
+                                    </div>
+                                    <div class="booth_r">
+                                        <div class="booth_tit">产品名称产品名称产品名称产品名称产品名称产品名称</div>
+                                        <div class="booth_tagBox clearfix">
+                                            <span class="booth_tag on">有折扣</span>
+                                        </div>
+                                        <div class="booth_r_b">
+                                            <span class="booth_price"><span>￥</span><em>550</em><span>.25</span></span>
+                                            <span class="booth_toDetail">...</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="booth_li" href="detail.html">
+                                    <div class="booth_l">
+                                        <img src="images/img.png" />
+                                    </div>
+                                    <div class="booth_r">
+                                        <div class="booth_tit">产品名称产品名称产品名称产品名称产品名称产品名称</div>
+                                        <div class="booth_tagBox clearfix">
+                                            <span class="booth_tag on">有折扣</span>
+                                        </div>
+                                        <div class="booth_r_b">
+                                            <span class="booth_price"><span>￥</span><em>550</em><span>.25</span></span>
+                                            <span class="booth_toDetail">...</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="booth_li" href="detail.html">
+                                    <div class="booth_l">
+                                        <img src="images/img.png" />
+                                    </div>
+                                    <div class="booth_r">
+                                        <div class="booth_tit">产品名称产品名称产品名称产品名称产品名称产品名称</div>
+                                        <div class="booth_tagBox clearfix">
+                                            <span class="booth_tag on">有折扣</span>
+                                        </div>
+                                        <div class="booth_r_b">
+                                            <span class="booth_price"><span>￥</span><em>550</em><span>.25</span></span>
+                                            <span class="booth_toDetail">...</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                    <div class="gototop">
+                        <img src="css/img/gototop.png" />
+                    </div>
+                    <script src="script/zepto.min.js"></script>
+                    <script src="script/dropload.min.js"></script>
+                    <script>
+                        // dropload
+                        var dropload = Zepto('.inner').dropload({
+                            domUp: {
+                                domClass: 'dropload-up',
+                                domRefresh: '<div class="dropload-refresh">↓下拉刷新</div>',
+                                domUpdate: '<div class="dropload-update">↑释放更新</div>',
+                                domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+                            },
+                            domDown: {
+                                domClass: 'dropload-down',
+                                domRefresh: '<div class="dropload-refresh">↑上拉加载更多</div>',
+                                domUpdate: '<div class="dropload-update">↓释放加载</div>',
+                                domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+                            },
+                            loadUpFn: function (me) {
+                                $.ajax({
+                                    type: 'GET',
+                                    url: './json/update.json',
+                                    dataType: 'json',
+                                    success: function (data) {
+                                        var result = '';
+                                        for (var i = 0; i < data.lists.length; i++) {
+                                            result += '<li class="opacity"><a class="booth_li" href="' + data.lists[i].link + '">'
+                                                    + '<div class="booth_l">'
+                                                    + '<img src="' + data.lists[i].pic + '" /></div>'
+                                                    + '<div class="booth_r">'
+                                                    + '<div class="booth_tit">' + data.lists[i].title + '</div>'
+                                                    + '<div class="booth_tagBox clearfix">'
+                                                    + '<span class="booth_tag on">' + data.lists[i].date + '</span>'
+                                                    + '</div>'
+                                                    + '<div class="booth_r_b">'
+                                                    + '<span class="booth_price"><span>￥</span><em>550</em><span>.25</span></span>'
+                                                    + '<span class="booth_toDetail">...</span>'
+                                                    + '</div>'
+                                                    + '</div>'
+                                                    + '</a>'
+                                                    + '</li>';
+                                        }
+                                        // 为了测试，延迟1秒加载
+                                        setTimeout(function () {
+                                            $('.lists').html('');
+                                            $('.lists').prepend(result);
+                                            me.resetload();
+                                        }, 1000);
+                                    },
+                                    error: function (xhr, type) {
+                                        alert('Ajax error!');
+                                        me.resetload();
+                                    }
+                                });
+                            },
+                            loadDownFn: function (me) {
+                                $.ajax({
+                                    type: 'GET',
+                                    url: '../json/more.json',
+                                    dataType: 'json',
+                                    success: function (data) {
+                                        var result = '';
+                                        for (var i = 0; i < data.lists.length; i++) {
+                                            result += '<li class="opacity"><a class="booth_li" href="' + data.lists[i].link + '">'
+                                                    + '<div class="booth_l">'
+                                                    + '<img src="' + data.lists[i].pic + '" /></div>'
+                                                    + '<div class="booth_r">'
+                                                    + '<div class="booth_tit">' + data.lists[i].title + '</div>'
+                                                    + '<div class="booth_tagBox clearfix">'
+                                                    + '<span class="booth_tag on">' + data.lists[i].date + '</span>'
+                                                    + '</div>'
+                                                    + '<div class="booth_r_b">'
+                                                    + '<span class="booth_price"><span>￥</span><em>550</em><span>.25</span></span>'
+                                                    + '<span class="booth_toDetail">...</span>'
+                                                    + '</div>'
+                                                    + '</div>'
+                                                    + '</a>'
+                                                    + '</li>';
+                                        }
+                                        // 为了测试，延迟1秒加载
+                                        setTimeout(function () {
+                                            $('.lists').append(result);
+                                            me.resetload();
+                                        }, 1000);
+                                    },
+                                    error: function (xhr, type) {
+                                        alert('Ajax error!');
+                                        me.resetload();
+                                    }
+                                });
+                            }
+                        });
+                    </script>
+
+
+                </div>
+
+
+            </div>
+            <div class="page">
+                <div class="content index">
+                    <section class="star_box">
+                        <div class="star_box_top">您当前的等级</div>
+                        <div class="star_box_img">
+                            <img src="images/star1.png" />
+                        </div>
+                    </section>
+                    <ul class="userList_box">
+                        <li class="userList_li">
+                            <h2 class="userList_li_tit">权限</h2>
+                            <span class="userList_li_msg"></span>
+                            <div class="icon ul_icon_down"></div>
+                        </li>
+                        <li class="userList_detail">
+                            1.三个产品展位<br />
+                            2.可以出售一星展位（无限），二星展位（无限）<br />
+                            3.升级费用300<br />
+                            4.给予买家等值产品
+                        </li>
+                        <li class="userList_li">
+                            <h2 class="userList_li_tit">申请升级标准</h2>
+                            <span class="userList_li_msg"></span>
+                            <div class="icon ul_icon_down"></div>
+                        </li>
+                        <li class="userList_detail">
+                            1.三个产品展位<br />
+                            2.可以出售一星展位（无限），二星展位（无限）<br />
+                            3.升级费用300<br />
+                            4.给予买家等值产品
+                        </li>
+                        <li class="userList_li">
+                            <h2 class="userList_li_tit">升级后可享有权限</h2>
+                            <span class="userList_li_msg"></span>
+                            <div class="icon ul_icon_down"></div>
+                        </li>
+                        <li class="userList_detail">
+                            1.三个产品展位<br />
+                            2.可以出售一星展位（无限），二星展位（无限）<br />
+                            3.升级费用300<br />
+                            4.给予买家等值产品
+                        </li>
+                    </ul>
+                    <footer>©copyright</footer>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header class="fix">
+
+        <h1></h1>
+        <a class="hr_news hr_a" href="news.html">
+            <div class="icon">
+                <em class="corner">3</em>
+            </div>
+        </a>
+        <a class="hr_search hr_a" href="search.html">
+            <div class="icon"></div>
+        </a>
+        <a class="hr_upGrade hr_a" href="#">
+            <div class="icon"></div>
+        </a>
+    </header>
+    <nav class="fr_navBox" id="navs">
+        <a class="">
+            <div class="icon fr_icon_user"></div>
+            <span class="fr_navTit">用户</span>
+        </a>
+        <a class="">
+            <div class="icon fr_icon_booth"></div>
+            <span class="fr_navTit">展厅</span>
+        </a>
+        <a class="">
+            <div class="icon fr_icon_grade"></div>
+            <span class="fr_navTit">等级</span>
+        </a>
+    </nav>
+
+    <script>
+        var reg = location.search.match(/page=([^&]*)/),
+                page = reg && reg[1] || 0,
+                a = new pageSwitch('pages', {
+                    duration: 1000,
+                    start: page,
+                    direction: 0,
+                    loop: false,
+                    ease: 'ease',
+                    transition: 'scrollX',
+                    freeze: false,
+                    mouse: true,
+                    mousewheel: true,
+                    arrowkey: true
+                }),
+                navs = document.getElementById('navs').getElementsByTagName('a');
+        navs[page].className = 'on';
+        a.on('before', function (m, n) {
+            navs[m].className = '';
+            navs[n].className = 'on';
+        });
+        i = 0;
+        for (; i < navs.length; i++) {
+            !function (i) {
+                navs[i].onclick = function () {
+                    a.slide(i);
+                }
+            }(i);
+        }
+    </script>
+    <script>
+        $(function () {
+            $(".select").click(function () {
+                $(this).toggleClass("default");
+            })
+            $(".option[data-section]").click(function () {
+
+                $(this).parent(".select").children(".option[data-show]").text("价格区间(" + $(this).text() + ")");
+            })
+        })
+        $(function () {
+            $(".userList_li").click(function () {
+                $(this).next(".userList_detail").stop(true, true).slideToggle();
+                $(this).children(".ul_icon_down").toggleClass("ul_icon_up")
+            });
+
+        })
+
+        $(function () {
+
+            $(".inner").scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $(this).next(".gototop").fadeIn();
+                } else {
+                    $(this).next(".gototop").fadeOut();
+                }
+
+            })
+            $(".gototop").click(function () {
+                $(this).siblings(".inner").animate({ scrollTop: "0px" }, 500);;
+            });
+        })
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <title></title>
+    <script src="script/51size.js"></script>
+    <link href="css/start.css" rel="stylesheet" />
+    <link href="css/general.css" rel="stylesheet" />
+    <script src="script/jquery-1.11.1.min.js"></script>
+    <script src="script/pageSwitch.js"></script>
+
+</head>
+<body>
+    <header class="fix">
+        <a class="hr_back hr_a" href="javascript:window.history.go(-1)">
+            <div class="icon"></div>
+        </a>
+        <h1 class="on" id="product">产品</h1>
+        <h1 id="evaluate">评价</h1>
+    </header>
+    <div class="content index">
+        <div class="banner_box">
+            <div class="banner" id="banner">
+                <div>
+                    <img src="images/img.png" />
+                </div>
+                <div>
+                    <img src="images/123.jpg" />
+                </div>
+            </div>
+            <div class="banner_nav" id="banner_nav">
+                <a class="on"></a>
+                <a></a>
+            </div>
+        </div>
+        <div class="booth_top">
+            <div class="booth_tit">产品名称产品名称产品名称产品名称产品名称产品名称</div>
+            <div class="booth_tagBox clearfix">
+                <span class="booth_tag on">有折扣</span>
+            </div>
+            <div class="booth_r_b">
+                <span class="booth_price"><span>￥</span><em>550</em><span>.25</span></span>
+            </div>
+        </div>
+
+        <div class="booth_detail">
+            <div class="booth_tit">展品描述:</div>
+            <p class="booth_txt">
+                品名称产品名称产品名称产品名称产品
+            </p>
+        </div>
+
+        <div class="booth_evaluate">
+            <div class="booth_tit">展品评价:</div>
+            <div class="booth_tagBox clearfix">
+                <span class="booth_tag">好评(<em>2</em>)</span><span class="booth_tag">好评(<em>2</em>)</span><span class="booth_tag">好评(<em>2</em>)</span><span class="booth_tag">好评(<em>2</em>)</span><span class="booth_tag">好评(<em>2</em>)</span><span class="booth_tag">好评(<em>2</em>)</span>
+            </div>
+            <ul class="evaluate_ul">
+                <li class="evaluate_li">
+                    <div class="evaluate_li_t">
+                        <div class="evaluate_li_t_l">
+                            <div class="user_img"><img /></div>
+                            <div class="user_name">昵称</div>
+                        </div>
+                        <div class="evaluate_li_t_r">2015-05-12 12:00</div>
+                    </div>
+                    <div class="evaluate_li_b">
+                        名称产品名称产品名称名称产品名称产品名称名称产品名名称名称产品名称产品名称名称产品名称产品名称名称产品名称产品名称名称产品名称产品名称名称产品名称产品名称
+                    </div>
+                </li>
+                <li class="evaluate_li">
+                    <div class="evaluate_li_t">
+                        <div class="evaluate_li_t_l">
+                            <div class="user_img"><img /></div>
+                            <div class="user_name">昵称</div>
+                        </div>
+                        <div class="evaluate_li_t_r">2015-05-12 12:00</div>
+                    </div>
+                    <div class="evaluate_li_b">
+                        名称产品名称产品名称名称产品名称产品名称名称产品名称产品名称名称产品名称产品名称名称产品名称产品名称名称产品名称产品名称名称产品名称产品名称
+                    </div>
+                </li>
+            </ul>
+
+            <style>
+            </style>
+
+        </div>
+        <footer>©copyright</footer>
+
+    </div>
+    <div class="gototop">
+        <img src="css/img/gototop.png" />
+    </div>
+    <div class="fr_btnBox">
+        <div class="fr_btnBox_t">
+            
+        </div>
+        <div class="fr_btnBox_b">
+           
+        </div>
+    </div>
+    <script>
+        var b = new pageSwitch('banner', {
+            duration: 1000,
+            start: 0,
+            direction: 0,
+            loop: true,
+            ease: 'ease',
+            transition: 'scrollX',
+            freeze: false,
+            mouse: true,
+            mousewheel: true,
+            arrowkey: true
+        }),
+        navs = document.getElementById('banner_nav').getElementsByTagName('a');
+        b.on('before', function (m, n) {
+            navs[m].className = '';
+            navs[n].className = 'on';
+        });
+        $(function () {
+            var num = 2;//剩余次数
+            var can = -1;//是否产看过
+            $(".fr_btnBox_t").html("查看联系人(剩余次数:" + num + ")")
+
+            $(".content").scroll(function () {
+                if ($(this).scrollTop() > 200) {
+                    $(this).next(".gototop").fadeIn();
+                } else {
+                    $(this).next(".gototop").fadeOut();
+                }
+                if ($(".booth_evaluate").offset().top - $("header").height() < 10) {
+                    $("h1").removeClass("on");
+                    $("h1").eq(1).addClass("on");
+                } else {
+                     $("h1").removeClass("on");
+                    $("h1").eq(0).addClass("on");
+                }
+
+            })
+            $(".gototop").click(function () {
+                $(this).siblings(".content").animate({ scrollTop: "0px" }, 500);;
+            });
+            $("#product").click(function () {
+                $(".content").animate({ scrollTop: "0px" }, 500);;
+            });
+            $("#evaluate").click(function () {
+                $(".content").animate({ scrollTop: ($(".booth_evaluate").offset().top + $(".content").scrollTop() - $("header").height()) }, 500);;
+            });
+            $(".fr_btnBox").click(function () {
+
+                if (can == -1) {
+                    can = 0;
+                    num = num - 1;
+                    $(".fr_btnBox_t").html("已查看(剩余次数:" + num + ")");
+                    $(".fr_btnBox_b").html("昵称：小号<br>微信号：weixin4564<br>手机后：13988888888<br>")
+                } else if (can == 0) {
+                    can = 1
+                    $(".fr_btnBox_t").html("再次查看(剩余次数:" + num + ")");
+                    $(".fr_btnBox_b").hide();
+                    
+                } else if (can == 1) {
+                    can = 0
+                    $(".fr_btnBox_t").html("已查看(剩余次数:" + num + ")");
+                    $(".fr_btnBox_b").show();
+                }
+                
+               
+                
+
+            })
+
+
+        })
+    </script>
+
+</body>
+</html>

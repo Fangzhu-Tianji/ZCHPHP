@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <title></title>
+    <script src="script/51size.js"></script>
+    <link href="css/start.css" rel="stylesheet" />
+    <link href="css/general.css" rel="stylesheet" />
+    <script src="script/jquery-1.11.1.min.js"></script>
+
+
+</head>
+<body>
+    <header class="fix">
+        <h1>评价</h1>
+        <a class="hr_back hr_a" href="news.html">
+            <div class="icon"></div>
+        </a>
+    </header>
+    <div class="content index">
+
+
+
+
+
+        <div class="evaluate_box">
+            <div class="booth_tit">选择评价:</div>
+            <div class="booth_tagBox clearfix" id="booth_tag">
+                <span class="booth_tag on">优质品</span><span class="booth_tag">中等品</span><span class="booth_tag">劣质品</span><span class="booth_tag">未给货</span><span class="booth_tag">假货</span>
+            </div>
+        </div>
+
+        <div class="booth_detail">
+            <div class="booth_tit">备注:</div>
+            <textarea placeholder="请填写展品描述" class="booth_txt"></textarea>
+        </div>
+        <a class="button btn_color">提交评价</a>
+        <footer>©copyright</footer>
+    </div>
+
+    <script>
+        $(function () {
+            $("#booth_tag span").click(function () {
+                $("#booth_tag span").removeClass("on");
+                $(this).addClass("on");
+
+            })
+
+        })
+    </script>
+
+
+</body>
+</html>

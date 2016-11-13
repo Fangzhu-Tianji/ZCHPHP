@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <title></title>
+    <script src="script/51size.js"></script>
+    <link href="css/start.css" rel="stylesheet" />
+    <link href="css/general.css" rel="stylesheet" />
+    <script src="script/jquery-1.11.1.min.js"></script>
+
+
+</head>
+<body>
+    <header>
+        <div class="search_inputBox">
+            <input class="search_input" placeholder="请输入搜索内容" />
+            <div class="search_inputClear">X</div>
+        </div>
+        <a class="hr_back hr_a" href="index.html?page=1">
+            <div class="icon"></div>
+        </a>
+        <a class="hr_search2 hr_a">
+            搜索
+        </a>
+    </header>
+    <div class="content ">
+        <ul class="booth_ul search_bg">
+            <li>
+                <a class="booth_li" href="detail.html">
+                    <div class="booth_l">
+                        <img src="images/123.jpg" />
+                    </div>
+                    <div class="booth_r">
+                        <div class="booth_tit">产品名称产品名称产品名称产品名称产品名称产品名称</div>
+                        <div class="booth_tagBox clearfix">
+                            <span class="booth_tag on">有折扣</span>
+                        </div>
+                        <div class="booth_r_b">
+                            <span class="booth_price"><span>￥</span><em>550</em><span>.25</span></span>
+                            <span class="booth_toDetail">...</span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a class="booth_li" href="detail.html">
+                    <div class="booth_l">
+                        <img src="images/123.jpg" />
+                    </div>
+                    <div class="booth_r">
+                        <div class="booth_tit">产品名称产品名称产品名称产品名称产品名称产品名称</div>
+                        <div class="booth_tagBox clearfix">
+                            <span class="booth_tag on">有折扣</span>
+                        </div>
+                        <div class="booth_r_b">
+                            <span class="booth_price"><span>￥</span><em>550</em><span>.25</span></span>
+                            <span class="booth_toDetail">...</span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a class="booth_li" href="detail.html">
+                    <div class="booth_l">
+                        <img src="images/123.jpg" />
+                    </div>
+                    <div class="booth_r">
+                        <div class="booth_tit">产品名称产品名称产品名称产品名称产品名称产品名称</div>
+                        <div class="booth_tagBox clearfix">
+                            <span class="booth_tag on">有折扣</span>
+                        </div>
+                        <div class="booth_r_b">
+                            <span class="booth_price"><span>￥</span><em>550</em><span>.25</span></span>
+                            <span class="booth_toDetail">...</span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a class="booth_li" href="detail.html">
+                    <div class="booth_l">
+                        <img src="images/123.jpg" />
+                    </div>
+                    <div class="booth_r">
+                        <div class="booth_tit">产品名称产品名称产品名称产品名称产品名称产品名称</div>
+                        <div class="booth_tagBox clearfix">
+                            <span class="booth_tag on">有折扣</span>
+                        </div>
+                        <div class="booth_r_b">
+                            <span class="booth_price"><span>￥</span><em>550</em><span>.25</span></span>
+                            <span class="booth_toDetail">...</span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a class="booth_li" href="detail.html">
+                    <div class="booth_l">
+                        <img src="images/123.jpg" />
+                    </div>
+                    <div class="booth_r">
+                        <div class="booth_tit">产品名称产品名称产品名称产品名称产品名称产品名称</div>
+                        <div class="booth_tagBox clearfix">
+                            <span class="booth_tag on">有折扣</span>
+                        </div>
+                        <div class="booth_r_b">
+                            <span class="booth_price"><span>￥</span><em>550</em><span>.25</span></span>
+                            <span class="booth_toDetail">...</span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <footer>©copyright</footer>
+    </div>
+    <div class="gototop">
+        <img src="css/img/gototop.png" />
+    </div>
+    <script>
+        $(function () {
+            $(".search_input").keyup(function () {
+                if ($(this).val() == "") {
+                    $(this).next(".search_inputClear").removeClass("show");
+
+                } else {
+                    $(this).next(".search_inputClear").addClass("show");
+                }
+            })
+            $(".search_inputClear").click(function () {
+                $(this).removeClass("show");
+                $(this).prev(".search_input").val("");
+            })
+
+        })
+        $(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 400) {
+                    $(".gototop").fadeIn();
+                } else {
+                    $(".gototop").fadeOut();
+                }
+            })
+            $(".gototop").click(function () {
+                $("body").animate({ scrollTop: "0px" }, 500);
+            });
+        })
+    </script>
+
+</body>
+</html>

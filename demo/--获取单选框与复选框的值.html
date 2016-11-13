@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>value</title>
+</head>
+<body>
+	<div class="radio">
+		<label>
+			<input type="radio" value="苹果" name="demo1" class="res">苹果
+		</label>
+		<label>
+			<input type="radio" value="梨子" name="demo1" class="res" checked="checked">梨子
+		</label>
+		<label>
+			<input type="radio" value="香蕉" name="demo1" class="res">香蕉
+		</label>
+		<button type="button" onclick="getRadioVal()">获取值</button>
+	</div>
+	<div class="check">
+		<label>
+			<input type="checkbox" value="星期一" class="cres">星期一
+		</label>
+		<label>
+			<input type="checkbox" value="星期二" class="cres" checked="checked">星期二
+		</label>
+		<label>
+			<input type="checkbox" value="星期三" class="cres">星期三
+		</label>
+		<label>
+			<input type="checkbox" value="星期四" class="cres">星期四
+		</label>
+		<button type="button" onclick="getCheckVal()">获取值</button>
+	</div>
+	<!--<script type="text/javascript">
+		// 原生单选
+		function getRadioVal() {
+			var res = getRadiores("res");
+			console.log(res);
+		}
+		function getRadiores(className) {
+			var resObj = document.getElementsByClassName(className);
+			var checkVal = null;
+			for(var i=0; i<resObj.length; i++) {
+				if(resObj[i].checked) {
+					checkVal = resObj[i].value;
+				}
+			}
+			return checkVal;
+		}
+		// 原生复选
+		function getCheckVal() {
+			var res = getCheckres("cres");
+			console.log(res);
+		}
+		function getCheckres(className) {
+			var resObj = document.getElementsByClassName(className);
+			var checkVal = " ";
+			for(var i=0; i<resObj.length; i++) {
+				if(resObj[i].checked) {
+					checkVal += resObj[i].value;
+				}
+			}
+			return checkVal;
+		}
+	</script>-->
+	<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		// jquery单选
+		function getRadioVal() {
+			var res = getRadiores($(".radio input"));
+			console.log(res);
+		}
+		function getRadiores(element) {
+			/*$(".radio input").each(function(index,domEle) {
+				if($(this).is(":checked")) {
+					console.log($(this).val())
+				}
+			})*/
+			var checkVal = null;
+			$.each(element,function(index,domEle) {
+				if($(this).is(":checked")) {
+					checkVal = $(this).val();
+				}
+			})
+			return checkVal;
+		}
+		// jquery复选
+		function getCheckVal() {
+			var res = getCheckres($(".check input"));
+			console.log(res);
+		}
+		function getCheckres(element) {
+			/*$(".radio input").each(function(index,domEle) {
+				if($(this).is(":checked")) {
+					console.log($(this).val())
+				}
+			})*/
+			var checkVal = " ";
+			$.each(element,function(index,domEle) {
+				if($(this).is(":checked")) {
+					checkVal += $(this).val();
+				}
+			})
+			return checkVal;
+		}
+	</script>
+
+</body>
+</html>
