@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>lazyload</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+		}
+		.box {
+			width: 1200px;
+			height: auto;
+			padding: 50px;
+			border: 1px solid #ccc;
+			margin: 20px auto;
+		}
+		img {
+			margin: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<p>这是P标签</p>
+		<img class="lazy" src="img/loading.gif" data-original="img/bmw_m1_hood.jpg" />
+		<img class="lazy" src="img/loading.gif" data-original="img/bmw_m1_side.jpg" />
+	</div>
+	<script src="jquery-1.11.0.min.js"></script>
+	<script src="jquery.lazyload.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$("img.lazy").lazyload({
+				// threshold: 200,
+				placeholder : "img/loading.gif",
+				effect : "fadeIn"
+			});
+		})
+	</script>
+</body>
+</html>
