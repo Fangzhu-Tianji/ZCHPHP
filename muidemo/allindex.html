@@ -10,31 +10,60 @@
 
 <body>
 	<header class="mui-bar mui-bar-nav">
-	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
+	    	<span style="font-size:16px;margin-left:-14px;">返回</span>
+	    </a>
 	    <h1 class="mui-title">hello world</h1>
 	</header>
+	<nav class="mui-bar mui-bar-tab">
+	    <a class="mui-tab-item mui-active">
+	        <span class="mui-icon mui-icon-home"></span>
+	        <span class="mui-tab-label">首页</span>
+	    </a>
+	    <a class="mui-tab-item" id="tel2">
+	        <span class="mui-icon mui-icon-phone"></span>
+	        <span class="mui-tab-label">电话</span>
+	    </a>
+	    <a class="mui-tab-item">
+	        <span class="mui-icon mui-icon-email"></span>
+	        <span class="mui-tab-label">邮件</span>
+	    </a>
+	    <a class="mui-tab-item">
+	        <span class="mui-icon mui-icon-gear"></span>
+	        <span class="mui-tab-label">设置</span>
+	    </a>
+	</nav>
 	<script src="js/mui.min.js"></script>
 	<script type="text/javascript">
-		mui.init({
-			subpages: [{
-				url: 'alllist.html',
-				id: 'alllist.html',
-				styles: {
-					top: '45px',
-					bottom: '45px'
-				}
-			}]
+//		mui.init({
+//			subpages: [{
+//				url: 'alllist.html',
+//				id: 'alllist.html',
+//				styles: {
+//					top: '45px', // mui标题栏默认高度为45px
+//					bottom: '0px' // 默认为0px，可不定义
+//				}
+//			}]
+//		})
+		mui.init();
+		/*mui.plusReady(function(){
+			document.getElementById('tel2').addEventListener('tap',function() {
+				mui.openWindow({
+					url: 'alltel.html',
+					id: 'alltel.html'
+				});
+			})
+			console.log("当前页面URL："+plus.webview.currentWebview().getURL());
+		})*/
+		mui.ready(function() {
+			/*document.getElementById("tel2").addEventListener('tap',function() {
+				mui.openWindow({
+					url: 'alltel.html',
+					id: 'alltel.html'
+				})
+			})*/
+			console.log(2222)
 		})
-		/*mui.init({
-		    subpages:[{
-		      url:'alllist.html',
-		      id:'alllist.html',
-		      styles:{
-		        top:'45px',//mui标题栏默认高度为45px；
-		        bottom:'0px'//默认为0px，可不定义；
-		      }
-		    }]
-		  });*/
 	</script>
 </body>
 

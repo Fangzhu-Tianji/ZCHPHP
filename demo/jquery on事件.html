@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>jquery on</title>
+	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		.color {
+			background-color: white;
+		}
+	</style>
+</head>
+<body>
+	<div class="jumbotron">
+		<div class="container"></div>
+		<p>这是P标签这是P标签这是P标签这是P标签这是P标签这是P标签这是P标签这是P标签</p>
+		<button class="btn btn-primary">button</button>
+	</div>
+	<div class="container" style="background:pink;">
+		<button class="btn btn-primary" id="btn">btnnon01</button>
+		<h1 class="text-center" style="background-color:blue;" id="h">this is textarea! hahaahhahhahh</h1>
+	</div>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*$("#h").on("click",function() {
+				$(this).css("color","purple")
+			})
+			$("#btn").click(function() {
+				$("#h").off("click");
+			})*/
+			$("#btn").on({
+				click: function() {
+					$("#h").css("backgroundColor","red")
+				},
+				mouseenter: function() {
+					$("#h").css("backgroundColor","yellow")
+				},
+				mouseleave: function() {
+					$("#h").css("backgroundColor","green")
+				}
+			})
+		})
+		
+		$(document).ready(function(){
+
+		  $("p").on({
+		
+		    mouseover:function(){$("body").css("background-color","lightgray");},  
+		
+		    mouseout:function(){$("body").css("background-color","lightblue");}, 
+		
+		    click:function(){$("body").css("background-color","yellow");}  
+		
+		  });
+		
+		});
+	</script>
+</body>
+</html>
