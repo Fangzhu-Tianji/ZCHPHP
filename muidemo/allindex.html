@@ -3,9 +3,10 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<title>财视通</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 	<link href="css/mui.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="css/userstyle.css" />
 </head>
 
 <body>
@@ -33,19 +34,23 @@
 	        <span class="mui-tab-label">设置</span>
 	    </a>
 	</nav>
+	<div class="mui-content" style="padding-top:50px;">
+	    <button type="button" onclick="openWindows();">打电话11</button>
+	    <em class="iconfont" onclick="alertfn();">&#xe641;</em>
+	</div>
 	<script src="js/mui.min.js"></script>
 	<script type="text/javascript">
-//		mui.init({
-//			subpages: [{
-//				url: 'alllist.html',
-//				id: 'alllist.html',
-//				styles: {
-//					top: '45px', // mui标题栏默认高度为45px
-//					bottom: '0px' // 默认为0px，可不定义
-//				}
-//			}]
-//		})
-		mui.init();
+		mui.init({
+			subpages: [{
+				url: 'alllist.html',
+				id: 'alllist.html',
+				styles: {
+					top: '45px', // mui标题栏默认高度为45px
+					bottom: '0px' // 默认为0px，可不定义
+				}
+			}]
+		})
+//		mui.init();
 		/*mui.plusReady(function(){
 			document.getElementById('tel2').addEventListener('tap',function() {
 				mui.openWindow({
@@ -56,14 +61,26 @@
 			console.log("当前页面URL："+plus.webview.currentWebview().getURL());
 		})*/
 		mui.ready(function() {
-			/*document.getElementById("tel2").addEventListener('tap',function() {
+			document.getElementById("tel2").addEventListener('tap',function() {
 				mui.openWindow({
 					url: 'alltel.html',
 					id: 'alltel.html'
 				})
-			})*/
-			console.log(2222)
+			})
 		})
+		function openWindows() {
+			mui.openWindow({
+				url: 'allextras.html',
+				id: 'allextras.html',
+				extras: {
+					'name': '小明',
+					'age': 18
+				}
+			})
+		}
+		function alertfn() {
+			alert("ok")
+		}
 	</script>
 </body>
 

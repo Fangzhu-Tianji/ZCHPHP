@@ -18,22 +18,22 @@
 		<p>ooooooo</p>
 	</div>
 <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-<script src="jquery.jsonp.js"></script>
+<!--<script src="jquery.jsonp.js"></script>-->
 <script type="text/javascript">
-/*$.ajax({
+$.ajax({
 	type:"get",
-	url:"http://192.168.0.223:8080/home/topnewinfor",
+	url:"http://10.100.101.8/home/partner",
 	async:true,
 	success: function(data) {
-		var aa = data.Data.ID;
+		var aa = data.Data[1].ID;
 		console.log(aa);
 		console.log(22222)
 	},
 	error: function() {
 		console.log("错误");
 	}
-});*/
-var url="http://192.168.0.223:8080/home/topnewinfor";
+});
+/*var url="http://192.168.0.223:8080/home/topnewinfor";
 $.jsonp({
   "url": url,
   "success": function(data) {
@@ -42,7 +42,7 @@ $.jsonp({
   "error": function(d,msg) {
     console.log("错误");
   }
-});
+});*/
 </script>
 </body>
 </html>
