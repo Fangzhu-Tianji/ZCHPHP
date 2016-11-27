@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原生AJAX</title>
+</head>
+<body>
+    <form id="from">
+        用户名：<input type="text" name="username"><br>
+        密码：<input type="password" name="password"><br>
+        <input type="submit" name="" value="提交">
+    </form>
+    <script type="text/javascript">
+        window.onload = function() {
+            var xhr = null;
+            if(window.XMLHttpRequet()) {
+                xhr = new XMLHttpRequet();
+            } else {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+        }
+    </script>
+</body>
+</html>

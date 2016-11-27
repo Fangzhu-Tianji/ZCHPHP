@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jqueryAJAX</title>
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.js" charset="utf-8"></script>
+</head>
+<body>
+<script type="text/javascript">
+    $(function() {
+        $.ajax({
+            // type: "POST",
+            // url: "http://openapi.baidu.com/public/2.0/bmt/translate?client_id=2ALMz6WqUEcsBg4BS91Eppq3&q=chair&from=auto&to=auto&callback=abcdef%22",
+            // data: "json",
+            // success: function(data) {
+            //     console.log(123)
+            // },
+            // error: function() {
+            //     console.log("错误")
+            // }
+            type: "POST",
+            url: "data.json",
+            data: "json",
+            success: function(data) {
+                console.log(7777)
+            },
+            error: function() {
+                console.log("错误")
+            }
+        })
+    })
+</script>
+</body>
+</html>

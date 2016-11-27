@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>script之jsonp</title>
+    <style>
+    .box {
+        width: 300px;
+        height: 600px;
+        background-color: pink;
+        margin: 20px auto;
+    }
+    h2 {
+        text-align: center;
+    }
+    </style>
+</head>
+<body>
+<div class="box">
+    <h2>查看天气</h2>
+    <select id="city">
+		<option value="101010100">北京</option>
+		<option value="101020100">上海</option>
+		<option value="101280101">广州</option>
+		<option value="101280601">深圳</option>
+	</select>
+    <button id="btn">获取</button>
+    <div class="info" id="info">
+        <ul>
+            <li>日期：</li>
+            <li>白天最高温度：</li>
+            <li>白天最低温度：</li>
+            <li>天气情况</li>
+            <li>风向：</li>
+        </ul>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.js"></script>
+<script type="text/javascript">
+    var city = document.getElementById("city");
+    var btn = document.getElementById("btn");
+    var info = document.getElementById("info");
+    function abc(data) {
+        console.log(data.weather[0].date);
+        var d = data.weather[0];
+        info.innerHTML = "";
+        var tag = "";
+        tag = '<ul>'
+            + '<li>日期：'+d.date+'</li>'
+            + '<li>白天最高温度：'+d.info.day[0]+'</li>'
+            + '<li>白天最低温度：'+d.info.day[1]+'</li>'
+            + '<li>天气情况：'+d.info.day[2]+'</li>'
+            + '<li>风向：'+d.info.day[3]+'</li>';
+        info.innerHTML = tag;
+    }
+    // btn.onclick = function() {
+    //     var cityCode = city.value;
+    //     var url = 'http://cdn.weather.hao.360.cn/api_weather_info.php?app=hao360&_jsonp=abc&code='+cityCode;
+    //     var script = document.createElement("script");
+    //     script.type='text/javascript';
+    //     script.src = url;
+    //     document.body.appendChild(script);
+    // }
+    $("#btn").on("click",function() {
+        $.ajax({
+            type: "get",
+            async: false,
+            url: "http://cdn.weather.hao.360.cn/api_weather_info.php?callback=flightHandler",
+            dataType: "jsonp",
+            jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+            jsonpCallback:"flightHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
+            success: function(data){
+                alert(data.weather[0].date);
+            },
+            error: function(){
+                alert('fail');
+            }
+        })
+    })
+</script>
+</body>
+</html>
