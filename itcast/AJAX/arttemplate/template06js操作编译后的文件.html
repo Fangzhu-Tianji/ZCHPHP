@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<div class="box">1123</div>
+<button type="button">按钮</button>
+<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script src="template.js"></script>
+<script type="text/html" id="temp">
+	<ul>
+		<li>{{area_id}}</li>
+		<li class="active">{{district_cn}}</li>
+	</ul>
+</script>
+<script>
+	$(function(){
+		$.ajax({
+			type: "POST",
+			url: "./data01.json",
+			dataType: "json",
+			success: function(data){
+				var html = template("temp",data.retData);
+				$(".box").html(html)
+			},
+			error: function(jqXHR){
+				console.log("发生错误")
+			}
+		});
+		$("button").click(function(){
+			$(".active").css({
+				"fontSize": "28px",
+				"color": "pink"
+			})
+		})
+	})
+</script>
+</body>
+</html>

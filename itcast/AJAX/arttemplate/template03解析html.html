@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>循环</title>
+<style>
+	.box {
+		width: 600px;
+		height: 200px;
+		background-color: pink;
+		margin:50px auto;
+	}
+	span {
+		color:red;
+		font-size:20px;
+	}
+</style>
+</head>
+<body>
+<div class="box"></div>
+<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script src="template.js"></script>
+<script type="text/html" id="template">
+	<ul>
+		<h2>{{name}}</h2>
+		{{each rows as value i}}
+			<li>标题： {{i}} + {{value.title}}，时间：{{value.time}}</li>
+		{{/each}}
+	</ul>
+</script>
+<script type="text/javascript">
+$(function(){
+    var data = {
+    	"name": "左春华",
+        "rows":[{
+        	"title": "<span>第一个标题</span>",
+        	"time": "1000"
+        },{
+        	"title": "第二个标题",
+        	"time": "2000"
+        },{
+        	"title": "第三个标题",
+        	"time": "3000"
+        },{
+        	"title": "第四个标题",
+        	"time": "4000"
+        }]
+    }
+    template.config("escape", false);
+    var html = template("template",data);
+    $(".box").html(html);
+    console.log(data.rows[1].title);
+})
+</script>
+</body>
+</html>
+<!-- 
+{{each list as value i}}
+        <li>索引 {{i + 1}} ：{{value}}</li>
+    {{/each}} -->

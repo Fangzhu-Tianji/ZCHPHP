@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>百度搜索</title>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+	}
+	.box {
+		width: 250px;
+		padding:30px 50px;
+		background-color: pink;
+		margin: 50px auto 0;
+	}
+	.search {
+		width: 250px;
+		height: 90px;
+		padding:0 50px;
+		background-color: yellow;
+		margin: 0 auto;
+		font:16px/1.6 "microsoft yahei";
+		color: blue;
+	}
+</style>
+</head>
+<body>
+<div class="box">
+	<input type="text" placeholder="请输入搜索的内容" id="keyword" autocomplete=off>
+	<button type="button">搜索</button>
+</div>
+<div class="search">
+	<ul>
+
+	</ul>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script>
+//https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=
+//https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd="+val+"&cb=callback
+$(function(){
+	$("#keyword").keyup(function(){
+		var kw = $("#keyword").val();
+		var url = "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd="+kw;
+		console.log(url);
+		querySUG(url);
+	})
+	function querySUG(url){
+		$("ul").html("");
+		$.ajax({
+			type: "get",
+			async: true,
+			url: url,
+			dataType: "jsonp",
+			jsonp: "cb",
+			//jsonpCallback: "callback",
+			success: function(data){
+				var num = "";
+				$.each(data.s,function(index,domEle){
+					num += "<li>" + domEle + "</li>"
+				})
+				$("ul").append(num)
+			},
+			error: function(){
+				console.log("fail")
+			}
+		})
+	}
+})
+</script>
+</body>
+</html>

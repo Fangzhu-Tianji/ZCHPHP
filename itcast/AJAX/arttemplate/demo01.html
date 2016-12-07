@@ -20,36 +20,23 @@
 <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <script src="template.js"></script>
 <script id="artinfo" type="text/html">
-    <!-- {{if retData}}
-        <ul>
-            <li>{{retData.province_cn}}</li>
-            <li>{{district_cn}}</li>
-            <li>{{name_cn}}</li>
-            <li>{{name_en}}</li>
-            <li>{{area_id}}</li>
-        </ul>
-    {{/if}} -->
     <ul>
-        <li>{{retData.province_cn}}</li>
-        <li>{{district_cn}}</li>
+        <li>{{province_cn}}</li>
+        <!-- <li>{{district_cn}}</li>
         <li>{{name_cn}}</li>
         <li>{{name_en}}</li>
-        <li>{{area_id}}</li>
+        <li>{{area_id}}</li> -->
     </ul>
 
 </script>
-<script id="test" type="text/html">
-    {{if isAdmin}}
-
+<!-- <script id="test" type="text/html">
     <h1>{{title}}</h1>
     <ul>
         {{each list as value i}}
             <li>索引 {{i + 1}} ：{{value}}</li>
         {{/each}}
     </ul>
-
-    {{/if}}
-</script>
+</script> -->
 <script type="text/javascript">
     $.ajax({
         url: "./data01.json",
@@ -59,19 +46,11 @@
             var htmls = template('artinfo',data.retData);
             $(".box").empty().html(htmls);
             console.log(data.retData.name_cn)
-            console.log(if retData)
         },
         error: function(){
             console.log(456);
         }
     });
-    var datas = {
-    	title: '基本例子',
-    	isAdmin: true,
-    	list: ['文艺', '博客', '摄影', '电影', '民谣', '旅行', '吉他']
-    };
-    var htmls = template('test', datas);
-    $(".ppp").html(htmls);
 </script>
 </body>
 </html>
