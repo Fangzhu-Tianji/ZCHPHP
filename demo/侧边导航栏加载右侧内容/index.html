@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>侧边栏</title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.box {
+	width: 1200px;
+	height: 1000px;
+	border: 1px solid #ddd;
+	margin: 20px auto;
+}
+.slidebar {
+	float: left;
+	width: 200px;
+	height: 600px;
+	background-color: pink;
+}
+.slidebar li {
+	width: 200px;
+	height: 40px;
+	background-color: #ccc;
+	font: bold 24px/40px "microsoft yahei";
+	color: #fff;
+	text-align: center;
+	border-bottom: 1px solid #333;
+	cursor: pointer;
+}
+.slidebar li.active {
+	background-color: blue;
+}
+.content {
+	float: left;
+	width: 1000px;
+}
+iframe {
+	width: 100%;
+	border: none 0;
+}
+</style>
+</head>
+<body>
+<div class="box">
+	<div class="slidebar">
+		<ul>
+			<li class="active" data-change="one">1</li>
+			<li data-change="two">2</li>
+			<li data-change="three">3</li>
+			<li data-change="four">4</li>
+		</ul>
+	</div>
+	<div class="content">
+		<iframe id="iframepage" onload="changeFrameHeight()" src="one.html" scrolling="no" frameborder="0"></iframe>
+	</div>
+</div>
+
+</body>
+</html>
+<script>
+	function changeFrameHeight(){
+	    var ifm= document.getElementById("iframepage"); 
+	    ifm.height=document.documentElement.clientHeight;
+	}
+	window.onresize=function(){  
+	     changeFrameHeight();  
+	} 
+</script>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	$(".slidebar li").click(function(){
+		$(this).addClass("active").siblings().removeClass("active");
+		var data = $(this).attr("data-change");
+		$(".content iframe").attr("src",data + ".html")
+	})
+</script>

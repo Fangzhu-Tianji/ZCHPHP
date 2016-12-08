@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>3333</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.box {
+	width: 1000px;
+	height: 600px;
+}
+</style>
+</head>
+<body>
+<div class="box">
+	<h1>这是H33标签</h1>
+	<h1>这是H33标签</h1>
+	<h1>这是H33标签</h1>
+	<h1>这是H33标签</h1>
+	<h1>这是H33标签</h1>
+	<h1>这是H33标签</h1>
+	<h1>这是H33标签</h1>
+	<h1>这是H33标签</h1>
+	<h1>这是H33标签</h1>
+	<h1>这是H33标签</h1>
+	<h1>这是H33标签</h1>
+	<h1>这是H33标签</h1>
+	<h1>这是H33标签</h1>
+	<h1>这是H33标签</h1>
+	<h1>这是H33标签</h1>
+	<p></p>
+	<button type="button">点击</button>
+	<div class="con"></div>
+</div>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	$.ajax({
+		url: "data.json",
+		type: "get",
+		success: function(data){
+			$("p").html(data.lists[1].name)
+		},
+		error: function(){
+			console.log("错误")
+		}
+	})
+	$("button").on("click",function(){
+		$.ajax({
+			url: "data.json",
+			type: "get",
+			success: function(data){
+				$(".con").html(data.lists[1].title)
+			},
+			error: function(){
+				console.log("错误")
+			}
+		})
+	})
+</script>
