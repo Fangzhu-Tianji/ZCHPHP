@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<script src='jquery-1.9.1.min.js'></script>
+<style type="text/css">
+#news {padding-top:10px;font-size: 14px;line-height: 180%;font-family: '微软雅黑',Microsoft YaHei,Verdana;text-align: center;}
+#news #main table {border-collapse: collapse;line-height: 1.6em;margin: 5px 10px;width: 400px; text-align:center;}
+#news #main th {background: none repeat scroll 0 0 #EEEEEE;border: 1px solid #DDDDDD;font-size: 13px;font-weight: bold;padding: 5px;}
+#news #main table {border-collapse: collapse;line-height: 1.6em;}
+#news #main tbody th {background: none repeat scroll 0 0 #F9F9F9;font-weight: normal;text-align: right;}
+#news #main tbody td {text-align: left;padding-left: 25px;}
+#news #main th {background: none repeat scroll 0 0 #EEEEEE;border: 1px solid #DDDDDD;font-size: 13px;font-weight: bold;padding: 5px;}
+#news #main td {border: 1px solid #DDDDDD;padding: 5px;}
+</style>
+<div id="news">
+<div id="main">
+<table style="margin:auto; width:50%;">
+<thead><tr><th colspan="2">网贷计算器</th></tr></thead>
+<tbody>
+<tr>
+<th>利率：</th>
+<td><input id="yearRate" size="5" class="compute num1" maxlength="5" value="0" style="text-align: right;" type="text">&nbsp;%<span style="font-size: 12px;"><input id="checkbox1" checked="checked" type="checkbox">年利率<input id="checkbox2" type="checkbox">日利率</span></td>
+</tr>
+<tr>
+<th>投标奖励：</th>
+<td><input size="5" id="prize" class="compute num1" value="0" style="text-align: right;" type="text">&nbsp;%</td>
+</tr>
+<tr>
+<th>管理费：</th>
+<td><input id="fee" size="5" maxlength="5" class="compute num1" value="0" style="text-align: right;" type="text">&nbsp;%</td>
+</tr>
+<tr>
+<th>期限：</th>
+<td><input size="5" id="limitTime" maxlength="5" class="compute num2" value="1" style="text-align: right;" type="text">&nbsp;<input id="radio1" name="limitType" checked="checked" type="radio">月<input id="radio2" name="limitType" type="radio">天</td>
+</tr>
+<tr>
+<th>投标金额：</th>
+<td><input size="5" id="money" class="compute num1" value="10000" style="text-align: right;" type="text">&nbsp;元</td>
+</tr>
+<tr>
+<th>还款方式：</th>
+<td>
+<select id="repayType">
+<option value="1" selected="selected">按月还本息</option>
+<option value="2">按季还本息</option>
+<option value="3">月还息到期还本</option>
+<option value="4">到期还本息</option>
+</select>
+</td>
+</tr>
+</tbody><thead>
+<tr><th colspan="2" style="text-align: left;padding-left: 50px;">年化利率：<span id="totalYearRate" style="font-size: 16px;color: red;">0</span>&nbsp;%</th></tr>
+<tr><th colspan="2" style="text-align: left;padding-left: 65px;">月利率：<span id="monthRate" style="font-size: 16px;color: green;">0</span>&nbsp;%</th></tr>
+<tr><th colspan="2" style="text-align: left;padding-left: 65px;">总收益：<span id="earnMoney" style="font-size: 16px;color: green;">0</span>&nbsp;元&nbsp;&nbsp;<span>（含奖励：<span id="prizeMoney">0</span>&nbsp;元）</span></th></tr>
+</thead>
+
+</table>
+</div>
+</div>
+
+
+<script>
+$(function(){
+$("input.num1").bind("keyup blur", function(){
+var value = $(this).val();
+$(this).val(value.replace(/[^\.\d]/g,''));
+});
+
+$("input.num2").bind("keyup blur", function(){
+var value = $(this).val();
+$(this).val(value.replace(/[^\d]/g,''));
+});
+
+$(".compute").keyup(computeFun);	
+$("#repayType").change(computeFun);	
+$("input:radio").click(function(){
+if ($("#radio2").attr("checked")) {
+$("#repayType").attr("disabled", "disabled");
+} else {
+$("#repayType").removeAttr("disabled");
+}
+
+computeFun();
+});
+
+$("#checkbox1").click(function(){
+$("#checkbox1").attr("checked", "checked");
+$("#checkbox2").removeAttr("checked");
+computeFun();
+});
+
+$("#checkbox2").click(function(){
+$("#checkbox2").attr("checked", "checked");
+$("#checkbox1").removeAttr("checked");
+computeFun();
+});
+});
+
+function computeFun(){
+var totalYearRate, yearRate, monthRate, prize, fee, money, earnMoney;
+    	var display;
+    	var limitTime, season;
+    	
+totalYearRate = 0;
+yearRate = parseFloat($("#yearRate").val());
+if ($("#checkbox2").attr("checked")) yearRate = yearRate * 365;
+prize = parseFloat($("#prize").val());
+fee =  parseFloat($("#fee").val() / 100);
+limitTime =  parseFloat($("#limitTime").val());
+money = parseFloat($("#money").val());
+yearRate = yearRate * (1 - fee);
+
+if ($("#radio1").attr("checked") && yearRate > 0 && limitTime > 0) {
+if ($("#repayType").val() == 1) {
+totalYearRate = 24.00 * prize / (limitTime + 1) + yearRate;
+earnMoney = (money * yearRate / 1200 * Math.pow((1 + yearRate / 1200), limitTime) /(Math.pow((1 + yearRate / 1200),limitTime)- 1) * limitTime - money + money * prize / 100);
+} 
+
+else if ($("#repayType").val() == 2) {
+season = Math.ceil(limitTime / 3);
+     				earnMoney = money * yearRate * (1 + season) / 800 + money * prize / 100;
+     				totalYearRate = (yearRate * 3 + 24 * prize /(limitTime/3+1)) / 3;
+} 
+
+else if ($("#repayType").val() == 3) {
+earnMoney = money * yearRate * limitTime / 1200 + money * prize / 100;
+     				totalYearRate = (yearRate * limitTime + 12 * prize) / limitTime;
+} 
+
+else if ($("#repayType").val() == 4) {
+earnMoney = money * yearRate * limitTime / 1200 + money * prize / 100;
+     				totalYearRate = yearRate + prize * 12 / limitTime;
+} 
+
+$("#totalYearRate").html(Math.round(totalYearRate*100)/100);
+$("#monthRate").html(Math.round(totalYearRate/12*100)/100);
+$("#earnMoney").html(Math.round(earnMoney*100)/100);
+$("#prizeMoney").html(Math.round(money*prize) / 100);
+}
+
+if ($("#radio2").attr("checked") && yearRate > 0 && limitTime > 0) {
+totalYearRate = yearRate + prize / limitTime * 360;
+monthRate = totalYearRate / 12;
+earnMoney = money * yearRate * limitTime / 36000 + money * prize / 100;
+
+$("#totalYearRate").html(Math.round(totalYearRate*100)/100);
+$("#monthRate").html(Math.round(totalYearRate/12*100)/100);
+$("#earnMoney").html(Math.round(earnMoney*100)/100);
+$("#prizeMoney").html(Math.round(money*prize) / 100);
+}
+}
+</script>
+
+</body>
+</html>
