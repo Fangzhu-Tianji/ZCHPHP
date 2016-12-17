@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () { obaganlestyle(1, 7);
+        });
+        
+        function obaganlestyle(snum,lnum)
+        {
+            var myDate = new Date();
+            var day = myDate.getDay();//返回0-6
+            //var today = new Array('星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六');
+            //当天的日期
+            var endday;
+            var startday;
+          
+            endday = getthisDay(-day + lnum); //算得周日
+            startday = getthisDay(-day + snum);//算的周一
+            
+            $("#begintime").val(startday + " 00:00:00");
+            $("#endtime").val(endday + " 59:59:59");
+        }
+        //取得日期
+        function getthisDay(day) {
+            var today = new Date();
+            var targetday_milliseconds = today.getTime() + 1000 * 60 * 60 * 24 * day;
+            today.setTime(targetday_milliseconds); //关键
+            var tyear = today.getFullYear();
+            var tMonth = today.getMonth();
+            var tDate = today.getDate();
+            if (tDate < 10) {
+                tDate = "0" + tDate;
+            }
+            tMonth = tMonth + 1;
+            if (tMonth < 10) {
+                tMonth = "0" + tMonth;
+            }
+            return tyear + "-" + tMonth + "-" + tDate + "";
+        }
+
+        //各种日期取得
+        function getdaybytype(type) {
+            switch (type) {
+                case 1:
+                    obaganlestyle(1, 7);
+                    break;
+                case 2:
+                    obaganlestyle(0,-6);
+                    break;
+                case 3:
+                    obaganlestyle(8, 14);
+                    break;
+                default:
+                    break;
+            }
+        }
+    </script>
+</head>
+<body>
+    开始时间：<input type="text" id="begintime" value="" /><br />
+    结束时间：<input type="text" id="endtime" value="">
+    <input type="button" id="thisweek" onclick="getdaybytype(1)" value="这周" />
+    <input type="button" id="onweek" onclick="getdaybytype(2)" value="上一周" />
+    <input type="button" id="nextweek" onclick="getdaybytype(3)" value="下一周" />
+</body>
+</html>

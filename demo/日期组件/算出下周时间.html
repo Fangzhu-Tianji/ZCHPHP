@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>data</title>
+</head>
+<body>
+<select name="" id="">
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
+	<option value="5">5</option>
+</select>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script>
+	// var data = new Date();
+	// var day = data.getDay();
+	// var targetday_milliseconds = data.getTime() + 1000 * 60 * 60 * 24 * day;
+	// // data.setTime(targetday_milliseconds);
+	// console.log( data.setTime(targetday_milliseconds) );
+	// var data = new Date();
+	// console.log( data.getDay() );
+	function getthisDay(day) {
+        var today = new Date();
+        var targetday_milliseconds = today.getTime() + 1000 * 60 * 60 * 24 * day;
+        today.setTime(targetday_milliseconds); //关键
+        var tyear = today.getFullYear();
+        var tMonth = today.getMonth();
+        var tDate = today.getDate();
+        if (tDate < 10) {
+            tDate = "0" + tDate;
+        }
+        tMonth = tMonth + 1;
+        if (tMonth < 10) {
+            tMonth = "0" + tMonth;
+        }
+        return tyear + "-" + tMonth + "-" + tDate + "";
+    }
+    function obaganlestyle(snum)
+    {
+        var myDate = new Date();
+        var day = myDate.getDay();//返回0-6
+        //var today = new Array('星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六');
+        //当天的日期
+        var startday;
+      
+        startday = getthisDay(-day + snum);//算的周一
+        
+        console.log( startday )
+    }
+    $("select").change(function(){
+    	var html = $("select").val();
+    	var datas = parseInt(html)+7;
+    	var datasString = datas.toString();
+    	var cut = datasString.substring(1,5);
+    	obaganlestyle(datas);
+    	console.log( typeof datasString );
+    	console.log( cut )
+    })
+    //obaganlestyle(8);
+</script>
+</body>
+</html>

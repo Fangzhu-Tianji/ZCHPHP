@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>多个if判断</title>
+	<style>
+		.box {
+			width: 200px;
+			height: 200px;
+			background-color: pink;
+			margin: 50px auto;
+		}
+	</style>
+</head>
+<body>
+<div class="box"></div>
+<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script src="template.js"></script>
+<script type="text/html" id="template">
+	<!-- {{ if number.num1 == 4 }}
+		<h2>{{name}}</h2>
+		{{ else if number.num1 == 5 }}
+		<h2>{{rows[1].title}}</h2>
+	{{/if}} -->
+	{{ if number.num1 > 4 && (number.num1 < 7 || number.num1 == 5) }}
+		<h2>{{name}}</h2>
+		{{ else if number.num1 == 5 }}
+		<h2>{{rows[1].title}}</h2>
+	{{/if}}
+</script>
+<script type="text/javascript">
+$(function(){
+    var data = {
+    	"name": "左春华",
+        "rows":[{
+        	"title": "<span>第一个标题</span>",
+        	"time": "1000"
+        },{
+        	"title": "第二个标题",
+        	"time": "2000"
+        },{
+        	"title": "第三个标题",
+        	"time": "3000"
+        },{
+        	"title": "第四个标题",
+        	"time": "4000"
+        }],
+        "number": {
+        	"num1": 5,
+        	"num2": 9
+        }
+    }
+    template.config("escape", false);
+    var html = template("template",data);
+    $(".box").html(html);
+    console.log(data.rows[1].title);
+})
+</script>	
+</body>
+</html>

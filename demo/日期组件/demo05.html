@@ -1,0 +1,29 @@
+<html>
+  <script>
+  function test(){
+     var test = document.getElementById("test");
+     var changeDate = test.value.split("-");
+ 
+    if(new Date().getDay()==3||new Date().getDay()==6){
+  
+  if(changeDate[changeDate.length-1]-new Date().getDate()>4){
+         alert("提示信息");
+   return;
+       }
+ }
+ if(new Date().getDay()==5||new Date().getDay()==4){
+  if(changeDate[changeDate.length-1]-new Date().getDate()>5){
+         alert("提示信息");
+   return;搜索
+       }
+ }
+    if(changeDate[changeDate.length-1]-new Date().getDate()>3){
+           alert("提示信息");
+    }
+ }
+  </script>
+<body>
+   <input type="text" id="test" onchange="test()" /><!--输入的日期格式为2008-12-11-->
+</body>
+
+</html>

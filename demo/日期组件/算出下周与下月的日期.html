@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>data</title>
+</head>
+<body>
+<div class="box">
+	<select name="" id="">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+	</select>
+</div>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript">
+	// var date = new Date();
+	// console.log( date.getDate() );
+	// console.log( date.setDate(date.getDate() - 1) );
+	// var d = new Date();
+ //    dd = d.getDay();
+ //    friday = new Date((5 - dd)*(3600*24*1000)+d.getTime()).getDate();
+	// alert(friday);
+	$("select").change(function(){
+		console.log($(".box select").val());
+		var num = $(".box select").val();
+		datass(num);
+	})
+	function datass(numb) {
+		var friday = 0;
+		var d = new Date();
+    	dd = d.getDay();
+   	 	friday = new Date((numb - dd)*(3600*24*1000)+d.getTime()).getDate();
+		console.log(friday);
+	}
+	//console.log(friday);
+</script>
+</body>
+</html>

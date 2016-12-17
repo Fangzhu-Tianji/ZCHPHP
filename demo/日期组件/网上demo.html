@@ -1,0 +1,68 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>透析日程表</title> 
+    <script type="text/javascript" language="JavaScript">
+        var myDate = new Date();
+        myDate.setDate(myDate.getDay() == 0 ? myDate.getDate() - 6 : myDate.getDate() - (myDate.getDay() - 1)); //周一 
+        var predate = new Date();
+        predate.setDate(predate.getDay() == 0 ? 6 - predate.getDate() : predate.getDate() - (-3 - predate.getDay())); //上周周日 
+        var sundate = new Date();
+        sundate.setDate(sundate.getDay() == 0 ? sundate.getDate() - 6 : sundate.getDate() - (-3 - sundate.getDay())); //下周周日  
+        
+        function prevArea() {//上周一时间
+            myDate.setDate(myDate.getDate() - 7);
+            form1.dDT.value = myDate.toLocaleDateString(); 
+            
+            predate.setDate(predate.getDate() - 7);
+            form1.dDT1.value = predate.toLocaleDateString();
+        }
+        function nextArea() {//下周一时间
+        
+            
+            myDate.setDate(myDate.getDate() + 7);
+            form1.dDT.value = myDate.toLocaleDateString(); 
+            
+            sundate.setDate(sundate.getDate() + 7); 
+            form1.dDT1.value = sundate.toLocaleDateString();
+        }
+        function getCurarea() {//本周一到本周日
+            var amyDate = new Date();
+            amyDate.setDate(amyDate.getDay() == 0 ? amyDate.getDate() - 6 : amyDate.getDate() - (amyDate.getDay() - 1)); //周一   
+            var acurdate = new Date();
+            acurdate.setDate(acurdate.getDay() == 0 ? acurdate.getDate() - 6 : acurdate.getDate() - (acurdate.getDay() - 1)); //周日 
+            acurdate.setMonth(acurdate.getMonth()); //取得月赋值
+            acurdate.setDate(acurdate.getDate() + 6); //周日
+              form1.dDT.value = amyDate.toLocaleDateString();
+            form1.dDT1.value = acurdate.toLocaleDateString(); 
+        }
+        
+    </script > 
+</head>
+
+<body> 
+    <form id="form1" runat="server">
+    <div>
+<table style ="width :98%;"  border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr style ="height :6;">
+    <td></td>
+ </tr> 
+</table>    
+<table width="98%" border="0" align="center" cellpadding="1" cellspacing="1" bgcolor="327AC6" >    
+           <tr style ="background-color :#F9F9FB"> 
+                    <td align="right">时间：</td>
+                <td align="left"> 
+                    <asp:TextBox ID="dDT" runat="server"  onclick="calendardate(this,true);" ></asp:TextBox> --
+                    <asp:TextBox ID="dDT1" runat="server"  onclick="calendardate(this,true);" ></asp:TextBox>&nbsp;  
+                         <input type="button" value="上周时间段" onclick="prevArea();" />
+                        <input type="button" value="本周时间段" onclick="getCurarea();" />
+                        <input type="button" value="下周时间段" onclick="nextArea();" /> 
+                        <asp:Button ID="Button2" runat="server" Text="重置时间" CssClass="hidden" />
+                        </td>
+              </tr >
+
+      </table> 
+ 
+    </div>
+    </form>
+</body>
+</html>
