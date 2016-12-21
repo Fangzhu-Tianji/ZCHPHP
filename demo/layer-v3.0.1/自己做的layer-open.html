@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>	
+</body>
+</html>
+<script type="text/javascript">
+	function fn1(){
+		layer.open({
+			// 带图标的alert弹窗，只用修改pic的class与p的html值；
+			// pic1 --> success
+			// pic2 --> warn
+			skin: 'layer-no-title',	//无标题版皮肤
+			type: 1,	
+			area: ['400px','172px'],
+			move: false, //是否拖拽
+			shade: 0.4,	//遮罩透明度
+			shadeClose: false,	//点击遮罩是否关闭
+			maxmin: false, //允许全屏最小化
+			resize: false, //是否允许拉伸
+			title: '&nbsp;',	//是否有标题
+			content: 
+			'<div class="layer-alert-pic">'+
+				'<div class="content clearfix">'+
+					'<div class="pic pic2"></div>'+
+					'<p class="write">恭喜您定投成功！</p>'+
+				'</div>'+
+			'</div>'
+			,btnAlign: 'c',
+			btn: ['确定'],
+			yes: function(index,layero){
+				layer.closeAll();
+			}
+		})
+	}
+</script>

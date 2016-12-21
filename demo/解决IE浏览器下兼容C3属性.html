@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>兼容性</title>
+<style>
+	*{margin:0; padding:0;}
+	.content {
+		width:500px;
+		height: 400px;
+		background-color: #fafafa;
+		margin: 20px auto;
+	}
+	.box {
+		width: 100px;
+		height: 100px;
+		  -moz-border-radius: 15px; /* Firefox */
+ 			 -webkit-border-radius: 15px; /* Safari 和 Chrome */
+			  border-radius: 15px; /* Opera 10.5+, 以及使用了IE-CSS3的IE浏览器 */
+		background-color: pink;
+		behavior:url(js/ie-css3.htc);	
+	}
+</style>
+</head>
+<body>
+	<div class="content">
+		<div class="box"></div>
+	</div>
+</body>
+</html>
