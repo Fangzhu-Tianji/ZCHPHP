@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="jquery.validate-1.13.1.js"></script>
+<script type="text/javascript">
+$(function ($) {
+  $("#procode").validate({
+        expression: "if (VAL) return true; else return false;",
+        message: "请输入procode",
+        errorElement:"font",
+        errorPlacement: function(error, element){
+            error.appendTo(element.parent().find(".tipinfo"));
+        },success:"valid"
+    });
+     
+});
+ 
+ 
+</script>
+<title>无标题文档</title>
+</head>
+ 
+<body>
+<form id="thisForm" method="post" action="">
+           <table width="800px" border="0">
+           <tr>
+                   <td width="100px" height="35px"></td>
+                   <td width="110px"></td>
+                   <td width="330px"></td>
+                   <td width="260px"></td>
+           </tr>
+              <tr>
+                  <td height="50px"></td>
+                <td align="left"><label for="procode" class="STYLE14">procode</label></td>      
+                <td align="left">
+                    <input id="procode" name="procode" type="text" maxlength="20" style="width: 300px;" autocomplete="off"/>
+                    <div class="tipinfo">1</div>
+                </td>  
+                  <td >
+                  </td>
+              </tr>
+               
+         </table>
+</form> 
+ 
+</body>
+</html>
