@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>三级联动</title>
+<style>
+*{margin:0; padding:0; list-style-type: none;}
+.box {width:1000px; height:400px; border:1px solid #ddd; margin:20px auto;}
+.box .wrap {width:100px; background-color:pink; float:left; margin-right:30px;}
+.box .wrap .one {display:block; width:100px; height:40px; font:16px/40px "microsoft yahei"; color:#333; text-align:center; cursor:pointer;}
+.box .wrap .two {display:block; width:100px; height:38px; background-color:purple; border-top:1px solid #ccc; border-bottom:1px solid #ccc; font:14px/38px "microsoft yahei"; color:#fff; text-align:center; cursor:pointer;}
+.box .wrap .wrap-in-in {width:100px; height:38px; background-color:yellow; border-top:1px solid #ccc; border-bottom:1px solid #ccc; font:14px/38px "microsoft yahei"; color:#333; text-align:center;}
+.hidden {display:none;}
+.show {display:block;}
+</style>
+</head>
+<body>
+<div class="box">
+	<ul>
+		<li class="wrap">
+			<span class="one">香蕉</span>
+			<ul class="hidden">
+				<li class="wrap-in">
+					<span class="two">香蕉-in</span>
+					<ul class="hidden">
+						<li class="wrap-in-in">香蕉-in-in111</li>
+						<li class="wrap-in-in">香蕉-in-in111</li>
+						<li class="wrap-in-in">香蕉-in-in111</li>
+					</ul>
+				</li>
+				<li class="wrap-in">
+					<span class="two">香蕉-in</span>
+					<ul class="hidden">
+						<li class="wrap-in-in">香蕉-in-in222</li>
+						<li class="wrap-in-in">香蕉-in-in222</li>
+						<li class="wrap-in-in">香蕉-in-in222</li>
+					</ul>
+				</li>
+				<li class="wrap-in">
+					<span class="two">香蕉-in</span>
+					<ul class="hidden">
+						<li class="wrap-in-in">香蕉-in-in333</li>
+						<li class="wrap-in-in">香蕉-in-in333</li>
+						<li class="wrap-in-in">香蕉-in-in333</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+<!-- 		<li class="wrap">
+			<span class="one">葡萄</span>
+			<ul>
+				<li>
+					<span class="two">葡萄-in</span>
+					<ul>
+						<li>葡萄-in-in</li>
+						<li>葡萄-in-in</li>
+						<li>葡萄-in-in</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li class="wrap">
+			<span class="one">栗子</span>
+			<ul>
+				<li>
+					<span class="two">栗子-in</span>
+					<ul>
+						<li>栗子-in-in</li>
+						<li>栗子-in-in</li>
+						<li>栗子-in-in</li>
+					</ul>
+				</li>
+			</ul>
+		</li> -->
+	</ul>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script>
+$(function(){
+	$(".one").click(function(){
+		$(this).siblings().toggleClass("show");
+	});
+	$(".two").click(function(){
+		$(".two").siblings().removeClass("show");
+		$(this).siblings().toggleClass("show");
+	});
+})
+</script>
+</body>
+</html>
