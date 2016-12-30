@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<!-- <link rel="stylesheet" href="laypage/skin/laypage.css"> -->
+<style>
+	*{margin:0; padding:0; list-style-type:none;}
+	.page {width:1000px; height:700px; border:1px solid #ccc; margin:30px auto;}
+	#box {height:300px; background-color:blue;}
+	#page_list {height:40px; padding:30px 0; background-color:pink; text-align:center;}
+</style>
+</head>
+<body>
+<div class="page">
+	<div id="box"></div>
+	<div class="page_list" id="page_list"></div>
+</div>
+<button>按钮</button>
+<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.js"></script>
+<script src="laypage/laypage.js"></script>
+<script>
+var data = [
+    '北京',
+    '上海',
+    '广州',
+    '深圳',
+    '杭州',
+    '长沙',
+    '合肥',
+    '宁夏',
+    '成都',
+    '西安',
+    '南昌',
+    '上饶',
+    '沈阳',
+    '济南',
+    '厦门',
+    '福州',
+    '九江',
+    '宜春',
+    '赣州',
+    '宁波',
+    '绍兴',
+    '无锡',
+    '苏州',
+    '徐州',
+    '东莞',
+    '佛山',
+    '中山',
+    '成都',
+    '武汉',
+    '青岛',
+    '天津',
+    '重庆',
+    '南京',
+    '九江',
+    '香港',
+    '澳门',
+    '台北'
+];
+$("button").click(function(){
+	laypage({
+	    cont: $(".page_list"),
+	    //num:
+	    pages: 30,
+	    curr: 1,
+	    groups: 10,
+	    prev: "<",
+	    next: ">",
+	    first: 1,
+	    last: 30,
+	    jump: function(obj){
+	        document.getElementById('box').innerHTML = 123456;
+	        //$("#laypage_0").append("<span>1111111</span>")
+	    }
+	})
+}) 
+
+laypage({
+    cont: $(".page_list"),
+    //num:
+    pages: 33,
+    curr: 4,
+    groups: 5,
+    prev: "<",
+    next: ">",
+    first: 1,
+    last: 33,
+    jump: function(obj){
+        document.getElementById('box').innerHTML = 123456;
+        //$("#laypage_0").append("<span>1111111</span>")
+    }
+}) 
+</script>
+</body>
+</html>
