@@ -15,21 +15,18 @@
 <body>
 <div class="box"></div>
 <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-<script src="juicer.js"></script>
-<script id="tpl" type="text/template">
+<script src="template.js"></script>
+<script type="text/html" id="template">
 	<!-- {{ if number.num1 == 4 }}
 		<h2>{{name}}</h2>
 		{{ else if number.num1 == 5 }}
 		<h2>{{rows[1].title}}</h2>
 	{{/if}} -->
-	<!-- {{ if number.num1 > 4 && (number.num1 < 7 || number.num1 == 5) }}
+	{{ if number.num1 > 4 && (number.num1 < 7 || number.num1 == 5) }}
 		<h2>{{name}}</h2>
 		{{ else if number.num1 == 5 }}
 		<h2>{{rows[1].title}}</h2>
-	{{/if}} -->
-	{@if number.num1 == 5}
-		<h2>1111111</h2>
-	{@/if}
+	{{/if}}
 </script>
 <script type="text/javascript">
 $(function(){
@@ -53,7 +50,8 @@ $(function(){
         	"num2": 9
         }
     }
-    var html = juicer(tpl,data);
+    template.config("escape", false);
+    var html = template("template",data);
     $(".box").html(html);
     console.log(data.rows[1].title);
 })

@@ -1,0 +1,34 @@
+{
+	errno: 0,
+	data: {
+	ResultList: [
+	{
+	NewsID: 44,
+	HeadImage: "http://imgs.cst58.cn/cms/news/201612/20161229173427fnc45m3nwk0.jpg",
+	Title: "奇特让人为",
+	Summary: "而是放弃阿发",
+	PublishTime: "2016-12-29 17:34:46"
+	},
+	{
+	NewsID: 43,
+	HeadImage: "http://imgs.cst58.cn/cms/news/201612/201612291734004drcamc3t10.jpg",
+	Title: "2313",
+	Summary: "染发认为",
+	PublishTime: "2016-12-29 17:34:06"
+	},
+	{
+	NewsID: 42,
+	HeadImage: "http://imgs.cst58.cn/cms/news/201612/201612291733217xbm3f8rq30.png",
+	Title: "还是大郭德纲",
+	Summary: "奇热网若无若",
+	PublishTime: "2016-12-29 17:33:39"
+	}
+	],
+	AllowPaging: true,
+	PageIndex: 2,
+	PageSize: 3,
+	TotalRecord: 33,
+	TotalPage: 11
+	},
+	errmsg: ""
+}

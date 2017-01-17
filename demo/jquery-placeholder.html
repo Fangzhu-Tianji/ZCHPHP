@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>placeholder</title>
+  <style>
+  input,textarea {
+    color:#333;
+  }
+  .placeholder {color: #aaa;}
+  </style>
+</head>
+<body>
+<input type="text" placeholder="请输入文本" />
+<input type="password" placeholder="请输入密码" />
+<input type="text" placeholder="请输入文本请输入密码" />
+<textarea name="1111" id="" cols="30" rows="10">234234fsdfdsgfdg</textarea>
+<!-- <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script> -->
+<script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="js/jquery.placeholder.min.js"></script>
+<script type="text/javascript">
+  $(function($){
+    console.log(11111);
+    //$.placeholder.ini();
+		$('input, textarea').placeholder();
+  });
+</script>
+</body>
+</html>
