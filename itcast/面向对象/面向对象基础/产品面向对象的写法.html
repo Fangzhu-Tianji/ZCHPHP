@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+// 产品对象
+// 名称、价格、图片、描述
+function Product(){
+  this.name = '这是初始的名字';
+  this.price = 00;
+  this.image = '这是初始的图片';
+  this.depict = '这是初始的描述';
+}
+Product.prototype = {
+  bindDOM: function(){
+    var str = '';
+    str = '<div>这是DIV盒子1</div>'
+        + '<div>'+ this.name +'</div>'
+        + '<div>'+ this.price +'</div>'
+        + '<div>'+ this.image +'</div>'
+        + '<div>'+ this.depict +'</div>'
+        + '<div>这是DIV盒子6</div>';
+    console.log(str);
+  }
+}
+window.onload = function(){
+  // 对象的实例化
+  var product = new Product();
+  console.log(product.name);
+  product.bindDOM();
+}
+</script>
+</body>
+</html>

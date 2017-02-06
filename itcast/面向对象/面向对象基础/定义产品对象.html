@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>product</title>
+</head>
+<body>
+<h2 id="title">产品名称</h2>
+<h3 id="des">产品描述</h3>
+<div id="price">0</div>
+<script>
+  // 产品对象属性：名称、价格、描述
+  function Product(){
+    this.name = "iphone8";
+    this.price = 8000;
+    this.images = [];
+    this.description = "手机中的战斗机";
+  }
+  Product.prototype = {
+    buy: function(){
+
+    },
+    getDetail: function(){
+
+    },
+    // 对代码进行分类管理
+    bindDOM: function(){
+      console.log(12345678);
+    },
+    bindEvents: function(){
+
+    }
+  }
+  window.onload = function(){
+    // 对象实例化
+    var iphone32 = new Product();
+    iphone32.title = "这是标题1111111";
+    iphone32.price = 10000;
+    var titlt = document.getElementById("title");
+    var price = document.getElementById("price");
+    title.innerHTML = iphone32.title;
+    console.log(iphone32.name);
+  }
+</script>
+</body>
+</html>
