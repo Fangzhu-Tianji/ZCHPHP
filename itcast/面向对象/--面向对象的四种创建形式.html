@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+// 默认值
+function Product(){
+  this.name = '';
+  this.age = 0;
+}
+Product.prototype = {}
+var product = new Product();
+// 动态添加形式
+product.pirce = 0;
+product.images = [];
+
+// 函数传参形式
+function Product(name){
+  this.name = name;
+}
+Product.prototype = {};
+var product = new Product('iphone8');
+
+// 混合模式
+function Product(name,price){
+  this.name = name;
+  this.price = price;
+  this.version = 1.0;
+  this.add = function(){};
+}
+Product.prototype = {};
+var product = new Product('iphone8',100);
+product.description='XXXXXXXXXX';
+product.images=[];
+console.log(product instanceof Product);
+
+</script>
+</body>
+</html>

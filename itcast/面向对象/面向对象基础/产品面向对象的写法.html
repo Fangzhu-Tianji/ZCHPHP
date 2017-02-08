@@ -7,6 +7,7 @@
   <title>Document</title>
 </head>
 <body>
+<div id="box"></div>
 <script>
 // 产品对象
 // 名称、价格、图片、描述
@@ -17,6 +18,7 @@ function Product(){
   this.depict = '这是初始的描述';
 }
 Product.prototype = {
+  // 进行单个进行编程
   bindDOM: function(){
     var str = '';
     str = '<div>这是DIV盒子1</div>'
@@ -25,14 +27,28 @@ Product.prototype = {
         + '<div>'+ this.image +'</div>'
         + '<div>'+ this.depict +'</div>'
         + '<div>这是DIV盒子6</div>';
-    console.log(str);
+    return str;
   }
 }
 window.onload = function(){
   // 对象的实例化
-  var product = new Product();
-  console.log(product.name);
-  product.bindDOM();
+  var product1 = new Product();
+  product1.price = 111;
+  var product2 = new Product();
+  product2.price = 222;
+  var product3 = new Product();
+  product3.price = 333;
+  var product4 = new Product();
+  product4.price = 444;
+  // 用数组形式保存数据
+  var products = [product1,product2,product3,product4];
+  // 针对单个对象进行整体编程
+  var strs = '';
+  for(var i=0; i<products.length; i++){
+    strs += products[i].bindDOM() + '</br>';
+  }
+  var oBox = document.getElementById("box");
+  oBox.innerHTML = strs;
 }
 </script>
 </body>
