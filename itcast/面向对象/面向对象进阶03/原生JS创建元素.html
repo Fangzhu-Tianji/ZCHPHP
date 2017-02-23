@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JavaScript</title>
+<style>
+    #box {
+        width: 400px;
+        height: 400px;
+        background-color: pink;
+    }
+</style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+function $(id){
+  return document.getElementById(id);
+}
+var a = document.createElement("span");
+a.innerHTML = "这是文章内容";
+a.setAttribute("date-name","join");
+$("box").appendChild(a);
+</script>
+</body>
+</html>

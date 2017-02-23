@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型</title>
+</head>
+<body>
+<script>
+function fn(){
+
+}
+fn.prototype = {
+    info: {
+        name: "soum",
+        age: 28
+    }
+}
+var a = new fn();
+var b = new fn();
+a.info.name = "aaaaa";
+b.info.name = "bbbbb";
+console.log(a.info.name)
+console.log(b.info.name)
+
+console.log(a)
+</script>
+</body>
+</html>

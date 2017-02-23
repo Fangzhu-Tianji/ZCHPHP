@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  .red {
+    color: red;
+  }
+  </style>
+</head>
+<body>
+<div id="box">
+  这是一个盒子圣诞节和法律帝豪斯费独守空房v还是得看发货速度快富华大厦富华大厦多少放大书法家黄色的。
+</div>
+<script>
+  function $(id){
+    return document.getElementById(id);
+  }
+  var html = $("box").innerHTML;
+  var newHtml = html.replace(/(大厦)/g,"<span class='red'>$1</span>");
+  console.log(newHtml);
+  $("box").innerHTML = newHtml;
+</script>
+</body>
+</html>

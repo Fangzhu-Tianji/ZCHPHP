@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  .red {
+    color: red;
+  }
+  </style>
+</head>
+<body>
+<div id="box">
+  惊呆了佛教受打击发票圣诞节股东附近工地附近施工房管局哦设计费大家跟ODF介绍给ODF合格的世界观哦发动机盖记得发感觉到佛教个哦第三方机构发动机盖圣诞节哦枫蓝国际的设计稿老地方就地方几十个igksdgkdfjsghjdf四季度房价该发动机盖好地方公开
+  <div id="box_in">
+    的数据法律手段寄过来辅导机构is附近的化工is会费个鲁大师加工费拉电视剧福拉倒多少功夫大使馆单方事故回复回复国行 返回电饭锅
+  </div>
+</div>
+<input id="txt" type="text">
+<input id="btn" type="button" value="按钮">
+<script>
+  function $(id){
+    return document.getElementById(id);
+  }
+  function txts(){
+    return $("txt").value;
+  }
+  $("btn").onclick = function(){
+    var txtss = txts();
+    var regExp = new RegExp(">("+txtss+")<", 'gi');
+    console.log(txtss);
+    var html = $("box").innerHTML;
+    var newHtml = html.replace(regExp,'><span class="red">$1</span><');
+    console.log(newHtml);
+    $("box").innerHTML = newHtml;
+  }
+  // $("btn").onclick = function(){
+  //   var txtss = txts();
+  //   var regExp = new RegExp(">("+txtss+")<", 'gi');
+  //   console.log(txtss);
+  //   var html = $("box").innerHTML;
+  //   var newHtml = html.replace(eval("/>("+txtss+")</gi"),"><span class='red'>$1</span><");
+  //   console.log(newHtml);
+  //   $("box").innerHTML = newHtml;
+  // }
+</script>
+<!-- var regExp = new RegExp(">("+searchText+")<", 'gi');
+alert("old"+html+searchText);
+var newHtml = html.replace(regExp,'><em class="highlight">$1</em><');
+alert("new"+newHtml); -->
+</body>
+</html>
