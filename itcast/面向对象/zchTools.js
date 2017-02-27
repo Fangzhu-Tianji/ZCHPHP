@@ -36,6 +36,11 @@ T.prototype = {
         uname: /^[a-zA-Z]\w{5,15}$/,
         nonempty: /\S/,
         size: /\d+[\d.]*[A-za-z]*\*+\d+[\d.]*[A-za-z]*|\d+[*×]\d+/i
+    },
+    // artTemplate语法
+    bindTemplate: function(templateId, data){
+      var html = template(templateId, data);
+      return html;
     }
 }
 // 对象的实例化
