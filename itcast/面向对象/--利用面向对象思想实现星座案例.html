@@ -20,6 +20,9 @@
   .red {
     color: red;
   }
+  .active {
+    color: green;
+  }
   </style>
 </head>
 <body>
@@ -87,6 +90,7 @@
     this.data = data;
     this.num = num;
     this.dom = $("<div></div>").addClass('item num-' + num);
+    this.init();
   }
   Xinzuo.prototype = {
     init: function(){
@@ -96,14 +100,19 @@
     bindDom: function(){
       var html = "<p class='red'>星座标题</p>" +
                 "<p>" + data[i].name + "</p>" +
-                "<p>" + data[i].time + "</p>"
+                "<p>" + data[i].time + "</p>";
       this.dom.html(html).appendTo(".xinzuo");
     },
-    bindEvent: function(){}
+    bindEvent: function(){
+      var _this = this;
+      _this.dom.mouseover(function(){
+        _this.dom.addClass('active');
+      })
+    }
   };
   // new Xinzuo(data,1).init();
   for(var i=0; i<data.length; i++){
-    new Xinzuo(data[i],i).init();
+    new Xinzuo(data[i],i);
   }
 </script>
 </body>
