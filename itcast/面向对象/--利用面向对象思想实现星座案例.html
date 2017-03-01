@@ -89,7 +89,7 @@
   var Xinzuo = function(data,num){
     this.data = data;
     this.num = num;
-    this.dom = $("<div></div>").addClass('item num-' + num);
+    this.dom = $("<div style='background-color:pink;border:2px solid red;'></div>").addClass('item num-' + num);
     this.init();
   }
   Xinzuo.prototype = {
@@ -105,8 +105,18 @@
     },
     bindEvent: function(){
       var _this = this;
-      _this.dom.mouseover(function(){
+      // _this.dom.mouseover(function(){
+      //   _this.dom.addClass('active');
+      // });
+      // _this.dom.mouseout(function(){
+      //   _this.dom.removeClass('active');
+      // })
+      _this.dom.on("click",function(e){
         _this.dom.addClass('active');
+      }).on("mouseenter",function(e){
+        _this.dom.addClass('active');
+      }).on("mouseleave",function(){
+        _this.dom.removeClass('active');
       })
     }
   };
