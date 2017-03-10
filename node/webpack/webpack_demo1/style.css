@@ -1,0 +1,14 @@
+body,html {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+}
+.container {
+	width: 1200px;
+	margin: 0 auto;
+}
+.container .head {
+	font: 60px/3 "microsoft yahei";
+	color: red;
+	text-align: center;
+}
