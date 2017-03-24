@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="Generator" content="EditPlus®">
+<meta name="Author" content="梦想星辰大海">
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<title>财视通-后台管理中心</title>
+<link rel="stylesheet" href="./layui/css/layui.css">
+<link rel="stylesheet" href="./css/global.css">
+</head>
+<body>
+    <!-- 布局容器 -->
+    <div class="layui-layout layui-layout-admin">
+        <!-- 头部 -->
+        <div class="layui-header header">
+            <div class="layui-main">
+                <!-- logo -->
+                <a class="logo" href="./index.html">
+                  <img src="./images/cst.png" alt="财视通">
+                </a>
+                <!-- 头部导航 -->
+                <ul class="layui-nav top-nav-container">
+                  <li class="layui-nav-item layui-this">
+                    <a href="javascript:void(0)">首页</a>
+                  </li>
+                  <li class="layui-nav-item">
+                    <a href="javascript:void(0)">list1</a>
+                  </li>
+                </ul>
+                <!-- 水平导航 -->
+                <ul class="layui-nav top-nav-right">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            进入前台
+                        </a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            梦想星辰大海
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a href="javascript:;">
+                                    个人信息
+                                </a>
+                            </dd>
+                            <dd>
+                                <a href="javascript:;">
+                                    修改密码
+                                </a>
+                            </dd>
+                            <dd>
+                                <a href="javascript:;">
+                                    退出登录
+                                </a>
+                            </dd>
+                        </dl>
+                    </li>
+                </ul>
+                
+            </div>
+        </div>
+
+        <!-- 侧边栏 -->
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <ul class="layui-nav layui-nav-tree left_menu_ul" lay-filter="left-nav">
+                  <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">默认展开</a>
+                    <dl class="layui-nav-child">
+                      <dd class="first-item layui-this">
+                        <a href="javascript:;" data-url="./home.html" data-id="1">
+                          <i class="layui-icon">&#xe638;</i>
+                          <cite>home</cite>
+                        </a>
+                      </dd>
+                      <dd>
+                        <a href="javascript:;" data-url="./form.html" data-id="2">
+                          <i class="layui-icon">&#xe642;</i>
+                          <cite>form</cite>
+                        </a>
+                      </dd>
+                    </dl>
+                  </li>
+                  <li class="layui-nav-item">
+                    <a href="javascript:;">feedback</a>
+                    <dl class="layui-nav-child">
+                      <dd>
+                        <a href="javascript:;" data-url="./feedback_edit.html" data-id="3">
+                          <i class="layui-icon">&#xe642;</i>
+                          <cite>feedback_edit</cite>
+                        </a>
+                      </dd>
+                      <dd>
+                        <a href="javascript:;" data-url="./feedback_list.html" data-id="4">
+                          <i class="layui-icon">&#xe642;</i>
+                          <cite>feedback_list</cite>
+                        </a>
+                      </dd>
+                      <dd>
+                        <a href="javascript:;" data-url="./category_add.html" data-id="5">
+                          <i class="layui-icon">&#xe642;</i>
+                          <cite>category_add</cite>
+                        </a>
+                      </dd>
+                      <dd>
+                        <a href="javascript:;" data-url="./category_list.html" data-id="6">
+                          <i class="layui-icon">&#xe642;</i>
+                          <cite>category_list</cite>
+                        </a>
+                      </dd>
+                      <dd>
+                        <a href="javascript:;" data-url="./content_manage_search.html" data-id="7">
+                          <i class="layui-icon">&#xe642;</i>
+                          <cite>content_manage_search</cite>
+                        </a>
+                      </dd>
+                    </dl>
+                  </li>
+                  <li class="layui-nav-item">
+                    <a href="javascript:;" data-url="./404.html" data-id="8">
+                      <i class="layui-icon">&#xe642;</i>
+                      <cite>404</cite>
+                    </a>
+                  </li>
+                </ul>
+                <!-- E_ul -->
+                <ul class="layui-nav layui-nav-tree left_menu_ul hide" lay-filter="left-nav">
+                  <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">默认展开</a>
+                    <dl class="layui-nav-child">
+                      <dd class="first-item layui-this">
+                        <a href="javascript:;" data-url="http://www.taobao.com" data-id="100">
+                          <i class="layui-icon">&#xe638;</i>
+                          <cite>list1-1</cite>
+                        </a>
+                      </dd>
+                      <dd>
+                        <a href="javascript:;" data-url="http://www.jd.com" data-id="101">
+                          <i class="layui-icon">&#xe642;</i>
+                          <cite>list1-2</cite>
+                        </a>
+                      </dd>
+                      <dd><a href="javascript:;" data-url="http://www.tmall.com" data-id="102">list1-3</a></dd>
+                    </dl>
+                  </li>
+                  <li class="layui-nav-item">
+                    <a href="javascript:;">demo列表</a>
+                    <dl class="layui-nav-child">
+                      <dd>
+                        <a href="javascript:;" data-url="http://www.taobao.com" data-id="103">
+                          <i class="layui-icon">&#xe642;</i>
+                          <cite>list1-4</cite>
+                        </a>
+                      </dd>
+                      <dd>
+                        <a href="javascript:;" data-url="http://www.taobao.com" data-id="104">
+                          <i class="layui-icon">&#xe642;</i>
+                          <cite>list1-4</cite>
+                        </a>
+                      </dd>
+                    </dl>
+                  </li>
+                </ul>
+                <!-- E_ul -->
+            </div>
+        </div>
+
+        <!-- 主体 -->
+        <div class="layui-body">
+            <!-- 顶部切换卡 -->
+            <div class="layui-tab layui-tab-brief" lay-filter="top-tab" lay-allowClose="true" style="margin: 0;">
+                <ul class="layui-tab-title"></ul>
+                <div class="layui-tab-content" style="padding: 0;"></div>
+            </div>
+        </div>
+
+        <!-- 底部 -->
+        <div class="layui-footer footer">
+          <div class="layui-main">
+            <p style="font-family:'microfost yahei';">2015-2017 版权所有 © <a href="http://www.cst58.com" target="_blank">深圳市财视通互联网金融有限公司</a></p>
+          </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="./layui/layui.js"></script>
+    <script type="text/javascript">
+        layui.use(['layer','element'], function() {
+            var element    = layui.element();
+            var layer      = layui.layer;
+            var $          = layui.jquery;
+
+            var navfilter  = 'left-nav';
+            var nav        = $('.layui-nav[lay-filter='+navfilter+']').eq(0);
+
+            var tabfilter  = 'top-tab';
+            var tab        = $('.layui-tab[lay-filter='+tabfilter+']').eq(0);
+            var tabcontent = tab.children('.layui-tab-content').eq(0);
+            var tabtitle   = tab.children('.layui-tab-title').eq(0);
+
+            /**
+             * iframe自适应
+             */
+            $(window).resize(function() {
+                //设置顶部切换卡容器度
+                tabcontent.height($(this).height() - 65 - 41 - 46); //头部高度 顶部切换卡高度 底部高度
+                //设置顶部切换卡容器内每个iframe高度
+                tabcontent.find('iframe').each(function () {
+                    $(this).height(tabcontent.height());
+                });
+            }).resize();
+
+            /**
+             * 头部菜单切换
+             */
+             $('.top-nav-container .layui-nav-item').click(function(){
+                var menu_index = $(this).index('.top-nav-container .layui-nav-item');
+                $('.top-nav-container .layui-nav-item').removeClass('layui-this');
+                $(this).addClass('layui-this');
+                $('.left_menu_ul').addClass('hide');
+                $('.left_menu_ul:eq('+menu_index+')').removeClass('hide');
+                $('.left_menu_ul .layui-nav-item').removeClass('layui-this');
+                $('.left_menu_ul:eq('+menu_index+')').find('.first-item').addClass('layui-this');
+                $(".layui-nav[lay-filter='left-nav']").eq(menu_index).find('.first-item').click();
+              });
+
+            /**
+             * 监听侧边栏导航点击事件
+             */
+            element.on('nav('+navfilter+')', function(elem) {
+                var a         = elem.children('a');
+                var title     = a.children('cite').text();
+                var src       = elem.children('a').attr('data-url');
+                var id        = elem.children('a').attr('data-id');
+                var iframe    = tabcontent.find('iframe[data-id='+id+']').eq(0);
+                var tabindex  = tabtitle.children('li').length;
+
+                if(src != undefined && src != null && id != undefined && id != null) {
+                    if(iframe.length) { //存在 iframe
+                        //获取iframe身上的tab index
+                        tabindex = iframe.attr('data-tabindex');
+                    }else{ //不存在 iframe
+                        //显示加载层
+                        layer.load();
+                        setTimeout(function() {
+                            layer.closeAll('loading');
+                        }, 300);
+                        //拼接iframe
+                        var iframe = '<iframe';
+                        iframe += ' src="'+src+'" data-id="'+id+'" data-tabindex="'+tabindex+'"';
+                        iframe += ' style="width: 100%; height: '+tabcontent.height()+'px; border: 0px;"';
+                        iframe += '></iframe>';
+                        //顶部切换卡新增一个卡片
+                        element.tabAdd(tabfilter, {title: title,content: iframe});
+                    }
+
+                    //切换到指定索引的卡片
+                    element.tabChange(tabfilter, tabindex);
+                }
+            });
+
+            /**
+             * 初始化点击侧边栏第一个导航
+             */
+            nav.find('.first-item').click();
+        });
+    </script>
+</body>
+</html>
