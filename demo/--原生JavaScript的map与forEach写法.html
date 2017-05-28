@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>map与forEach</title>
+</head>
+<body>
+<script type="text/javascript">
+	var arr = [1,2,3,4,5,6,7,8,9];
+	// arr.map(function(item,index,input) {
+	// 	console.log(item);
+	// 	console.log(index);
+	// 	console.log(input);
+	// });
+	var res = arr.map(function(item) {
+		return item*10;
+	});
+	console.log(res);	//[10,20,30...]
+
+
+	// arr.forEach(function(item,index,input) {
+	// 	console.log(item);
+	// 	console.log(index);
+	// 	console.log(input);
+	// })
+	var resEach = arr.forEach(function(item){
+		return item*10;
+	});
+	console.log(resEach);	// undefined
+
+</script>
+</body>
+</html>
