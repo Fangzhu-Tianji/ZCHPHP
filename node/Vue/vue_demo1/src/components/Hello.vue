@@ -3,8 +3,8 @@
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
+      <li><a href="http://baidu.com" target="_blank">百度</a></li>
+      <li><a href="https://www.jd1.com" target="_blank">{{ jd }}</a></li>
       <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
       <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
       <br>
@@ -25,7 +25,8 @@ export default {
   name: 'hello',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      jd: 'https://www.jd.com'
     }
   }
 }
