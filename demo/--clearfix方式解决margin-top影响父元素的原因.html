@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+/*清除浮动*/
+.clearfix {
+    display: inline-block
+}
+.clearfix::after {
+    display: block;
+    content: ".";
+    height: 0;
+    line-height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.box {
+	width: 1000px;
+	height: 400px;
+	background: #ccc;
+}
+.box .in {
+	width: 200px;
+	height: 200px;
+	margin-top: 30px;
+	background-color: red;
+}
+</style>
+</head>
+<body>
+<div class="box clearfix">
+	<div class="in"></div>
+</div>
+</body>
+</html>
