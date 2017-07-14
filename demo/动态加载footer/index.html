@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+	.head {
+		width: 1000px;
+		height: 400px;
+		background-color: pink;
+	}
+</style>
+</head>
+<body>
+	<div class="head">
+		<p>zheshi8head标签</p>
+	</div>
+	<div class="foot"></div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script>
+	$(function(){
+		$('.foot').load('./footer.html');
+		$('body').on('click','.f-h1',function(){
+			console.log('222');
+		})
+	})
+</script>
+</html>
