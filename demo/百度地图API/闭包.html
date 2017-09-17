@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>闭包</title>
+</head>
+<body>
+<script>
+// function out() {
+// 	window.a = 111;
+// }
+// out();
+// console.log(a);
+function out() {
+	var a = 111111;
+	return function inner() {
+		console.log(a);
+	}
+}
+out()();
+// for (var i = 0; i < 4; i++) { setTimeout(function () { console.log(i) }, 0) }
+// for (var i = 0; i < 4; i++) { (function (i) { setTimeout(function () { console.log(i) }, 0) })(i) }
+</script>
+</body>
+</html>
