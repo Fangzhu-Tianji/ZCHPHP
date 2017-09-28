@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+<title>移动端事件</title>
+</head>
+<body>
+<script src="js/vconsole.min.js"></script>
+<script type="text/javascript">
+// 当按下手指时，触发ontouchstart；
+// 当移动手指时，触发ontouchmove；
+// 当移走手指时，触发ontouchend。
+document.documentElement.ontouchstart = function(){
+	console.log('document ontouchstart');
+}
+</script>
+</body>
+</html>
