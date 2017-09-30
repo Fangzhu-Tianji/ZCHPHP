@@ -29,13 +29,23 @@
   }
   $("btn").onclick = function(){
     var txtss = txts();
-    var regExp = new RegExp(">("+txtss+")<", 'gi');
     console.log(txtss);
+    var reg = new RegExp(txtss,"g");
     var html = $("box").innerHTML;
-    var newHtml = html.replace(regExp,'><span class="red">$1</span><');
+    var newHtml = html.replace(reg, '<span class="red">$1</span>');
     console.log(newHtml);
     $("box").innerHTML = newHtml;
   }
+  // $("btn").onclick = function(){
+  //   var txtss = txts();
+  //   var regExp = new RegExp(">("+txtss+")<", 'gi');
+  //   console.log(txtss);
+  //   console.log(regExp);
+  //   var html = $("box").innerHTML;
+  //   var newHtml = html.replace(regExp,'><span class="red">$1</span><');
+  //   console.log(newHtml);
+  //   $("box").innerHTML = newHtml;
+  // }
   // $("btn").onclick = function(){
   //   var txtss = txts();
   //   var regExp = new RegExp(">("+txtss+")<", 'gi');
