@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>原型与构造函数</title>
+</head>
+<body>
+<script>
+	// var a = function(){
+	// 	this.name = "money";
+	// 	this.age = 18;
+	// 	this.array = [1,2,3,4,5];
+	// }
+	// a.prototype.show = function(){
+	// 	console.log("姓名：" + this.name + "--" + "年龄：" + this.age + "--数组：" + this.array);
+	// }
+	// var q = new a();
+	// var w = new a();
+	// q.name = "hello";
+	// q.array[1] = "hello";
+	// q.show();
+	// w.show();
+	var a = function(){}
+	a.prototype = {
+		name: "money",
+		age: 18,
+		array: [1,2,3,4,5],
+		show: function(){
+			console.log("姓名：" + this.name + "--" + "年龄：" + this.age + "--数组：" + this.array);
+		}
+	}
+	var q = new a();
+	var w = new a();
+	q.name = "hello";
+	q.array[1] = "hello";
+	q.show();
+	w.show();
+</script>
+</body>
+</html>
