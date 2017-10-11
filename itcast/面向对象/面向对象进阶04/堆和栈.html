@@ -1,12 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>这是堆</title>
+<meta charset="UTF-8">
+<title>堆和栈</title>
 </head>
 <body>
 <script type="text/javascript">
-	
+	var string = 'this is string';
+	var num = 12345;
+	var is = true;
+	var array = ['a','b','c'];
+	var obj = {
+		'name': 'jak',
+		'age': 18
+	}
+	var fn = function(){
+		this.na = 'aaaa';
+	}
+	var string1 = string;
+	var num1 = num;
+	var array1 = array;
+	var obj1 = obj;
+	var is1 = is;
+	string1 = 'this is string1';
+	num1 = 54321;
+	array1[1] = 'r';
+	obj1.name = 'good';
+	is1 = false;
+	fn = function(){
+		this.age = 111;
+	}
+	console.log(string);
+	console.log(num);
+	console.log(array);
+	console.log(obj);
+	console.log(is);
+	console.log(fn);
 </script>
 </body>
 </html>
