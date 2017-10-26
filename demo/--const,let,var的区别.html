@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>const,let,var</title>
+</head>
+<body>
+<script type="text/javascript">
+// const a = 'aaaa';
+// a = 'bbb';
+// console.log(a) //报错(const定义的变量不可以修改，而且必须初始化)
+
+
+let a = 'aaaa';
+function change(){
+	let a = 'ccc';
+	console.log(a);
+}
+change(); //ccc
+console.log(a) //aaaa (let是块级作用域，函数内部使用let定义后，对函数外部无影响)
+</script>
+</body>
+</html>
