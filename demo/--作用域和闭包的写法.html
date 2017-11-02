@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>作用域和闭包</title>
+</head>
+<body>
+<ul>
+	<li>111111111111111</li>
+	<li>2222222222222222</li>
+	<li>333333333333333333</li>
+	<li>4444444444444444</li>
+	<li>55555555555555555</li>
+</ul>
+<script>
+var nodes = document.getElementsByTagName('li');
+// for(var i=0; i<nodes.length; i++){
+// 	nodes[i].index = i;
+// 	nodes[i].onclick = function(){
+// 		console.log(this.index)
+// 	}
+// }
+for(var i=0; i<nodes.length; i++){
+	(function(i){
+		nodes[i].onclick = function(){
+			console.log(i)
+		}
+	})(i)
+}
+</script>
+</body>
+</html>
