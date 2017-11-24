@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>querySelector</title>
+</head>
+<body>
+<div class="wrap">
+	<p>this is p tag</p>
+	<p>this is p tag</p>
+	<p class="ppp">this is p class</p>
+	<p id="pp">this is p id</p>
+	<h1>this is h1 tag</h1>
+</div>
+<p class="ppp">out this is p class</p>
+<script>
+	window.onload = function() {
+		var wrap = document.querySelectorAll('.wrap')[0];
+		// document.querySelector('p').style.color = 'red';
+		document.querySelector('.wrap .ppp').style.color = 'blue';
+		document.querySelector('#pp').style.color = 'green';
+		document.querySelectorAll('p')[1].style.color = 'red';
+		console.log(wrap.querySelectorAll('p'));
+		var wrapP = wrap.querySelectorAll('p');
+		for(var i=0; i<wrapP.length; i++) {
+			wrapP[i].style.fontWeight = "bold";
+		}
+	}
+</script>
+</body>
+</html>
