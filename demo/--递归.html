@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script>
+	// http://blog.csdn.net/genius_yym/article/details/53945766
+	// 递归就是函数自己调用自己
+	// function fun() {
+	// 	fun();
+	// 	console.log(999)
+	// };
+	// fun();
+
+	// 求5的阶乘
+	// function fun (n) {
+	// 	if(n == 1) {
+	// 		return 1;
+	// 	}
+	// 	return n*fun(n-1);
+	// }
+	// console.log(fun(5))
+
+	// 求兔子的总数
+	function func( n )
+	{
+	    if (n == 0 || n == 1)
+	    {
+	        return 1;
+	    }
+	    return func(n-1) + func(n-2);
+	}
+
+	var a = func(2);
+	console.log(a);
+</script>
+</body>
+</html>
