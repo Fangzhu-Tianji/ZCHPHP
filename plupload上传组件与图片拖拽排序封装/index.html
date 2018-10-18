@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>plupload上传组件与拖拽图片排序</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
+<script src="js/plupload.full.min.js"></script>
+<script src="js/vue-dragging.es5.js"></script>
+<style>
+.fl { float: left;}
+.fr { float: right;}
+.clearfix { zoom: 1; }
+.clearfix:before,
+.clearfix:after { content: ''; display: table; }
+.clearfix:after { clear: both; } /*清除浮动*/
+* { margin: 0; padding: 0; }
+.box { padding: 30px 100px; }
+.goods-name { width: 25%; }
+.upload-content { width: 75%; }
+.upload-content .name { box-sizing: content-box; padding: 8px 14px; height: 20px; line-height: 20px; position: relative; cursor: pointer; color: #666666; background: #fafafa; border: 1px solid #dddddd; border-radius: 4px; overflow: hidden; display: inline-block; }
+.upload-content .name:hover { color: #333333; background: #eee; border-color: #ccc; text-decoration: none; }
+.progress-content { height: 25px; }
+.content .pic { width: 200px; margin: 0 10px 10px 0; cursor: pointer; transition: transform .3s; }
+.content .pic.dragging { transform: scale(1.1); }
+</style>
+</head>
+<body>
+	<div class="clearfix box" id="app">
+		<div class="fl goods-name">商品图片</div>
+		<div class="fl upload-content">
+			<div class="title">
+				<span class="name" id="uploadImg">上传图片</span>
+			</div>
+			<div class="progress-content">
+				<div class="progress" style="margin:0;">
+					<div id="progress" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 4%">4%(woshi)</div>
+				</div>
+			</div>
+			<div class="clearfix content">
+				<img class="fl pic" :src="img" alt="" v-for="img in images" :key="img" v-dragging="{ item: img, list: images, group: 'images' }" @click="preview">
+			</div>
+			
+			<div class="clearfix content">
+				<img class="fl pic" :src="img" alt="" v-for="img in images1" :key="img" v-dragging="{ item: img, list: images1, group: 'images1' }" @click="preview">
+			</div>
+		</div>
+	</div>
+	<script>
+		Vue.use(VueDragging);
+		var app = new Vue({
+			el: '#app',
+			data: {
+				images: [
+					'images/pic1.jpg',
+					'images/pic2.jpg',
+					'images/pic3.jpg',
+					'images/pic4.jpg'
+				],
+				images1: [
+					'images/pic1.jpg',
+					'images/pic2.jpg',
+					'images/pic3.jpg',
+					'images/pic4.jpg'
+				]
+			},
+			mounted: function () {
+				// 拖拽事件
+				this.$dragging.$on('dragged', function (value) {
+					console.log(value.item)
+		          	console.log(value.list)
+		          	console.log(value.group)
+					// app[value.group] = value.list;
+				})
+			},
+			methods: {
+				// 预览
+				preview: function () {
+					window.open('http://baidu.com');
+				},
+			}
+		})
+
+		uploadImage('uploadImg', function () {
+			console.log('上传成功');
+		});
+		function uploadImage (boxId, callback) {
+			//实例化一个plupload上传对象
+			var uploader = new plupload.Uploader({ 
+				browse_button: boxId,
+				url: 'http://mini.blm.22um.com/index.php/login/index/ajax_upload_img',
+				flash_swf_url : 'js/Moxie.swf',
+				silverlight_xap_url : 'js/Moxie.xap',
+				//最大文件限制
+				max_file_size: '100mb',
+				//一次上传数据大小
+				chunk_size: '100mb',    
+				unique_names: false,    //是否自动生成唯一名称
+				multipart_params: {
+						"key": "file"
+				},
+				//filters: [                //文件类型限制
+				//  {title: "图片文件", extensions: "jpg,gif,png" },
+				//  { title: "压缩文件", extensions: "zip,rar" }
+				//],
+				// 缩放图片
+				// resize: { width: 320, height: 240, quality: 80 },
+				init: {
+					// 某一个文件正要开始上传前触发监听函数
+	                BeforeUpload: function (uploader,file) {
+	                	// 判断是否超过9张图片
+	                    if(app.images.length >= 9) {
+	                        layer.msg('最多上传9张图片',{icon:2,time:2000});
+	                        uploader.stop(); //停止队列中的文件上传
+	                        return;
+	                    }
+	                },
+					// 文件添加进队列事件
+					FilesAdded: function (uploader, files) {
+						// 判断是否超过9张图片
+						var now_length = app.images.length;//当前网页存在图片的数量
+                    	var upload_length = files.length;//本次上传图片数量
+	                    if(now_length + upload_length > 9) {
+	                        uploader.splice();//清空上传队列
+	                        layer.msg('最多上传9张图片',{icon:2,time:2000});
+	                        return;
+	                    }
+						uploader.start();
+					},
+					// 上传进度触发事件
+					UploadProgress: function (uploader, file) {
+						console.log(file.percent);
+						//file.percent为当前的进度
+						//file.loaded为已经上传的大小
+						//file.size为文件的总大小
+					},
+					// 某一个文件上传完成后触发监听函数
+					FileUploaded: function (up, file, info) {
+						callback(res);
+						var a = 45;
+						var time = setInterval(function(){
+							a = a+1;
+							console.log(a);
+							$('#progress').css({width:a + '%'});
+							$('#progress').html(a + '%');
+							if(a > 100) {
+								clearInterval(time);
+							}
+						},100)
+						//一个文件上传成功
+						console.log(up);
+						console.log(file);
+						console.log(info);
+					},
+					// 所有文件都上传完成后触发监听函数
+	                UploadComplete: function (uploader,files) {
+	                    layer.msg('上传完毕');
+	                },
+					//发生错误
+					Error: function (up, args) {
+						console.log('[error] File:' + args.file + "   " + args.message);
+						console.log('[error]' + args.message);
+					}
+				}
+			});
+			uploader.init();
+		}
+
+
+	// var uploader = new plupload.Uploader({ //实例化一个plupload上传对象
+	// 	browse_button : 'browse',
+	// 	url : 'upload.html',
+	// 	flash_swf_url : 'js/Moxie.swf',
+	// 	silverlight_xap_url : 'js/Moxie.xap',
+	// });
+	// uploader.init(); //初始化
+
+	// //绑定文件添加进队列事件
+	// uploader.bind('FilesAdded',function(uploader,files){
+	// 	for(var i = 0, len = files.length; i<len; i++){
+	// 		var file_name = files[i].name; //文件名
+	// 		//构造html来更新UI
+	// 		var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
+	// 		$(html).appendTo('#file-list');
+	// 	}
+	// });
+
+	// //绑定文件上传进度事件
+	// uploader.bind('UploadProgress',function(uploader,file){
+	// 	$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
+	// });
+
+	// //上传按钮
+	// $('#upload-btn').click(function(){
+	// 	uploader.start(); //开始上传
+	// });
+
+	</script>
+</body>
+</html>
