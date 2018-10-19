@@ -1,0 +1,1318 @@
+<{include file='../statics/public/base_header.tpl.htm'}>
+<link rel="stylesheet" href="<{$css_path}>/bootstrap-multiselect.css">
+<style>
+    .mr20 { margin-right: 20px; }
+    .fa-close { color: red; }
+    /* 商品参数 */
+    fieldset{padding:.35em .625em .75em;margin:0 2px;border:1px solid silver;border-radius: 5px}
+    legend{padding:.5em;border:0;width:auto;margin: 0;font-size: 15px}
+    /* 上传文件 */
+    .upload-content .name { position:relative; display:inline-block; cursor:pointer; background:#00b7ee; padding: 6px 12px; color:#fff; text-align:center; border-radius:3px;overflow:hidden； }
+    .upload-content .name:hover { background: #00a5d6; text-decoration: none; }
+    .progress-content { height: 25px; }
+    .image-row ul {list-style: none;overflow-x: hidden;overflow-y: auto;position: relative;height: auto;}
+    .image-row ul li {border: 1px #c7c5ca solid;width: 113px;height: 113px;text-align: center;margin: 5px 12px 5px 0;position: relative;  display: block;  float: left;  overflow: hidden; font-size: 12px;background: url(/statics/images/bg.png) no-repeat; cursor: pointer; transition: transform .3s; }
+    .image-row ul li:hover .shade { opacity: 1; }
+    .image-row ul li.dragging { transform: scale(1.1); }
+    /* .image-row ul li#filePickerBlock {width: 113px;height: 113px;background: url(/statics/images/image.png) no-repeat center 12px;border: 1px solid #eeeeee;border-radius: 0;cursor: pointer;} */
+    /* .img_sorts{list-style: none;padding-left: 0}
+    .img_sorts li{display: inline-block;width: 113px;text-align: center; margin-right: 12px;} */
+    .image-row ul li .shade { width: 100%; height: 100%; background: rgba(0,0,0,.4); position: absolute; top: 0; left: 0; z-index: 200; opacity: 0; transition: all .5s; }
+    .image-row ul li .cancel {font-size: 0;  position: absolute;  height: 0;  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#80000000', endColorstr='#80000000') \0;  width: 24px;  height: 24px;  margin: 3px 0 0 0;  cursor: pointer;  top: 0;  right: 0;  overflow: hidden;  z-index: 300;  background: url(/statics/images/img-icons.png) no-repeat -48px 0;  }
+    /* .image-row ul li .icon {  cursor: pointer;  width: 113px;  height: 113px;  position: absolute;  top: 0;  left: 0;  z-index: 2;  border: 0;  background-repeat: no-repeat;  }
+    .image-row ul li.selected .icon {  border: 3px solid #1094fa;  background-image: url(/statics/images/success.png);  background-position: 68px 71px;  width: 111px;  height: 111px;  } */
+    /* 上传文件或者视频 */
+    /* #choose_video .webuploader-pick { padding: 6px 12px; display: block; }
+    #choose_video { display: inline-block; line-height: 1.428571429; vertical-align: middle; margin: 0 12px 0 0; }
+    .webuploader-container {
+        position: relative;
+    }
+    .webuploader-element-invisible {
+        position: absolute !important;
+        clip: rect(1px 1px 1px 1px);
+        clip: rect(1px,1px,1px,1px);
+    }
+    .webuploader-pick {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        background: #00b7ee;
+        padding: 10px 15px;
+        color: #fff;
+        text-align: center;
+        border-radius: 3px;
+        overflow: hidden;
+    } */
+</style>
+<div class="content-wrapper" id="app">
+    <section class="content-header">
+        <{if $smarty.get.m eq 'add'}>
+        <h1>
+            添加商品
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#">商品管理</a></li>
+            <li>添加商品</li>
+        </ol>
+        <{else}>
+        <h1>
+            编辑商品
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#">商品管理</a></li>
+            <li><a href="<{$now_url}>&m=init">商品列表</a></li>
+            <li>编辑商品</li>
+        </ol>
+        <{/if}>
+    </section>
+    <section class="content">
+        <!-- 商品信息 -->
+        <div class="box box-danger">
+            <div class="box-header with-border">
+                <h3 class="box-title">商品信息</h3>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>商品分类 <span class="text-red">*</span></label>
+                            <select id="goods_cate_id" class="form-control" v-model="syncData.goods.cate_id">
+                                <{$cate_list}>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>商品名称 <span class="text-red">*</span></label>
+                            <input type="text" class="form-control" maxlength="50" placeholder="请输入商品名称，不得超过50个字符" v-model="syncData.goods.name"/>
+                        </div>
+                        <div class="form-group">
+                            <label>商品促销语</label>
+                            <input type="text" class="form-control" maxlength="50" placeholder="请输入促销语，不得超过50个字符" v-model="syncData.goods.promotional_name"/>
+                        </div>
+                        <div class="form-group">
+                            <label>关键字</label>
+                            <input type="text" class="form-control" maxlength="50" placeholder="商品关键字用于SEO搜索,多个关键字用/分隔" v-model="syncData.goods.key_words"/>
+                        </div>
+                        <div class="form-group">
+                            <label>产地</label>
+                            <input type="text" class="form-control" maxlength="50" placeholder="深圳" v-model="syncData.goods.from_city"/>
+                        </div>
+                        <div class="form-group">
+                            <label>款号</label>
+                            <input type="text" class="form-control" maxlength="20" placeholder="请输入商品款号,如:jzg0001" v-model="syncData.goods.goods_code"/>
+                        </div>
+                        <div class="form-group">
+                            <label>商品重量(g)</label>
+                            <input type="text" class="form-control" maxlength="20" placeholder="请输入商品重量" v-model="syncData.goods.goods_weight"  @input="resetData($event, 'goods_weight', 'integer')"/>
+                        </div>
+                        <div class="form-group">
+                            <label>零售包装单位</label>
+                            <select id="goods_units" class="form-control" v-model="syncData.goods.units">
+                                <{foreach $units as $k=>$v}>
+                                <option value="<{$k}>"> <{$v}> </option>
+                                <{/foreach}>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>批发包装单位</label>
+                            <select id="goods_wholesale_units" class="form-control" v-model="syncData.goods.wholesale_units">
+                                <{foreach $units as $k=>$v}>
+                                <option value="<{$k}>"> <{$v}> </option>
+                                <{/foreach}>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        
+                        <div class="form-group">
+                            <label>最大购买量</label>
+                            <input type="text" class="form-control" maxlength="20" placeholder="0表示无限制" v-model="syncData.goods.max_buy" @input="resetData($event, 'max_buy', 'integer')"/>
+                        </div>
+                        <div class="form-group">
+                            <label>减库存方式</label>
+                            <select class="form-control" v-model="syncData.goods.subtract">
+                                <option value="0">下单减库存</option>
+                                <option value="1">不减库存</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>产品批次号</label>
+                            <input type="text" class="form-control" maxlength="20" placeholder="请输入产品批次号" v-model="syncData.goods.product_code" @input="resetData($event, 'product_code', 'integer')"/>
+                        </div>
+                        <div class="form-group">
+                            <label>排序</label>
+                            <input type="text" class="form-control" maxlength="20" placeholder="请输入排序" v-model="syncData.goods.listorder" @input="resetData($event, 'listorder', 'integer')"/>
+                        </div>
+                        <div class="form-group">
+                            <label>商品状态 <span class="text-red">*</span></label>
+                            <div class="radio">
+                                <label class="mr20">
+                                    <input type="radio" name="goods[status]" v-model="syncData.goods.status" value="1">上架
+                                </label>
+                                <label class="mr20">
+                                    <input type="radio" name="goods[status]" v-model="syncData.goods.status" value="2">待审
+                                </label>
+                                <label class="mr20">
+                                    <input type="radio" name="goods[status]" v-model="syncData.goods.status" value="-1">下架
+                                </label>
+                                <label>
+                                    <input type="radio" name="goods[status]" v-model="syncData.goods.status" value="-2">删除
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>是否支持退换货 <span class="text-red">*</span></label>
+                            <div class="radio">
+                                <label class="mr20">
+                                    <input type="radio" name="goods[refund_status]" v-model="syncData.goods.refund_status" value="0">否
+                                </label>
+                                <label>
+                                    <input type="radio" name="goods[refund_status]" v-model="syncData.goods.refund_status" value="1">是
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>价格体系 <span class="text-red">*</span></label>
+                            <div class="radio">
+                                <label class="mr20">
+                                    <input type="radio" name="goods[price_type]" v-model="syncData.goods.price_type" value="0">不参与
+                                </label>
+                                <label class="mr20">
+                                    <input type="radio" name="goods[price_type]" v-model="syncData.goods.price_type" value="1">满减
+                                </label>
+                                <label>
+                                    <input type="radio" name="goods[price_type]" v-model="syncData.goods.price_type" value="2">满折
+                                </label>
+                            </div>
+                            <div v-show="syncData.goods.price_type == 1">
+                                <select class="form-control multiselect" id="price_ids" multiple v-model="syncData.goods.price_ids">
+                                    <{foreach $goods_full_minus as $k => $v}>
+                                    <option value="<{$v['id']}>">满<{$v['money']}>减<{$v['minus_money']}></option>
+                                    <{/foreach}>
+                                </select>
+                            </div>
+                            <div v-show="syncData.goods.price_type == 2">
+                                <select class="form-control multiselect" id="price_discount_ids" multiple v-model="syncData.goods.price_discount_ids">
+                                    <{foreach $goods_dicount as $k => $v}>
+                                    <option value="<{$v['id']}>">满<{$v['money']}>打<{$v['minus_money']}>折</option>
+                                    <{/foreach}>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>供应用户 <span class="text-red">*</span></label>
+                            <div class="radio">
+                                <label class="mr20">
+                                    <input type="radio" name="goods[user_type]" v-model="syncData.goods.user_type" value="0">所有用户
+                                </label>
+                                <label class="mr20">
+                                    <input type="radio" name="goods[user_type]" v-model="syncData.goods.user_type" value="1">用户级别
+                                </label>
+                                <label>
+                                    <input type="radio" name="goods[user_type]" v-model="syncData.goods.user_type" value="2">指定用户
+                                </label>
+                            </div>
+                            <div v-show="syncData.goods.user_type == 1">
+                                <select class="form-control multiselect" id="level_ids" multiple v-model="syncData.goods.level_ids">
+                                    <{foreach $level as $k => $v}>
+                                    <option value="<{$v['id']}>"><{$v['level']}></option>
+                                    <{/foreach}>
+                                </select>
+                            </div>
+                            <a href="<{$now_url}>&m=choose_member&hash=<{$smarty.get.hash}>&is_more=0" id="choose_member" class="choose_member btn btn-info ajax-get" data-width="700" data-height="500" data-title="选择用户" data-showbar="1" v-show="syncData.goods.user_type == 2">选择用户</a>
+                            <div style="word-break:break-all;padding-top:10px;" v-show="syncData.goods.user_type == 2">
+                                <input type="hidden" name="user_ids" value="<{$info.user_ids}>">
+                                <div id="phone"><{$info.username}></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- E_商品信息 -->
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">商品属性</h3>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label style="display:block;">商品参数</label>
+                            <select class="form-control multiselect" id="option_group_id" multiple v-model="syncData.goods.option_group_id">
+                                <{foreach $option_list as $k=>$v}>
+                                <option value="<{$v['option_group_id']}>"><{$v['name']}></option>
+                                <{/foreach}>
+                            </select>
+                            <fieldset v-for="(item, index) in syncData.goods.option_group_name" :key="item">
+                                <legend>{{item.title}}</legend>
+                                <div class="form-group" v-for="(item1, index1) in item" :key="item1" v-if="item1.name">
+                                    <label class="col-sm-1 control-label attribute-name">{{item1.name}}</label>
+                                    <div class="checkbox">
+                                        <label class="mr20" v-for="(item2, index2) in item1.value" :key="item2">
+                                            <input type="checkbox" :value="item2" v-model="syncData.goods.option[index][index1]">{{item2}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <hr class="m-t-0 m-b-40" style="border-color:#ccc;">
+                        <div class="form-group">
+                            <label style="display:block;">商品规格</label>
+                            <div class="form-group" v-for="(item, index) in syncData.goods.attribute_arr" :key="item" v-show="syncData.goods.isSpecTable">
+                                <label  class="col-sm-1 control-label attribute-name">{{item.name}}</label>
+                                <div class="checkbox">
+                                    <span v-for="(item1, index1) in item.values" :key="item1">
+                                        <span style="cursor:pointer;" v-if="item.type == 2" :id="'skuimage'+item1.id">
+                                            <img v-if="syncData.goods.sku_images[item1.id]" :src="'https://bsoss.oss-cn-hangzhou.aliyuncs.com/' + syncData.goods.sku_images[item1.id]" alt="" width="20" title="上传商品规格图片">
+                                            <img v-else src="/statics/images/image.png" alt="" width="20" title="上传商品规格图片">
+                                        </span>
+                                        <label class="mr20" @change="listenAttr">
+                                            <input type="checkbox" :value="item1.id" v-model="syncData.goods.attribute_value[item.id]">{{item1.name}}
+                                        </label>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width:100%;max-height:500px;overflow:auto">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr style="background:#eee;">
+                                        <th style="min-width:110px;">规格值</th>
+                                        <th style="min-width:100px;" v-show="syncData.goods.isSpec">sku <a href="javascript:void (0);" data-original-title="商品sku，如A0001（字母或数字组合）" data-toggle="tooltip" data-placement="top"><i class="fa fa-question-circle"></i></a></th>
+                                        <th style="min-width:80px;">市场价(元)<span class="text-red"> *</span></th>
+                                        <th style="min-width:80px;">销售价(元)<span class="text-red"> *</span></th>
+                                        <th style="min-width:80px;" v-for="(item, index) in syncData.goods.sale_price_arr" :key="item">{{item.name}}价(元)<span class="text-red">（{{item.discount/10}}折扣） *</span></th>
+                                        <th style="min-width:80px;">成本价(元)<span class="text-red"> *</span></th>
+                                        <th style="min-width:50px;">库存<span class="text-red"> *</span></th>
+                                        <th style="min-width:50px;">库存预警 <a href="javascript:void (0);" data-original-title="设置最低库存预警值。当库存低于预警值时商家中心商品列表页库存列红字提醒。0为不预警。" data-toggle="tooltip" data-placement="top"><i class="fa fa-question-circle"></i></a><span class="text-red"> *</span></th>
+                                        <th style="min-width:60px;">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-show="!syncData.goods.isSpec">
+                                        <td>无</td>
+                                        <td><input type="text" maxlength="20" class="form-control" v-model="syncData.goods.market_price" @input="resetData($event, 'market_price', 'decimal')"></td>
+                                        <td><input type="text" maxlength="20" class="form-control" v-model="syncData.goods.sale_price" @input="resetDataSale($event, 'sale_price')"></td>
+                                        <td v-for="(item, index) in syncData.goods.sale_price_arr" :key="item"><input type="text" maxlength="20" class="form-control" v-model="syncData.goods['sale_price_value_' + item.id + '_after']"></td>
+                                        <td><input type="text" maxlength="20" class="form-control" v-model="syncData.goods.cost_price" @input="resetData($event, 'cost_price', 'decimal')"></td>
+                                        <td><input type="text" maxlength="20" class="form-control" v-model="syncData.goods.quantity" @input="resetData($event, 'quantity', 'integer')"></td>
+                                        <td><input type="text" maxlength="20" class="form-control" v-model="syncData.goods.warning_quantity" @input="resetData($event, 'warning_quantity', 'integer')"></td>
+                                        <td>无</td>
+                                    </tr>
+                                    <tr v-for="(item, index) in syncData.goods.attribute_arr_table" :key="item">
+                                        <td>{{item.spec}}</td>
+                                        <td><input type="text" maxlength="20" class="form-control" v-model="item.sku"></td>
+                                        <td><input type="text" maxlength="20" class="form-control" v-model="item.market_price"></td>
+                                        <td><input type="text" maxlength="20" class="form-control" v-model="item.sale_price" @input="resetDataSale1($event, 'sale_price', index)"></td>
+                                        <td v-for="(item1, index1) in syncData.goods.sale_price_arr" :key="item1"><input type="text" maxlength="20" class="form-control" v-model="item['sale_price_value_' + item1.id + '_after']"></td>
+                                        <td><input type="text" maxlength="20" class="form-control" v-model="item.cost_price"></td>
+                                        <td><input type="text" maxlength="20" class="form-control" v-model="item.quantity"></td>
+                                        <td><input type="text" maxlength="20" class="form-control" v-model="item.warning_quantity"></td>
+                                        <td><a href="javascript:void (0);" class="btn btn-danger" @click="removeAttrTable(index)">移除</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- E_商品属性 -->
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">商品详情</h3>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>商品品牌</label>
+                            <select id="goods_brand" class="form-control" v-model="syncData.goods.goods_brand">
+                                <option value="0">请选择商品品牌</option>
+                                <{foreach $brand_list as $v}>
+                                <option value="<{$v['id']}>"> <{$v['name']}> </option>
+                                <{/foreach}>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>视频链接</label>
+                            <div class="upload-content">
+                                <span class="name" id="goods_video">选择视频</span>
+                            </div>
+                            <div class="progress-content" id="goods_video_progress"></div>
+                            <div class="image-row">
+                                <ul id="image-list" style="list-style: none" class="no-padding">
+                                    <li class="selected" v-if="syncData.goods.goods_video" @click.stop="previewVideo">
+                                        <img src="/statics/images/video.png" alt="" width="113" height="113">
+                                        <span class="cancel" @click.stop="delVideo">删除</span>
+                                        <div class="shade"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- <input type="text" class="form-control" maxlength="50" placeholder="请输入视频链接" v-model="syncData.goods.goods_video"/>
+                            <div style="margin-top:2px;">
+                                <div id="choose_video" style="display: inline-block;line-height: 1.428571429;vertical-align: middle;margin: 0 12px 0 0;position: relative">选择文件</div>
+                                <div style="display: inline-block;line-height: 1.428571429;vertical-align: middle;margin: 0 12px 0 0;position: relative;background: #00a65a;color: #fff;border-radius: 3px;padding: 5.7px 11px;cursor: pointer" id="watch_video">点击预览</div>
+                                <div class="progress progress-striped active" style="margin-top: 2px;display: none">
+                                    <div class="progress-bar" role="progressbar" style="width: 10%" id="upload_percent"></div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>SEO标题</label>
+                            <input type="text" class="form-control" maxlength="50" placeholder="请输入SEO标题" v-model="syncData.goods.seo_title"/>
+                        </div>
+                        <div class="form-group">
+                            <label>SEO描述</label>
+                            <input type="text" class="form-control" maxlength="50" placeholder="请输入SEO描述" v-model="syncData.goods.seo_description"/>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>商品描述</label>
+                            <textarea id="container" style="width: 70%" cols="30" rows="10" data-title="商品描述图片上传"  url="<{$now_url}>&m=public_img&image_list=preview&more=1&to_des=1&input=container"><{$info['description']}></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- E_商品详情 -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">商品图片<span style="font-size:14px;color:#333;font-weight:bold;">(750*562px或4:3) <span class="text-red">*</span></span></h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <div class="upload-content">
+                                <span class="name" id="selected_thumb">选择图片</span>
+                            </div>
+                            <div class="progress-content" id="selected_thumb_progress"></div>
+                            <div class="image-row">
+                                <ul id="image-list" style="list-style: none" class="no-padding">
+                                    <li class="selected" v-for="(item, index) in syncData.goods.selected_thumb" :key="item" @click.stop="previewGood(item)" v-dragging="{item: item, list: syncData.goods.selected_thumb, group: 'goodsImg'}">
+                                        <img :src="'https://bsoss.oss-cn-hangzhou.aliyuncs.com/' + item" alt="" width="113" height="113">
+                                        <span class="cancel" @click.stop="delGood(index)">删除</span>
+                                        <div class="shade"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">物流信息</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>计价方式</label>
+                            <select class="form-control" v-model="syncData.goods.freight_type">
+                                <option value="1">包邮</option>
+                                <option value="2">固定运费</option>
+                                <option value="3">后付</option>
+                            </select>
+                        </div>
+                        <div class="form-group" v-if="syncData.goods.freight_type == 2">
+                            <label>运费</label>
+                            <input type="text" class="form-control" maxlength="50" placeholder="请输入运费" v-model="syncData.goods.goods_freight" @input="resetData($event, 'goods_freight', 'integer')"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">积分信息</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>积分设置</label>
+                            <select class="form-control" v-model="syncData.goods.integral_status">
+                                <option value="0">非积分兑换</option>
+                                <option value="1">积分兑换</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>购买可获积分</label>
+                            <input type="text" class="form-control" maxlength="50" placeholder="请输入购买可获积分" v-model="syncData.goods.intergral_num" @input="resetData($event, 'intergral_num', 'integer')"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">会员返利 <a href="javascript:void (0);" data-original-title="会员返利比例设置，针对不对级别设置不同比例，如2%，输入2即可" data-toggle="tooltip" data-placement="top"><i class="fa fa-question-circle"></i></a></th></h3>
+                    </div>
+
+                    <!-- <tr v-for="(item, index) in syncData.goods.attribute_arr_table" :key="item">
+                            <td>{{item.spec}}</td>
+                            <td><input type="text" maxlength="20" class="form-control notzh" v-model="item.sku"></td>
+                            <td><input type="text" maxlength="20" class="form-control notzh" v-model="item.market_price"></td>
+                            <td><input type="text" maxlength="20" class="form-control onlycurrency" v-model="item.sale_price" @blur="resetDataSale1($event, 'sale_price', index)"></td>
+                            <td v-for="(item1, index1) in syncData.goods.sale_price_value" :key="item1"><input type="text" maxlength="20" class="form-control onlycurrency" v-model="item['sale_price'+index1]"></td>
+                            <td><input type="text" maxlength="20" class="form-control notzh" v-model="item.cost_price"></td>
+                            <td><input type="text" maxlength="20" class="form-control notzh" v-model="item.quantity"></td>
+                            <td><input type="text" maxlength="20" class="form-control notzh" v-model="item.warning_quantity"></td>
+                            <td><a href="javascript:void (0);" class="btn btn-danger" @click="removeAttrTable(index)">移除</a></td>
+                        </tr> -->
+
+                    <div class="box-body">
+                        <div class="form-group" v-for="(item, index) in syncData.goods.rebate_percent_list" :key="item">
+                            <label>{{item.level}}【返利比例】(%)</label>
+                            <input type="text" class="form-control" placeholder="输入返利比例，如2%输入2即可" v-model="syncData.goods.rebate_percent[item.id]" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- E_row-->
+        <div class="box-footer">
+            <a href="javascript:;" class="btn btn-info btn-block" @click="submit">提交</a>
+        </div>
+    </section>
+</div>
+
+<{include file='../statics/public/base_footer.tpl.htm'}>
+<script src="<{$js_path}>/jquery.serializejson.min.js"></script>
+<script src="<{$js_path}>/vue.min.js"></script>
+<script src="<{$js_path}>/plupload/plupload.full.min.js"></script>
+<script src="<{$js_path}>/plupload/vue-dragging.es5.js"></script>
+<!--<script type="text/javascript" src="<{$plugins_path}>/kindeditor/ueditor.config.js"></script>-->
+<script type="text/javascript" src="<{$plugins_path}>/kindeditor/kindeditor-all.js"></script>
+<script type="text/javascript" src="<{$js_path}>/bootstrap-multiselect.js"></script>
+<script src="<{$js_path}>/webuploader.nolog.min.js"></script>
+<script>
+    Vue.use(VueDragging);//注册vue-dragging组件
+    var app = new Vue({
+        el: '#app',
+        data: defaultData(),
+        // 加载完毕
+        created: function (){
+            //获取销售等级
+            var sale_price_arr = this.syncData.goods.sale_price_arr;
+            for(var i=0; i<sale_price_arr.length; i++) {
+                this.syncData.goods['sale_price_value_' + sale_price_arr[i].id + '_old'] = '0.00';
+                this.syncData.goods['sale_price_value_' + sale_price_arr[i].id + '_after'] = '0.00';
+            }
+            //会员返利列表
+            this.syncData.goods.rebate_percent_list = JSON.parse('<{json_encode($level)}>');
+            
+            //获取商品规格
+            // var attribute_arr = this.syncData.goods.attribute_arr;
+            // var attribute = [];
+            // for(var i=0; i<attribute_arr.length; i++) {
+            //     attribute.push([]);
+            // }
+            // this.syncData.goods.attribute_arr_value = attribute;
+        },
+        mounted: function () {
+            var _this = this;
+            // 上传商品图片
+            pluploadImage('http://mini.blm.22um.com/index.php/login/index/ajax_upload_img','selected_thumb', 'even', function(res) {
+                _this.syncData.goods.selected_thumb.push(res);
+            });
+            // 商品图片拖拽事件
+            _this.$dragging.$on('dragged', function (value) {});
+            // 上传视频
+            pluploadVideo('<{$now_url}>&m=public_upload_video','goods_video', 'odd', function(res) {
+                _this.syncData.goods.goods_video = res;
+            });
+            //模拟数据
+            var data = {"isSpec":true,"isSpecTable":true,"attributeId":"6","cate_id":"8","name":"商品名称","promotional_name":"商品促销语","key_words":"关键字","from_city":"深圳","goods_code":"jzee001","market_price":"0.00","sale_price":"345.00","cost_price":"0.00","quantity":"0","warning_quantity":"0","goods_weight":"10","units":"011","wholesale_units":"011","max_buy":"100","subtract":"1","product_code":"434354","listorder":"255","status":"2","refund_status":"1","price_type":"1","price_ids":["5","7"],"price_discount_ids":[],"user_type":"2","level_ids":["2","5"],"user_ids":"","user_names":"","sale_price_arr":[{"name":"一级代理","id":"15","discount":"15"},{"name":"二级代理","id":"10","discount":"10"},{"name":"三级代理","id":"5","discount":"5"}],"option_group_id":["3","4","6"],"option_group_name":{"3":{"1":{"name":"年份","value":["2010"]},"title":"上市时间"},"4":{"2":{"name":"产地","value":["云南勐海","广东新会","福建福鼎","浙江杭州"]},"title":"产地"},"6":{"3":{"name":"品种","value":["红茶"]},"title":"品种"}},"option":{"3":{"1":["2010"]},"4":{"2":["广东新会","云南勐海"]},"6":{"3":["红茶"]}},"attribute_arr":[{"id":"1","name":"包装","type":"1","listorder":"0","seller_id":"0","create_time":"1527075058","values":[{"id":"15","name":"普通","attribute_id":"1","listorder":"0","create_time":"1527411819"},{"id":"16","name":"精装","attribute_id":"1","listorder":"0","create_time":"1527411819"},{"id":"17","name":"礼盒","attribute_id":"1","listorder":"0","create_time":"1527411819"},{"id":"18","name":"散装","attribute_id":"1","listorder":"0","create_time":"1527411819"}]},{"id":"2","name":"重量","type":"1","listorder":"0","seller_id":"0","create_time":"1527075222","values":[{"id":"12","name":"125g","attribute_id":"2","listorder":"0","create_time":"1527411316"},{"id":"13","name":"250g","attribute_id":"2","listorder":"0","create_time":"1527411316"},{"id":"14","name":"500g","attribute_id":"2","listorder":"0","create_time":"1527411316"}]},{"id":"4","name":"颜色","type":"2","listorder":"0","seller_id":"0","create_time":"1533698514","values":[{"id":"19","name":"红色","attribute_id":"4","listorder":"0","create_time":"1533698514"},{"id":"20","name":"蓝色","attribute_id":"4","listorder":"0","create_time":"1533698514"},{"id":"21","name":"紫色","attribute_id":"4","listorder":"0","create_time":"1533698514"}]}],"attribute_value":{"1":["17","18","16"],"2":["14","13"],"4":["20"]},"sku_images":{"19":"","20":"index/201810/20181019184537_6816.png","21":"index/201810/20181019184533_2188.png"},"attribute_arr_table":[{"value":"17,14,20","spec":"礼盒,500g,蓝色","sku":"171420","market_price":"0.00","sale_price":"45.00","sale_price_value_15_old":"6.75","sale_price_value_15_after":"6.75","sale_price_value_10_old":"4.5","sale_price_value_10_after":"4.5","sale_price_value_5_old":"2.25","sale_price_value_5_after":"2.25","cost_price":"0.00","quantity":"0","warning_quantity":"0"},{"value":"17,13,20","spec":"礼盒,250g,蓝色","sku":"171320","market_price":"0.00","sale_price":"35.00","sale_price_value_15_old":"5.25","sale_price_value_15_after":"5.25","sale_price_value_10_old":"3.5","sale_price_value_10_after":"3.5","sale_price_value_5_old":"1.75","sale_price_value_5_after":"1.75","cost_price":"0.00","quantity":"0","warning_quantity":"0"},{"value":"18,14,20","spec":"散装,500g,蓝色","sku":"181420","market_price":"0.00","sale_price":"345.00","sale_price_value_15_old":"51.75","sale_price_value_15_after":"51.75","sale_price_value_10_old":"34.5","sale_price_value_10_after":"39.5","sale_price_value_5_old":"17.25","sale_price_value_5_after":"17.25","cost_price":"0.00","quantity":"0","warning_quantity":"0"},{"value":"18,13,20","spec":"散装,250g,蓝色","sku":"181320","market_price":"0.00","sale_price":"345.00","sale_price_value_15_old":"51.75","sale_price_value_15_after":"51.75","sale_price_value_10_old":"34.5","sale_price_value_10_after":"34.5","sale_price_value_5_old":"17.25","sale_price_value_5_after":"17.25","cost_price":"0.00","quantity":"0","warning_quantity":"0"},{"value":"16,13,20","spec":"精装,250g,蓝色","sku":"161320","market_price":"0.00","sale_price":"345.00","sale_price_value_15_old":"51.75","sale_price_value_15_after":"51.75","sale_price_value_10_old":"34.5","sale_price_value_10_after":"34.5","sale_price_value_5_old":"17.25","sale_price_value_5_after":"17.25","cost_price":"0.00","quantity":"0","warning_quantity":"0"}],"goods_brand":"1","seo_title":"SEO标题","seo_description":"SEO描述","goods_video":"goods/201810/20181019184558_4130.mp4","selected_thumb":["index/201810/20181019184614_3080.png","index/201810/20181019172344_7803.png","index/201810/20181019172344_4603.png","index/201810/20181019184614_8577.png"],"freight_type":"2","goods_freight":"34","integral_status":0,"integral_num":0,"rebate_percent_list":[{"id":"1","level":"普通会员","price_discount":"100","rebate_type":"1","rebate_percent":"","seller_id":"0"},{"id":"2","level":"白银会员","price_discount":"99","rebate_type":"1","rebate_percent":"","seller_id":"0"},{"id":"5","level":"星耀会员","price_discount":"96","rebate_type":"1","rebate_percent":"","seller_id":"0"},{"id":"6","level":"合作商","price_discount":"40","rebate_type":"1","rebate_percent":"","seller_id":"0"}],"rebate_percent":{"1":"23","2":"34","5":"43","6":"34"},"sale_price_value_15_old":"51.75","sale_price_value_15_after":"51.75","sale_price_value_10_old":"34.5","sale_price_value_10_after":"34.5","sale_price_value_5_old":"17.25","sale_price_value_5_after":"17.25","intergral_num":"34"};
+            _this.syncData.goods = data;
+            // 如果是编辑并且有商品规格
+            $.each(_this.syncData.goods.attribute_arr, function (i,e) {
+                // 上传规格图片
+                if(e.type == 2) {
+                    $.each(e.values, function (j,k) {
+                        _this.$nextTick(function () {
+                            pluploadImage('http://mini.blm.22um.com/index.php/login/index/ajax_upload_img','skuimage'+k.id, 'odd', function(res) {
+                                _this.syncData.goods.sku_images[k.id] = res;
+                                _this.$forceUpdate();
+                            });
+                        })
+                    })
+                }
+            })
+        },
+        methods: {
+            //提交表单
+            submit: function () {
+                // 如供应用户为指定用户时
+                this.syncData.goods.user_ids = $("input[name='user_ids']").val();
+                this.syncData.goods.user_names = $("#phone").html();
+                this.syncData.description = $("#container").html();
+                document.write(JSON.stringify(this.syncData.goods));
+            },
+            /**
+            * 用途：检测输入是否为数字
+            * 依赖plupload.full.min.js vue-dragging.es5.js
+            * @param {Object} event 当前点击事件
+            * @param {String} sync 需要修改的参数名
+            * @param {String} isInteger 是否是整数 integer decimal
+            */
+            resetData: function (event, sync, isInteger) {
+                var vaule = event.currentTarget.value;
+                if(isInteger == 'integer') {
+                    this.syncData.goods[sync] = vaule.replace(/[^\d]/g,'');
+                }
+                else {
+                    this.syncData.goods[sync] = checkNum(vaule);
+                }
+            },
+            //监听原销售价的变化
+            resetDataSale: function (event, sync) {
+                this.syncData.goods.sale_price = checkNum(event.currentTarget.value);
+                var sale_price_arr = this.syncData.goods.sale_price_arr;
+                for(var i=0; i<sale_price_arr.length; i++) {
+                    this.syncData.goods['sale_price_value_' + sale_price_arr[i].id + '_old'] = checkNum((sale_price_arr[i].discount/100 * this.syncData.goods.sale_price).toString());
+                    this.syncData.goods['sale_price_value_' + sale_price_arr[i].id + '_after'] = this.syncData.goods['sale_price_value_' + sale_price_arr[i].id + '_old'];
+                }
+            },
+            //监听生成销售价的变化
+            resetDataSale1: function (event, sync, index) {
+                this.syncData.goods.attribute_arr_table[index].sale_price = checkNum(event.currentTarget.value);
+                var sale_price_arr = this.syncData.goods.sale_price_arr;
+                for(var i=0; i<sale_price_arr.length; i++) {
+                    this.syncData.goods.attribute_arr_table[index]['sale_price_value_' + sale_price_arr[i].id + '_old'] = checkNum((sale_price_arr[i].discount/100 * this.syncData.goods.attribute_arr_table[index].sale_price).toString());
+                    this.syncData.goods.attribute_arr_table[index]['sale_price_value_' + sale_price_arr[i].id + '_after'] =  this.syncData.goods.attribute_arr_table[index]['sale_price_value_' + sale_price_arr[i].id + '_old'];
+                }
+            },
+            //移除商品规格表单
+            removeAttrTable: function (index) {
+                this.syncData.goods.attribute_arr_table.splice(index,1);
+                if(this.syncData.goods.attribute_arr_table.length == 0) {
+                    this.syncData.goods.isSpec = false;
+                }
+            },
+            //监听商品规格的变化
+            listenAttr: function () {
+                var value = this.syncData.goods.attribute_value;
+                var arr_values = [];
+                var arr_name = [];
+                var arr_table = [];
+                for (i in value) {
+                    var aa = [];
+                    var bb = [];
+                    for (var a=0; a<value[i].length; a++) {
+                        for (var j=0; j<this.syncData.goods.attribute_arr.length; j++) {
+                            if(this.syncData.goods.attribute_arr[j].id == i) {
+                                for(var k=0; k<this.syncData.goods.attribute_arr[j].values.length; k++) {
+                                    if(value[i][a] == this.syncData.goods.attribute_arr[j].values[k].id) {
+                                        aa.push(this.syncData.goods.attribute_arr[j].values[k].name);
+                                        bb.push(this.syncData.goods.attribute_arr[j].values[k].id);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if(aa.length != 0) {
+                        arr_values.push(bb);
+                        arr_name.push(aa);
+                    }
+                }
+                // 判断是否为空
+                if(arr_values.length == 0) {
+                    this.syncData.goods.attribute_arr_table = [];
+                    this.syncData.goods.isSpec = false;
+                    return;
+                }
+                else {
+                    this.syncData.goods.isSpec = true;
+                }
+                var changeValues = doExchange(arr_values);
+                var changeName = doExchange(arr_name);
+                var sale_price_arr = this.syncData.goods.sale_price_arr;
+                console.log(changeName);
+                for(var l=0; l<changeValues.length; l++) {
+                    arr_table[l] = {};
+                    arr_table[l].value = changeValues[l];
+                    arr_table[l].spec = changeName[l];
+                    arr_table[l].sku = changeValues[l].split(',').join('');
+                    arr_table[l].market_price = this.syncData.goods.market_price;
+                    arr_table[l].sale_price = this.syncData.goods.sale_price;
+                    for(var m=0; m<sale_price_arr.length; m++) {
+                        arr_table[l]['sale_price_value_' + sale_price_arr[m].id + '_old'] =  this.syncData.goods['sale_price_value_' + sale_price_arr[m].id + '_after'];
+                        arr_table[l]['sale_price_value_' + sale_price_arr[m].id + '_after'] =  this.syncData.goods['sale_price_value_' + sale_price_arr[m].id + '_after'];
+                    }
+                    arr_table[l].cost_price = this.syncData.goods.cost_price;
+                    arr_table[l].quantity = this.syncData.goods.quantity;
+                    arr_table[l].warning_quantity = this.syncData.goods.warning_quantity;
+                }
+                // this.syncData.goods.attribute_arr_values = arr_values;
+                // this.syncData.goods.attribute_arr_name = arr_name;
+                this.syncData.goods.attribute_arr_table = arr_table;
+                // for(var i=0; i<value.length; i++) {
+                //     console.log(value[i])
+                //     var aa = [];
+                //     var bb = [];
+                //     for(var j=0; j<value[i].length; j++) {
+                //         for(var k=0; k<this.syncData.goods.attribute_arr[i].group.length; k++) {
+                //             if(value[i][j] == this.syncData.goods.attribute_arr[i].group[k].value) {
+                //                 aa.push(this.syncData.goods.attribute_arr[i].group[k].name);
+                //                 bb.push(this.syncData.goods.attribute_arr[i].group[k].value);
+                //             }
+                //         }
+                //     }
+                //     if(aa.length != 0) {
+                //         arr_values.push(bb);
+                //         arr_name.push(aa);
+                //     }
+                // }
+                // if(arr_values.length != 0) {
+                //     var changeValues = doExchange(arr_values);
+                //     var changeName = doExchange(arr_name);
+                //     for(var l=0; l<changeValues.length; l++) {
+                //         arr_table[l] = {};
+                //         arr_table[l].value = changeValues[l];
+                //         arr_table[l].spec = changeName[l];
+                //         arr_table[l].sku = changeValues[l].split(',').join('');
+                //         arr_table[l].market_price = this.syncData.goods.market_price;
+                //         arr_table[l].sale_price = this.syncData.goods.sale_price;
+                //         for(var m=0; m<this.syncData.goods.sale_price_value.length; m++) {
+                //             arr_table[l]['sale_price'+m] = this.syncData.goods.sale_price_value[m];
+                //         }
+                //         arr_table[l].cost_price = this.syncData.goods.cost_price;
+                //         arr_table[l].quantity = this.syncData.goods.quantity;
+                //         arr_table[l].warning_quantity = this.syncData.goods.warning_quantity;
+                //     }
+                //     this.syncData.goods.isSpec = true;
+                // }
+                // else {
+                //     this.syncData.goods.isSpec = false;
+                // }
+                // this.syncData.goods.attribute_arr_values = arr_values;
+                // this.syncData.goods.attribute_arr_name = arr_name;
+                // this.syncData.goods.attribute_arr_table= arr_table;
+            },
+            // 预览商品图片
+            previewGood: function (url) {
+                window.open('https://bsoss.oss-cn-hangzhou.aliyuncs.com/' + url);
+            },
+            // 删除商品图片
+            delGood: function (i) {
+                this.syncData.goods.selected_thumb.splice(i,1);
+            },
+            // 预览视频
+            previewVideo: function (url) {
+                var url = "<{$smarty.const.__UPLOADS__}>" + app.syncData.goods.goods_video;
+                layer.open({
+                    type:1,
+                    shift:1,
+                    offset: 'c',
+                    skin:'default',
+                    title:'商品视频预览',
+                    btn: ['关闭'],
+                    shadeClose: false,
+                    shade: false,
+                    area: ['960px', '540px'],
+                    maxmin: true,
+                    content: "<video width='100%' height='100%' controls=\"controls\" autoplay=\"autoplay\">\n" +
+                    "  <source src='"+url+"' type=\"video/mp4\" />\n" +
+                    "抱歉，您的浏览器不支持视频播放 \n" +
+                    "</video>",
+                    yes: function(index, layero){
+                        layer.close(index);
+                    }
+                });
+            },
+            // 删除视频
+            delVideo: function (i) {
+                this.syncData.goods.goods_video = '';
+            },
+        }
+    });
+    // 默认数据
+    function defaultData () {
+        return {
+            syncData: {
+                goods: {
+                    isSpec: false, //是否有无规格
+                    isSpecTable: false, //是否有无规格选择框
+                    attributeId: '', //使商品显示规格的id
+                    cate_id: $('#goods_cate_id option').eq(1).val(), //商品分类
+                    name: '', //商品名称
+                    promotional_name: '', //商品促销语
+                    key_words: '', //关键字
+                    from_city: '', //产地
+                    goods_code: '', //款号
+                    market_price: '0.00', //市场价
+                    sale_price: '0.00', //销售价
+                    cost_price: '0.00', //成本价
+                    quantity: '0', //库存
+                    warning_quantity: '0', //库存预警
+                    goods_weight: '0', //商品重量
+                    units: $('#goods_units option').eq(0).val(), //零售包装单位
+                    wholesale_units: $('#goods_wholesale_units option').eq(0).val(), //批发包装单位
+                    max_buy: '0', //最大购买量
+                    subtract: '0', //减库存方式
+                    product_code: '0', //产品批次号
+                    listorder: '255', //排序
+                    status: '1', //商品状态
+                    refund_status: '0', //是否支持退换货
+                    price_type: '0', //价格体系
+                    price_ids: [], //参与满减
+                    price_discount_ids: [], //参与满折
+                    user_type: '0', //供应用户
+                    level_ids: [], //用户级别
+                    user_ids: '', //指定用户id
+                    user_names: '', //指定用户name
+                    sale_price_arr: [{
+                        name: '一级代理',
+                        id: '15',
+                        discount: '15'
+                    },{
+                        name: '二级代理',
+                        id: '10',
+                        discount: '10'
+                    },{
+                        name: '三级代理',
+                        id: '5',
+                        discount: '5'
+                    }], //销售级别
+                    option_group_id: [], //商品参数
+                    option_group_name: {}, //商品参数-内容
+                    option: {}, //商品参数-提交内容
+                    attribute_arr: [], //商品规格
+                    attribute_value: {}, //选中的商品规格
+                    sku_images: {}, //商品规格上传的图片
+                    // attribute_arr: [
+                    //     {
+                    //         name: '包装',
+                    //         id: '1',
+                    //         group: [
+                    //             {
+                    //                 name: '普通',
+                    //                 value: 'putong'
+                    //             },
+                    //             {
+                    //                 name: '精装',
+                    //                 value: 'jingzhuang'
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         name: '重量',
+                    //         id: '2',
+                    //         group: [
+                    //             {
+                    //                 name: '125g',
+                    //                 value: '125g'
+                    //             },
+                    //             {
+                    //                 name: '250g',
+                    //                 value: '250g'
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         name: '颜色',
+                    //         id: '3',
+                    //         group: [
+                    //             {
+                    //                 name: '红色',
+                    //                 img: '/statics/images/image.png',
+                    //                 value: 'hongse'
+                    //             },
+                    //             {
+                    //                 name: '蓝色',
+                    //                 img: '/statics/images/image.png',
+                    //                 value: 'lanse'
+                    //             },
+                    //             {
+                    //                 name: '紫色',
+                    //                 img: '/statics/images/image.png',
+                    //                 value: 'zise'
+                    //             }
+                    //         ]
+                    //     }
+                    // ], //商品规格
+                    // attribute_arr_value: [],//用于储存商品规格选中的value值
+                    // attribute_arr_name: [],//商品规格选中的name值
+                    attribute_arr_table: [],//商品规格table循环
+                    goods_brand: $('#goods_brand option').eq(0).val(),//商品详情页-商品品牌
+                    seo_title: '',//商品详情页-SEO标题
+                    seo_description: '',//商品详情页-SEO标题
+                    goods_video: '',//商品详情页-视频链接
+                    description: '',//商品描述
+                    selected_thumb: [],//商品图片
+                    freight_type: '1',//计价方式
+                    goods_freight: '',//运费
+                    integral_status: 0,//积分设置
+                    integral_num: 0,//购买可获积分
+                    rebate_percent_list: [],//会员返利列表
+                    rebate_percent: {},//会员返利提交的数据
+                }
+            }
+            
+        }
+    }
+    // 下拉多选
+    $(document).ready(function() {
+        $('#price_ids').multiselect({
+            nonSelectedText: '请选择满减活动',
+            nSelectedText:'全选',
+            allSelectedText:'已选择',
+            onChange: function(element, checked) {
+                var brands = $('#price_ids option:selected');
+                var selected = [];
+                $(brands).each(function(index, brand){
+                    selected.push($(this).val());
+                });
+                app.syncData.goods.price_ids = selected;
+            }
+        });
+        $('#price_discount_ids').multiselect({
+            nonSelectedText: '请选择折扣优惠',
+            nSelectedText:'全选',
+            allSelectedText:'已选择',
+            onChange: function(element, checked) {
+                var brands = $('#price_discount_ids option:selected');
+                var selected = [];
+                $(brands).each(function(index, brand){
+                    selected.push($(this).val());
+                });
+                app.syncData.goods.price_discount_ids = selected;
+            }
+        });
+        $('#level_ids').multiselect({
+            nonSelectedText: '请选择用户级别',
+            nSelectedText:'全选',
+            allSelectedText:'已选择',
+            onChange: function(element, checked) {
+                var brands = $('#level_ids option:selected');
+                var selected = [];
+                $(brands).each(function(index, brand){
+                    selected.push($(this).val());
+                });
+                app.syncData.goods.level_ids = selected;
+            }
+        });
+        $('#option_group_id').multiselect({
+            nonSelectedText: '请选择商品参数',
+            nSelectedText:'全选',
+            allSelectedText:'已选择',
+            onChange: function(element, checked) {
+                var brands = $('#option_group_id option:selected');
+                // var name = app.syncData.goods.option_group_name;
+                var val = $(element).val();
+                var text = $(element).text();
+                var selected = [];
+                $(brands).each(function(index, brand){
+                    selected.push($(this).val());
+                });
+                app.syncData.goods.option_group_id = selected;
+                //下面的框是否显示
+                if(checked) {
+                    console.log(123)
+                    $.get('<{$now_url}>&m=ajax_get_option_value',{id:val},function (res) {
+                        if (!res.status) return false;
+                        console.log(res);
+                        $.each(res.data.option_value, function (i,e) {
+                            app.syncData.goods.option_group_name[e.option_group_id] = {title:text};
+                            app.syncData.goods.option_group_name[e.option_group_id][e.id] = {
+                                name: e.name,
+                                value: e.value
+                            };
+                            app.syncData.goods.option[e.option_group_id] = {};
+                            app.syncData.goods.option[e.option_group_id][e.id] = [];
+                            app.$forceUpdate();
+                        })
+                        // 显示规格,并储存id
+                        if(res.data.attribute_data.length > 0) {
+                            app.syncData.goods.isSpec = true;
+                            app.syncData.goods.isSpecTable = true;
+                            app.syncData.goods.attributeId = val;
+                            app.syncData.goods.attribute_arr = res.data.attribute_data;
+                            app.listenAttr();
+                            if($.isEmptyObject(app.syncData.goods.attribute_value)) {
+                                $.each(res.data.attribute_data, function (i,e) {
+                                    app.syncData.goods.attribute_value[e.id] = [];
+                                    // 上传规格图片
+                                    if(e.type == 2) {
+                                        $.each(e.values, function (j,k) {
+                                            app.syncData.goods.sku_images[k.id] = '';
+                                            app.$nextTick(function () {
+                                                pluploadImage('http://mini.blm.22um.com/index.php/login/index/ajax_upload_img','skuimage'+k.id, 'odd', function(res) {
+                                                    app.syncData.goods.sku_images[k.id] = res;
+                                                    app.$forceUpdate();
+                                                });
+                                            })
+                                        })
+                                    }
+                                })
+                            }
+                        }
+                    },'json');
+                    // for(var i=0; i<name.length; i++) {
+                    //     if(val == name[i].id) {
+                    //         app.syncData.goods.option_group_name[i].show  = true;
+                    //     }
+                    // }
+                }
+                else {
+                    console.log(456)
+                    delete app.syncData.goods.option_group_name[val];
+                    delete app.syncData.goods.option[val];
+                    if(val == app.syncData.goods.attributeId) {
+                        app.syncData.goods.isSpec = false;
+                        app.syncData.goods.isSpecTable = false;
+                    }
+                    // for(var i=0; i<name.length; i++) {
+                    //     if(val == name[i].id) {
+                    //         app.syncData.goods.option_group_name[i].show  = false;
+                    //     }
+                    // }
+                }
+                
+            }
+        });
+    });
+    // 预览
+    function goods_preview() {
+        var url = "<{$now_url}>&m=public_preview";
+        layer.open({
+            type: 2,
+            shift:1,
+            offset: 'rb',
+            skin:'default',
+            title:'商品预览',
+            btn: ['预览'],
+            shadeClose: false,
+            shade: false,
+            area: ['305px', '635px'],
+            maxmin: true,
+            content: url,
+            yes: function(index, layero){
+                //var body = layer.getChildFrame('body', index);
+                var iframeWin = window[layero.find('iframe')[0]['name']];
+                iframeWin.sureChoose();
+            }
+        });
+    }
+    // 商品规格循环
+    function doExchange(arr){
+        var len = arr.length;
+        // 当数组大于等于2个的时候
+        if(len >= 2){
+            // 第一个数组的长度
+            var len1 = arr[0].length;
+            // 第二个数组的长度
+            var len2 = arr[1].length;
+            // 2个数组产生的组合数
+            var lenBoth = len1 * len2;
+            //  申明一个新数组,做数据暂存
+            var items = new Array(lenBoth);
+            // 申明新数组的索引
+            var index = 0;
+            // 2层嵌套循环,将组合放到新数组中
+            for(var i=0; i<len1; i++){
+                for(var j=0; j<len2; j++){
+                    items[index] = arr[0][i] +","+ arr[1][j];
+                    index++;
+                }
+            }
+            // 将新组合的数组并到原数组中
+            var newArr = new Array(len -1);
+            for(var i=2;i<arr.length;i++){
+                newArr[i-1] = arr[i];
+            }
+            newArr[0] = items;
+            // 执行回调
+            return doExchange(newArr);
+        }else{
+            return arr[0];
+        }
+    }
+    // 富文本编辑器
+    //var ue = UE.getEditor('container');
+    var editor_content;
+    KindEditor.ready(function(K) {
+        editor_content = K.create('#container', {
+            resizeType : 1,
+            allowPreviewEmoticons : true,
+            allowImageUpload : true,
+            minHeight : 400,
+            //langType : '{:jsup(LANG)}',
+            items: ["source", "|", "undo", "redo", "|", "preview", "print",  "cut", "copy", "paste", "plainpaste", "wordpaste", "|", "justifyleft", "justifycenter", "justifyright", "justifyfull", "insertorderedlist", "insertunorderedlist", "indent", "outdent", "subscript", "superscript", "clearhtml", "quickformat", "selectall",  "fullscreen", "|", "formatblock", "fontname", "fontsize", "|", "forecolor", "hilitecolor", "bold", "italic", "underline", "strikethrough", "lineheight", "removeformat", "|", "multiimage",  "table", "hr",  "pagebreak", "anchor", "link", "unlink"],
+            afterBlur: function () { this.sync(); }
+        });
+    });
+    // ///////////视频文件上传开始
+    // var uploader = WebUploader.create({
+
+    //     // swf文件路径
+    //     swf: '/statics/images/expressInstall.swf',
+
+    //     // 文件接收服务端。
+    //     server: '<{$now_url}>&m=public_upload_video',
+
+    //     accept: {
+    //         title: 'Video',
+    //         extensions: 'mp4',
+    //         mimeTypes: 'video/mp4'
+    //     },
+    //     // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+    //     pick: '#choose_video',
+    //     // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+    //     //resize: false,
+    //     auto:true
+    // });
+    // uploader.on( 'beforeFileQueued', function( file ) {
+    //     if (file.size > 31457280) {
+    //         layer.msg('视频文件不得大于30M',{icon:2,time:2000});
+    //         return false;
+    //     }
+    //     if (file.ext != 'mp4') {
+    //         layer.msg('请上传mp4格式的视频文件',{icon:2,time:2000});
+    //         return false;
+    //     }
+    // });
+    // // 当有文件被添加进队列的时候
+    // uploader.on( 'fileQueued', function( file ) {
+    //     $('#upload_percent').parent().show();
+    // });
+    // // 文件上传过程中创建进度条实时显示。
+    // uploader.on( 'uploadProgress', function( file, percentage ) {
+    //     $('#upload_percent').css( 'width', percentage * 100 + '%' );
+    // });
+    // uploader.on( 'uploadSuccess', function( file ,response) {
+    //     if (response.status == 1) {
+    //         app.syncData.goods.goods_video = response.url;
+    //         layer.msg('上传成功',{icon:1,time:2000},function () {
+    //             $('#upload_percent').parent().hide();
+    //         });
+    //     } else if (response.status == 0 || response.status == 2 || response.status == 3) {
+    //         layer.msg(response.message,{icon:2,time:2000});
+    //     }
+    //     $('#upload_percent').parent().hide();
+    //     return false;
+    // });
+    // ///////////视频文件上传结束
+    // $('#watch_video').click(function () {
+    //     var url = app.syncData.goods.goods_video;
+    //     if (!url) {
+    //         layer.msg('请先上传商品视频',{icon:2,time:2000});
+    //         return false;
+    //     }
+    //     if (url.slice(0,3) != 'http') {
+    //         url = "<{$smarty.const.__UPLOADS__}>"+url;
+    //     }
+    //     layer.open({
+    //         type:1,
+    //         shift:1,
+    //         offset: 'c',
+    //         skin:'default',
+    //         title:'商品视频预览',
+    //         btn: ['关闭'],
+    //         shadeClose: false,
+    //         shade: false,
+    //         area: ['960px', '540px'],
+    //         maxmin: true,
+    //         content: "<video width='100%' height='100%' controls=\"controls\" autoplay=\"autoplay\">\n" +
+    //         "  <source src='"+url+"' type=\"video/mp4\" />\n" +
+    //         "抱歉，您的浏览器不支持视频播放 \n" +
+    //         "</video>",
+    //         yes: function(index, layero){
+    //             layer.close(index);
+    //         }
+    //     });
+    // })
+    /**
+    * 用途：上传图片控件
+    * 依赖plupload.full.min.js vue-dragging.es5.js
+    * @param {String} url url地址
+    * @param {String} boxId 上传按钮的id
+    * @param {String} numType 一次可选择的图片数量 odd even
+    * @param {Function} callback 上传成功回调
+    * @example pluploadImage('https://baidu.com','box','even',function(){})
+    */
+    function pluploadImage (url, boxId, numType, callback) {
+        var uploader = new plupload.Uploader({
+            browse_button: boxId,
+            url: url,
+            flash_swf_url : '<{$js_path}>/plupload/Moxie.swf',
+            silverlight_xap_url : '<{$js_path}>/plupload/Moxie.xap',
+            //一次上传数据大小
+            chunk_size: '100mb',
+            multipart_params: {
+                "key": "file"
+            },
+            filters: {
+                max_file_size: '100mb',//最大文件限制
+                mime_types: [
+                    {title: "图片文件", extensions: "jpg,gif,png"}
+                ]
+            },
+            // 一次选择多个文件
+            multi_selection: numType == 'even' ? true : false,
+            init: {
+                // 某一个文件正要开始上传前触发监听函数
+                BeforeUpload: function (uploader,file) {
+                    if(numType == 'even') {
+                        if(app.syncData.goods[boxId].length >= 9) {
+                            layer.msg('最多上传9张图片',{icon:2,time:2000});
+                            uploader.stop(); //停止队列中的文件上传
+                            return;
+                        }
+                    }
+                },
+                // 文件添加进队列事件
+                FilesAdded: function (uploader, files) {
+                    if(numType == 'even') {
+                        var now_length = app.syncData.goods[boxId].length;//当前网页存在图片的数量
+                        var upload_length = files.length;//本次上传图片数量
+                        if(now_length + upload_length > 9) {
+                            uploader.splice();//清空上传队列
+                            layer.msg('最多上传9张图片',{icon:2,time:2000});
+                            return;
+                        }
+                    }
+                    uploader.start();
+                },
+                // 上传进度触发事件
+                UploadProgress: function (uploader, file) {
+                    if(numType == 'even') {
+                        //file.percent为当前的进度
+                        if(file.percent == 100) {
+                            $('#'+boxId+'_progress').html('');
+                        }
+                        else {
+                            var _html = '<div class="progress" style="margin:0;">';
+                            _html += '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:'+ file.percent +'%">'+ file.percent +'%('+ file.name +')</div>';
+                            $('#'+boxId+'_progress').html(_html);
+                        }
+                    }
+                },
+                // 某一个文件上传完成后触发监听函数
+                FileUploaded: function (up, file, info) {
+                    uploader.removeFile(file);
+                    //一个文件上传成功
+                    var data = JSON.parse(info.response);
+                    if(data.status) {
+                        callback(data.data);
+                    }
+                    else {
+                        layer.msg(data.message,{icon:2,time:2000});
+                    }
+                },
+                // 所有文件都上传完成后触发监听函数
+                UploadComplete: function (uploader,files) {
+                    layer.msg('上传完毕',{icon:1,time:2000});
+                },
+                //发生错误
+                Error: function (up, args) {
+                    console.log('[error] File:' + args.file + "   " + args.message);
+                    console.log('[error]' + args.message);
+                }
+            }
+        });
+        uploader.init();
+    }
+    /**
+    * 用途：上传视频控件
+    * 依赖plupload.full.min.js vue-dragging.es5.js
+    * @param {String} url url地址
+    * @param {String} boxId 上传按钮的id
+    * @param {String} numType 一次可选择的图片数量 odd even
+    * @param {Function} callback 上传成功回调
+    * @example pluploadVideo('https://baidu.com','box','even',function(){})
+    */
+    function pluploadVideo (url, boxId, numType, callback) {
+        var uploader = new plupload.Uploader({
+            browse_button: boxId,
+            url: url,
+            flash_swf_url : '<{$js_path}>/plupload/Moxie.swf',
+            silverlight_xap_url : '<{$js_path}>/plupload/Moxie.xap',
+            //一次上传数据大小
+            chunk_size: '30mb',
+            multipart_params: {
+                "key": "file"
+            },
+            filters: {
+                max_file_size: '30mb',//最大文件限制
+                mime_types: [
+                    {title: "视频文件", extensions: "mp4"}
+                ]
+            },
+            // 一次选择多个文件
+            multi_selection: numType == 'even' ? true : false,
+            init: {
+                // 某一个文件正要开始上传前触发监听函数
+                BeforeUpload: function (uploader,file) {
+                    if(numType == 'even') {
+                        if(app.syncData.goods[boxId].length >= 9) {
+                            layer.msg('最多上传9段视频',{icon:2,time:2000});
+                            uploader.stop(); //停止队列中的文件上传
+                            return;
+                        }
+                    }
+                },
+                // 文件添加进队列事件
+                FilesAdded: function (uploader, files) {
+                    if(numType == 'even') {
+                        var now_length = app.syncData.goods[boxId].length;//当前网页存在图片的数量
+                        var upload_length = files.length;//本次上传图片数量
+                        if(now_length + upload_length > 9) {
+                            uploader.splice();//清空上传队列
+                            layer.msg('最多上传9段视频',{icon:2,time:2000});
+                            return;
+                        }
+                    }
+                    uploader.start();
+                },
+                // 上传进度触发事件
+                UploadProgress: function (uploader, file) {
+                    //file.percent为当前的进度
+                    if(file.percent == 100) {
+                        $('#'+boxId+'_progress').html('');
+                    }
+                    else {
+                        var _html = '<div class="progress" style="margin:0;">';
+                        _html += '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:'+ file.percent +'%">'+ file.percent +'%('+ file.name +')</div>';
+                        $('#'+boxId+'_progress').html(_html);
+                    }
+                },
+                // 某一个文件上传完成后触发监听函数
+                FileUploaded: function (up, file, info) {
+                    uploader.removeFile(file);
+                    //一个文件上传成功
+                    var data = JSON.parse(info.response);
+                    if(data.status) {
+                        callback(data.url);
+                    }
+                    else {
+                        layer.msg(data.message,{icon:2,time:2000});
+                    }
+                },
+                // 所有文件都上传完成后触发监听函数
+                UploadComplete: function (uploader,files) {
+                    layer.msg('上传完毕',{icon:1,time:2000});
+                },
+                //发生错误
+                Error: function (up, args) {
+                    if(args.code == '-600') {
+                        layer.msg('文件大小不能超过30M',{icon:2,time:2000});
+                    }
+                }
+            }
+        });
+        uploader.init();
+    }
+    /**
+    * 用途：检测数字保留两位小数点
+    */
+    function checkNum(num){
+        num = num.replace(/[^\d.]/g,""); //清除"数字"和"."以外的字符
+        num = num.replace(/^\./g,""); //验证第一个字符是数字
+        num = num.replace(/\.{2,}/g,"."); //只保留第一个, 清除多余的
+        num = num.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
+        num = num.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3'); //只能输入两个小数
+        return num;
+    }
+</script>
+
