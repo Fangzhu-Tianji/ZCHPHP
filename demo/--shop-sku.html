@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>shop-sku</title>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.5.22/vue.js"></script>
+<style>
+.clearfix { zoom: 1; }
+.clearfix:before,
+.clearfix:after { content: ''; display: table; }
+.clearfix:after { clear: both; } /*清除浮动*/
+#app { width: 600px; height: 600px; padding: 15px; border: 1px solid #ccc; margin: 0 auto; }
+.head img{ float: left; width: 100px; height: 100px; }
+.head .info { float: left; }
+.wrap .title { font-size: 16px; color: #333333; }
+.wrap .item { float: left; padding: 5px 9px; min-width: 52px; height: 28px; line-height: 16px; font-size: 12px; color: #323233; text-align: center; border: 1px solid #969799;  border-radius: 3px; box-sizing: border-box; margin: 0 4px 4px 0; }
+.wrap .item.active { color: #fff; border-color: #f44; background: #f44; }
+.wrap .item.disabled { background: #e8e8e8; border-color: #ebedf0; color: #c8c9cc; }
+.num { margin: 10px 0; }
+.num .a { font-size: 24px; color: red; }
+.operate { width: 100px; height: 45px; font-size: 14px; line-height: 45px; text-align: center; color: #fff; background-color: #f44; }
+</style>
+</head>
+<body>
+<div id="app">
+	<div class="clearfix head">
+		<img :src="thumb" alt="">
+		<div class="info">
+			<p class="price">价格：{{price}}</p>
+			<p class="count">库存：{{quantity}}</p>
+		</div>
+	</div>
+	<div class="wrap" v-for="item in sku_info">
+		<p class="title">{{item.name}}：</p>
+		<div class="clearfix content">
+			<span class="item" v-for="item1 in item.value" :data-id="item1.id" @click="clickEvent($event)">{{item1.name}}</span>
+		</div>
+	</div>
+	<div class="num">
+		<span class="a" @click="minus">-</span>
+		<span>{{num}}</span>
+		<span class="a" @click="add">+</span>
+	</div>
+	<div class="operate" @click="submit">购买</div>
+</div>
+<script>
+var app = new Vue({
+	el: '#app',
+	data: function () {
+		return {
+			num: 1,
+			price: '200.00',
+			quantity: 10,
+			thumb: 'https://img.yzcdn.cn/upload_files/2017/03/16/Fs_OMbSFPa183sBwvG_94llUYiLa.jpeg?imageView2/2/w/100/h/100/q/75/format/jpg',
+			old_price: '200.00',
+			old_quantity: 10,
+			old_thumb: 'https://img.yzcdn.cn/upload_files/2017/03/16/Fs_OMbSFPa183sBwvG_94llUYiLa.jpeg?imageView2/2/w/100/h/100/q/75/format/jpg',
+			sku_info: [],
+			SKUResult: {} //生成的SKU信息
+		}
+	},
+	mounted: function () {
+		var _this = this;
+		$.ajax({
+			url:"https://www.easy-mock.com/mock/5bf3839b7e5d3d5c48c44a28/example/sku",
+			success:function(result){
+				app.sku_info = result.sku_info;
+				_this.$nextTick(function(){
+					_this.initSKU(result.attribute_info);
+					$('.wrap .item').each(function() {
+						var self = $(this);
+						var data_id = self.attr('data-id');
+						if(!_this.SKUResult[data_id]) {
+							self.addClass('disabled')
+						}
+					})
+				});
+			}
+		});
+	},
+	methods: {
+		add: function () {
+			if(app.num != app.quantity) {
+				app.num++
+			}
+		},
+		minus: function () {
+			if(app.num != 1) {
+				app.num--
+			}
+		},
+		submit: function () {
+			if($('.wrap .active').length != app.sku_info.length) {
+				alert('请选择您要的商品信息');
+			}
+			else {
+				alert(app.sku);
+			}
+		},
+		clickEvent: function (e) {
+			var _this = this;
+			var element = e.srcElement;
+			var self = $(element);
+
+			if(self.hasClass('disabled')) {
+				return
+			}
+
+			//选中自己，兄弟节点取消选中
+			self.toggleClass('active').siblings().removeClass('active');
+			
+			//已经选择的节点
+			var selectedObjs = $('.wrap .active');
+
+			if(selectedObjs.length) {
+				//获得组合key价格
+				var selectedIds = [];
+				selectedObjs.each(function() {
+					selectedIds.push($(this).attr('data-id'));
+				});
+				selectedIds.sort(function(value1, value2) {
+					return parseInt(value1) - parseInt(value2);
+				});
+				var len = selectedIds.length;
+				var prices = this.SKUResult[selectedIds.join(';')].market_price;
+				var maxPrice = Math.max.apply(Math, prices).toFixed(2);
+				var minPrice = Math.min.apply(Math, prices).toFixed(2);
+				app.price = maxPrice > minPrice ? minPrice + "-" + maxPrice : maxPrice;
+				app.quantity =  this.SKUResult[selectedIds.join(';')].quantity;
+				app.thumb =  this.SKUResult[selectedIds.join(';')].img;
+				app.sku =  this.SKUResult[selectedIds.join(';')].sku;
+				
+				//用已选中的节点验证待测试节点 underTestObjs
+				$(".wrap .item").not(selectedObjs).not(self).each(function() {
+					var siblingsSelectedObj = $(this).siblings('.active');
+					var testAttrIds = [];//从选中节点中去掉选中的兄弟节点
+					if(siblingsSelectedObj.length) {
+						var siblingsSelectedObjId = siblingsSelectedObj.attr('data-id');
+						for(var i = 0; i < len; i++) {
+							(selectedIds[i] != siblingsSelectedObjId) && testAttrIds.push(selectedIds[i]);
+						}
+					} else {
+						testAttrIds = selectedIds.concat();
+					}
+					testAttrIds = testAttrIds.concat($(this).attr('data-id'));
+					testAttrIds.sort(function(value1, value2) {
+						return parseInt(value1) - parseInt(value2);
+					});
+					if(!_this.SKUResult[testAttrIds.join(';')]) {
+						$(this).addClass('disabled').removeClass('active')
+					} else {
+						$(this).removeClass('disabled')
+					}
+				});
+			} else {
+				//设置默认价格
+				app.price = app.old_price;
+				app.quantity = app.old_quantity;
+				app.thumb = app.old_thumb;
+				app.sku = '';
+				//设置属性状态
+				$('.wrap .item').each(function() {
+					_this.SKUResult[$(element).attr('data-id')] ? $(element).removeClass('disabled') : $(element).addClass('disabled').removeClass('active');
+				})
+			}
+
+			// 如果数量大于最大值，则默认为最大库存
+			if(app.num > app.quantity) {
+				app.num = app.quantity
+			}
+		},
+		// 以下是封装的事件
+		// 初始化得到结果集
+		initSKU: function (data) {
+			var i, j, skuKeys = this.getObjKeys(data);
+			for(i = 0; i < skuKeys.length; i++) {
+				var skuKey = skuKeys[i];//一条SKU信息key
+				var sku = data[skuKey];	//一条SKU信息value
+				var skuKeyAttrs = skuKey.split(";"); //SKU信息key属性值数组
+				skuKeyAttrs.sort(function(value1, value2) {
+					return parseInt(value1) - parseInt(value2);
+				});
+				//对每个SKU信息key属性值进行拆分组合
+				var combArr = this.combInArray(skuKeyAttrs);
+				for(j = 0; j < combArr.length; j++) {
+					this.add2SKUResult(combArr[j], sku);
+				}
+				//结果集接放入SKUResult
+				this.SKUResult[skuKeyAttrs.join(";")] = {
+					quantity: sku.quantity,
+					market_price: [sku.market_price],
+					img: sku.img,
+					sku: sku.sku
+				}
+			}
+		},
+		// 获得对象的key
+		getObjKeys: function (obj) {
+			if (obj !== Object(obj)) throw new TypeError('Invalid object');
+			var keys = [];
+			for (var key in obj)
+				if (Object.prototype.hasOwnProperty.call(obj, key))
+					keys[keys.length] = key;
+			return keys;
+		},
+		// 把组合的key放入结果集SKUResult
+		add2SKUResult: function (combArrItem, sku) {
+			var key = combArrItem.join(";");
+			if(this.SKUResult[key]) {//SKU信息key属性·
+				this.SKUResult[key].quantity += sku.quantity;
+				this.SKUResult[key].market_price.push(sku.market_price);
+				this.SKUResult[key].img = sku.img;
+				this.SKUResult[key].sku = sku.sku;
+			} else {
+				this.SKUResult[key] = {
+					quantity: sku.quantity,
+					market_price: [sku.market_price],
+					img: sku.img,
+					sku: sku.sku
+				};
+			}
+		},
+		/**
+		 * 从数组中生成指定长度的组合
+		 * 方法: 先生成[0,1...]形式的数组, 然后根据0,1从原数组取元素，得到组合数组
+		 */
+		combInArray: function (aData) {
+			if(!aData || !aData.length) {
+				return [];
+			}
+			var len = aData.length;
+			var aResult = [];
+			for(var n = 1; n < len; n++) {
+				var aaFlags = this.getCombFlags(len, n);
+				while(aaFlags.length) {
+					var aFlag = aaFlags.shift();
+					var aComb = [];
+					for(var i = 0; i < len; i++) {
+						aFlag[i] && aComb.push(aData[i]);
+					}
+					aResult.push(aComb);
+				}
+			}
+			return aResult;
+		},
+		/**
+		 * 得到从 m 元素中取 n 元素的所有组合
+		 * 结果为[0,1...]形式的数组, 1表示选中，0表示不选
+		 */
+		getCombFlags: function (m, n) {
+			if(!n || n < 1) {
+				return [];
+			}
+
+			var aResult = [];
+			var aFlag = [];
+			var bNext = true;
+			var i, j, iCnt1;
+
+			for (i = 0; i < m; i++) {
+				aFlag[i] = i < n ? 1 : 0;
+			}
+
+			aResult.push(aFlag.concat());
+
+			while (bNext) {
+				iCnt1 = 0;
+				for (i = 0; i < m - 1; i++) {
+					if (aFlag[i] == 1 && aFlag[i+1] == 0) {
+						for(j = 0; j < i; j++) {
+							aFlag[j] = j < iCnt1 ? 1 : 0;
+						}
+						aFlag[i] = 0;
+						aFlag[i+1] = 1;
+						var aTmp = aFlag.concat();
+						aResult.push(aTmp);
+						if(aTmp.slice(-n).join("").indexOf('0') == -1) {
+							bNext = false;
+						}
+						break;
+					}
+					aFlag[i] == 1 && iCnt1++;
+				}
+			}
+			return aResult;
+		}
+	}
+})
+</script>
+<pre>
+"sku_info": [{
+	  "name": "重量",
+	  "value": [{
+	    "name": "415克",
+	    "id": "19"
+	  }, {
+	    "name": "500克",
+	    "id": "20"
+	  }]
+	},
+	{
+	  "name": "形状",
+	  "value": [{
+	      "name": "液态蜜",
+	      "id": "22"
+	    },
+	    {
+	      "name": "结晶",
+	      "id": "23"
+	    }
+	  ]
+	},
+	{
+	  "name": "产地",
+	  "value": [{
+	    "name": "长白山",
+	    "id": "26"
+	  }, {
+	    "name": "贵州",
+	    "id": "27"
+	  }]
+	}
+],
+"attribute_info": {
+	"19;22;26": {
+	  "sku": "a0001",
+	  "goods_id": "33",
+	  "merge_attribute_value_id": "19,22,26",
+	  "name": "重量  :415克;形状  :液态蜜;产地  :长白山",
+	  "quantity": 11,
+	  "img": "http://img4.tuwandata.com/v3/thumb/jpg/NzYxNywxMDI0LDAsOSwzLDEsLTEsTk9ORSwsLDkw/u/GLDM9lMIBglnFv7YKftLBGMvdHLuuaCeChlsq0Xe5FYIMfbRoC8SwjoTxxDoJeh3RfkdLQkKF79VsvRrEftMhJzaql3xEk2TbGv84iphKQ4D.jpg",
+	  "market_price": "68.05",
+	  "sale_price": "0.01",
+	  "cost_price": "49.00"
+	},
+	"19;23;26": {
+	  "sku": "a0002",
+	  "goods_id": "33",
+	  "merge_attribute_value_id": "19,23,26",
+	  "name": "重量  :415克;形状  :结晶;产地  :长白山",
+	  "quantity": 18,
+	  "img": "https://www.leshe.us/wp-content/uploads/2018/12/1544529316-001.jpg",
+	  "market_price": "68.40",
+	  "sale_price": "0.02",
+	  "cost_price": "49.00"
+	}
+}
+</pre>
+</body>
+</html>
